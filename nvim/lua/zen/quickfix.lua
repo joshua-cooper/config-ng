@@ -19,6 +19,9 @@
 ---@field valid 0|1
 ---@field vcol 0|1
 
+---@class KnownPaths
+---@field cwd string
+
 local M = {}
 
 ---@param info QuickfixTextFuncInfo
@@ -37,8 +40,9 @@ local function get_items(info)
 end
 
 ---@param item QuickfixItem
+---@param known_paths KnownPaths
 ---@return string
-local function format_label(item)
+local function format_label(item, known_paths)
 	if item.module ~= "" then
 		return item.module
 	end
@@ -53,21 +57,20 @@ local function format_label(item)
 		return label
 	end
 
-	local cwd = vim.fn.getcwd()
+	---@type [string, (string|function)][]
+	local patterns = {
+		{
+			"^/nix/store/[0-9a-z]+%-([^/]+)/",
+			"[nix:%1] ",
+		},
+	}
 
-	local patterns = {}
-
-	if cwd ~= "" and cwd ~= "/" then
+	if known_paths.cwd ~= "" and known_paths.cwd ~= "/" then
 		patterns[#patterns + 1] = {
-			("^%s/"):format(vim.pesc(cwd)),
-			""
+			("^%s/"):format(vim.pesc(known_paths.cwd)),
+			"",
 		}
 	end
-
-	patterns[#patterns + 1] = {
-		"^/nix/store/[0-9a-z]+%-([^/]+)/",
-		"[nix:%1] "
-	}
 
 	for _, pattern in ipairs(patterns) do
 		local s, n = label:gsub(pattern[1], pattern[2], 1)
@@ -130,13 +133,21 @@ end
 ---@return string[]
 function M.quickfixtextfunc(info)
 	local items = get_items(info)
+
 	---@type string[]
 	local formatted_items = {}
 
+	---@type KnownPaths
+	local known_paths = {
+		cwd = vim.fn.getcwd(),
+	}
+
 	for i = info.start_idx, info.end_idx do
+		---@type string[]
 		local parts = {}
+
 		local item = items[i]
-		local label = format_label(item)
+		local label = format_label(item, known_paths)
 		local metadata = format_metadata(item)
 		local message = format_message(item.text)
 
