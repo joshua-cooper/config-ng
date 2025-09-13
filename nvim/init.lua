@@ -10,3 +10,6 @@ vim.o.splitright = true
 vim.o.undofile = true
 vim.o.winborder = "solid"
 vim.o.wrap = false
+vim.o.quickfixtextfunc = "v:lua.require'zen.quickfix'.quickfixtextfunc"
+
+vim.o.guifont = "monospace:h10"
