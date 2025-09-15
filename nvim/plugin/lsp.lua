@@ -1,7 +1,3 @@
--- TODO:
---   - variable to configure auto start
---   - variable to configure auto format
-
 ---@param client_id integer
 ---@param buf integer
 ---@return string
@@ -39,10 +35,24 @@ vim.api.nvim_create_autocmd("LspAttach", {
 				buffer = buf,
 				desc = "Format the buffer on save",
 				callback = function(_)
-					vim.lsp.buf.format({
-						id = client.id,
-						bufnr = buf,
-					})
+					---@type unknown
+					local should_format = vim.b[buf].lsp_autoformat
+
+					if should_format == nil then
+						---@type unknown
+						should_format = vim.g.lsp_autoformat
+					end
+
+					if should_format == nil then
+						should_format = true
+					end
+
+					if should_format then
+						vim.lsp.buf.format({
+							id = client.id,
+							bufnr = buf,
+						})
+					end
 				end,
 			})
 		end
@@ -91,8 +101,10 @@ vim.api.nvim_create_autocmd("LspDetach", {
 	end,
 })
 
-for _, path in ipairs(vim.api.nvim_get_runtime_file("lsp/*.lua", true)) do
-	vim.lsp.enable(vim.fn.fnamemodify(path, ":t:r"))
+if vim.g.lsp_autostart ~= false then
+	for _, path in ipairs(vim.api.nvim_get_runtime_file("lsp/*.lua", true)) do
+		vim.lsp.enable(vim.fn.fnamemodify(path, ":t:r"))
+	end
 end
 
 vim.keymap.set("n", "grh", toggle_inlay_hints, {
