@@ -14,24 +14,26 @@ local function buffer_name(buf)
 	end
 
 	if vim.bo[buf].buftype == "help" then
-		return vim.fn.fnamemodify(name, ":t")
+		return ("[help] %s"):format(vim.fn.fnamemodify(name, ":t"))
 	end
 
 	if vim.bo[buf].buftype == "terminal" then
-		return (name:gsub("^term://.-//[0-9]+:", "term://"))
+		return ("[term] %s"):format((name:gsub("^term://.-//[0-9]+:", "")))
+	end
+
+	local protocol, content = name:match("^([%w%-]+)://(.+)$")
+
+	if protocol then
+		return ("[%s] %s"):format(protocol, content)
 	end
 
 	if vim.bo[buf].buftype ~= "" then
 		return name
 	end
 
-	local cwd_prefix = ("%s/"):format(vim.fn.getcwd())
-
-	if vim.startswith(name, cwd_prefix) then
-		return name:sub(#cwd_prefix + 1)
-	end
-
-	return name
+	return require("zen.display").path(name, {
+		cwd = vim.fn.getcwd(),
+	})
 end
 
 function M.statusline()

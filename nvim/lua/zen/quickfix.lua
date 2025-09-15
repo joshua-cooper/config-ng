@@ -19,9 +19,6 @@
 ---@field valid 0|1
 ---@field vcol 0|1
 
----@class KnownPaths
----@field cwd string
-
 local M = {}
 
 ---@param info QuickfixTextFuncInfo
@@ -53,34 +50,7 @@ local function format_label(item, known_paths)
 		label = vim.api.nvim_buf_get_name(item.bufnr)
 	end
 
-	if label == "" then
-		return label
-	end
-
-	---@type [string, (string|function)][]
-	local patterns = {
-		{
-			"^/nix/store/[0-9a-z]+%-([^/]+)/",
-			"[nix:%1] ",
-		},
-	}
-
-	if known_paths.cwd ~= "" and known_paths.cwd ~= "/" then
-		patterns[#patterns + 1] = {
-			("^%s/"):format(vim.pesc(known_paths.cwd)),
-			"",
-		}
-	end
-
-	for _, pattern in ipairs(patterns) do
-		local s, n = label:gsub(pattern[1], pattern[2], 1)
-
-		if n > 0 then
-			return s
-		end
-	end
-
-	return label
+	return require("zen.display").path(label, known_paths)
 end
 
 ---@param item QuickfixItem
