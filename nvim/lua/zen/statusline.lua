@@ -36,6 +36,7 @@ local function buffer_name(buf)
 	})
 end
 
+---@return string
 function M.statusline()
 	local win = vim.g.statusline_winid or vim.api.nvim_get_current_win()
 	local buf = vim.api.nvim_win_get_buf(win)
