@@ -15,6 +15,7 @@ vim.o.relativenumber = true
 vim.o.showcmd = false
 vim.o.splitbelow = true
 vim.o.splitright = true
+vim.o.statusline = "%!v:lua.require'zen.statusline'.statusline()"
 vim.o.undofile = true
 vim.o.winborder = "solid"
 vim.o.wrap = false
