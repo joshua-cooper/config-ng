@@ -36,6 +36,15 @@ local function buffer_name(buf)
 	})
 end
 
+---@param buf integer
+local function buffer_flags(buf)
+	if vim.bo[buf].modified then
+		return "[+]"
+	else
+		return ""
+	end
+end
+
 ---@return string
 function M.statusline()
 	local win = vim.g.statusline_winid or vim.api.nvim_get_current_win()
@@ -43,8 +52,10 @@ function M.statusline()
 
 	return table.concat({
 		buffer_name(buf),
+		" ",
+		buffer_flags(buf),
 		"%=",
-		"WIP",
+		"● ◉ ⊘ 🔒",
 	})
 end
 
