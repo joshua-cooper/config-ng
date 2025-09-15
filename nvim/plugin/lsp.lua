@@ -6,7 +6,7 @@
 ---@param buf integer
 ---@return string
 local function client_group_name(client_id, buf)
-	return ("zen.lsp.client_%d_%d"):format(client_id, buf)
+	return ("zen.lsp.client:%d_%d"):format(client_id, buf)
 end
 
 local function toggle_inlay_hints()
