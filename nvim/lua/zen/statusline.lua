@@ -1,6 +1,3 @@
--- TODO:
---   - redraw on diagnostic updates
-
 local M = {}
 
 ---@param buf integer
