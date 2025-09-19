@@ -1,6 +1,6 @@
 -- TODO:
 --   - show file encoding and line endings if they aren't typical (utf-8, unix)
---   - show buffer flags (e.g. dirty)
+--   - redraw on diagnostic updates
 
 local M = {}
 
@@ -37,11 +37,22 @@ local function buffer_name(buf)
 end
 
 ---@param buf integer
+---@return string
 local function buffer_flags(buf)
+	local flags = {}
+
+	if #vim.diagnostic.get(buf) > 0 then
+		flags[#flags + 1] = "[×]"
+	end
+
 	if vim.bo[buf].modified then
-		return "[+]"
-	else
+		flags[#flags + 1] = "[+]"
+	end
+
+	if #flags == 0 then
 		return ""
+	else
+		return table.concat(flags)
 	end
 end
 
