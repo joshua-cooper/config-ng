@@ -101,12 +101,12 @@ vim.api.nvim_create_autocmd("LspDetach", {
 	end,
 })
 
+vim.keymap.set("n", "grh", toggle_inlay_hints, {
+	desc = "Toggle inlay hints",
+})
+
 if vim.g.lsp_autostart ~= false then
 	for _, path in ipairs(vim.api.nvim_get_runtime_file("lsp/*.lua", true)) do
 		vim.lsp.enable(vim.fn.fnamemodify(path, ":t:r"))
 	end
 end
-
-vim.keymap.set("n", "grh", toggle_inlay_hints, {
-	desc = "Toggle inlay hints",
-})
