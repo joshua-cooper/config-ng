@@ -1,5 +1,4 @@
 -- TODO:
---   - show file encoding and line endings if they aren't typical (utf-8, unix)
 --   - redraw on diagnostic updates
 
 local M = {}
@@ -40,6 +39,16 @@ end
 ---@return string
 local function buffer_flags(buf)
 	local flags = {}
+	local fileencoding = vim.bo[buf].fileencoding
+	local fileformat = vim.bo[buf].fileformat
+
+	if fileencoding ~= "" and fileencoding ~= "utf-8" then
+		flags[#flags + 1] = ("[%s]"):format(fileencoding)
+	end
+
+	if fileformat ~= "unix" then
+		flags[#flags + 1] = ("[%s]"):format(fileformat)
+	end
 
 	if #vim.diagnostic.get(buf) > 0 then
 		flags[#flags + 1] = "[×]"
@@ -49,11 +58,7 @@ local function buffer_flags(buf)
 		flags[#flags + 1] = "[+]"
 	end
 
-	if #flags == 0 then
-		return ""
-	else
-		return table.concat(flags)
-	end
+	return table.concat(flags)
 end
 
 ---@return string
@@ -66,7 +71,7 @@ function M.statusline()
 		" ",
 		buffer_flags(buf),
 		"%=",
-		"● ◉ ⊘ 🔒",
+		-- "● ◉ ⊘ 🔒",
 	})
 end
 
