@@ -1,19 +1,3 @@
-vim.diagnostic.config({
-	float = {
-		header = "",
-	},
-	jump = {
-		float = true,
-		wrap = true,
-	},
-	severity_sort = true,
-	signs = false,
-	underline = false,
-	update_in_insert = false,
-	virtual_lines = false,
-	virtual_text = false,
-})
-
 ---@param buf? integer
 ---@return integer?
 local function priority_severity(buf)
@@ -67,6 +51,22 @@ local function setloclist()
 		severity = priority_severity(0),
 	})
 end
+
+vim.diagnostic.config({
+	float = {
+		header = "",
+	},
+	jump = {
+		float = true,
+		wrap = true,
+	},
+	severity_sort = true,
+	signs = false,
+	underline = false,
+	update_in_insert = false,
+	virtual_lines = false,
+	virtual_text = false,
+})
 
 vim.keymap.set("n", "]d", jump_next, {
 	desc = "Jump to the next priority diagnostic in the current buffer",
