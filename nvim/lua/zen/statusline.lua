@@ -8,17 +8,27 @@ local function push_non_empty_string(arr, s)
 	end
 end
 
+---@param win integer
 ---@param buf integer
 ---@return string
-local function buffer_name(buf)
+local function buffer_name(win, buf)
 	local name = vim.api.nvim_buf_get_name(buf)
-
-	if name == "" then
-		return "[No Name]"
-	end
 
 	if vim.bo[buf].buftype == "help" then
 		return ("[help] %s"):format(vim.fn.fnamemodify(name, ":t"))
+	end
+
+	if vim.bo[buf].buftype == "quickfix" then
+		local win_type = vim.fn.win_gettype(win)
+
+		---@type unknown
+		local title = vim.w[win].quickfix_title
+
+		if title == "" then
+			return ("[%s]"):format(win_type)
+		else
+			return ("[%s] %s"):format(win_type, title)
+		end
 	end
 
 	if vim.bo[buf].buftype == "terminal" then
@@ -41,6 +51,10 @@ local function buffer_name(buf)
 
 	if vim.bo[buf].buftype ~= "" then
 		return name
+	end
+
+	if name == "" then
+		return "[No Name]"
 	end
 
 	return require("zen.display").path(name, {
@@ -81,15 +95,13 @@ function M.statusline()
 	local start_parts = {}
 	local end_parts = {}
 
-	push_non_empty_string(start_parts, buffer_name(buf))
+	push_non_empty_string(start_parts, buffer_name(win, buf))
 	push_non_empty_string(start_parts, buffer_flags(buf))
 
 	return ("%s%%=%s"):format(
 		table.concat(start_parts, " "),
 		table.concat(end_parts, " ")
 	)
-
-	-- TODO: Handle quickfix statusline
 end
 
 return M
