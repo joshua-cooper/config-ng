@@ -1,5 +1,13 @@
 local M = {}
 
+---@param arr string[]
+---@param s string
+local function push_non_empty_string(arr, s)
+	if s ~= "" then
+		arr[#arr + 1] = s
+	end
+end
+
 ---@param buf integer
 ---@return string
 local function buffer_name(buf)
@@ -16,6 +24,14 @@ local function buffer_name(buf)
 	if vim.bo[buf].buftype == "terminal" then
 		return ("[term] %s"):format((name:gsub("^term://.-//[0-9]+:", "")))
 	end
+
+	-- TODO: handle fugitive
+	--   - strip cwd + .git
+	--   - shorten commit sha
+	--
+	-- e.g.
+	--
+	-- [fugitive:a14bef92] foo/bar.rs
 
 	local protocol, content = name:match("^([%w%-]+)://(.+)$")
 
@@ -62,14 +78,18 @@ end
 function M.statusline()
 	local win = vim.g.statusline_winid or vim.api.nvim_get_current_win()
 	local buf = vim.api.nvim_win_get_buf(win)
+	local start_parts = {}
+	local end_parts = {}
 
-	return table.concat({
-		buffer_name(buf),
-		" ",
-		buffer_flags(buf),
-		"%=",
-		-- "● ◉ ⊘ 🔒",
-	})
+	push_non_empty_string(start_parts, buffer_name(buf))
+	push_non_empty_string(start_parts, buffer_flags(buf))
+
+	return ("%s%%=%s"):format(
+		table.concat(start_parts, " "),
+		table.concat(end_parts, " ")
+	)
+
+	-- TODO: Handle quickfix statusline
 end
 
 return M
