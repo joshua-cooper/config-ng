@@ -35,6 +35,7 @@ local function buffer_name(win, buf)
 		return ("[term] %s"):format((name:gsub("^term://.-//[0-9]+:", "")))
 	end
 
+	---@type string, string
 	local protocol, content = name:match("^([%w%-]+)://(.+)$")
 
 	if protocol then
@@ -57,6 +58,7 @@ end
 ---@param buf integer
 ---@return string
 local function buffer_flags(buf)
+	---@type string[]
 	local flags = {}
 	local fileencoding = vim.bo[buf].fileencoding
 	local fileformat = vim.bo[buf].fileformat
@@ -82,9 +84,19 @@ end
 
 ---@return string
 function M.statusline()
+	---@type unknown
 	local win = vim.g.statusline_winid or vim.api.nvim_get_current_win()
+	assert(
+		type(win) == "number" and math.floor(win) == win,
+		"vim.g.statusline_winid should be an integer"
+	)
+	---@cast win integer
+
 	local buf = vim.api.nvim_win_get_buf(win)
+
+	---@type string[]
 	local start_parts = {}
+	---@type string[]
 	local end_parts = {}
 
 	push_non_empty_string(start_parts, buffer_name(win, buf))
