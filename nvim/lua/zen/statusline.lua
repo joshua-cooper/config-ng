@@ -35,14 +35,6 @@ local function buffer_name(win, buf)
 		return ("[term] %s"):format((name:gsub("^term://.-//[0-9]+:", "")))
 	end
 
-	-- TODO: handle fugitive
-	--   - strip cwd + .git
-	--   - shorten commit sha
-	--
-	-- e.g.
-	--
-	-- [fugitive:a14bef92] foo/bar.rs
-
 	local protocol, content = name:match("^([%w%-]+)://(.+)$")
 
 	if protocol then
