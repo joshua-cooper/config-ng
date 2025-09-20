@@ -15,6 +15,7 @@ vim.o.relativenumber = true
 vim.o.showcmd = false
 vim.o.splitbelow = true
 vim.o.splitright = true
+vim.o.tabline = "%!v:lua.require'zen.tabline'.tabline()"
 vim.o.undofile = true
 vim.o.winborder = "solid"
 vim.o.wrap = false
