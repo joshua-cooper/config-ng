@@ -6,15 +6,11 @@ function M.tabline()
 	local current_tab = vim.api.nvim_get_current_tabpage()
 
 	---@type string[]
-	local parts = { "%#TabLine#" }
+	local parts = {}
 
-	-- TODO: mouse support
 	for i, tab in ipairs(tabs) do
-		if tab == current_tab then
-			parts[#parts + 1] = ("%%#TabLineSel# %d %%#TabLine#"):format(i)
-		else
-			parts[#parts + 1] = (" %d "):format(i)
-		end
+		local hl_group = tab == current_tab and "#TabLineSel#" or "#TabLine#";
+		parts[#parts + 1] = ("%%%s%%%dT %d %%T"):format(hl_group, i, i)
 	end
 
 	parts[#parts + 1] = "%#TabLineFill#"
