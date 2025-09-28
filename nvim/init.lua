@@ -7,10 +7,6 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
 vim.o.completeopt = "menuone,noinsert,fuzzy"
-vim.o.foldexpr = "v:lua.require'zen.folding'.foldexpr()"
-vim.o.foldlevelstart = 99
-vim.o.foldmethod = "expr"
-vim.o.foldtext = ""
 vim.o.list = true
 vim.o.number = true
 vim.o.pumheight = 10
