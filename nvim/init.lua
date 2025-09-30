@@ -19,5 +19,3 @@ vim.o.tabline = "%!v:lua.require'zen.tabline'.tabline()"
 vim.o.undofile = true
 vim.o.winborder = "solid"
 vim.o.wrap = false
-
-vim.o.guifont = "monospace:h10"
