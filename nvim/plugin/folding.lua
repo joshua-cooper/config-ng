@@ -5,6 +5,10 @@ vim.api.nvim_set_decoration_provider(ns, {
 		if vim.wo[win].foldtext ~= "" then
 			return false
 		end
+
+		if not vim.wo[win].fillchars:find("fold: ", 1, true) then
+			return false
+		end
 	end,
 	on_line = function(_, win, buf, row)
 		---@type integer?
