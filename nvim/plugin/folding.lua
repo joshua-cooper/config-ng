@@ -46,7 +46,7 @@ vim.api.nvim_set_decoration_provider(ns, {
 			hl_mode = "combine",
 			priority = 200,
 			ephemeral = true,
-			strict = false,
+			strict = true,
 		})
 	end,
 })
