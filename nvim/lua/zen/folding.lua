@@ -11,7 +11,7 @@ function M.foldexpr(line)
 	})
 
 	if #clients > 0 then
-		return vim.lsp.foldexpr(lnum)
+		return vim.lsp.foldexpr(line)
 	end
 
 	return "0"

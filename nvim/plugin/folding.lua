@@ -8,46 +8,37 @@ vim.api.nvim_set_decoration_provider(ns, {
 	end,
 	on_line = function(_, win, buf, row)
 		---@type integer?
-		local win_col = vim.api.nvim_win_call(win, function()
+		local win_column = vim.api.nvim_win_call(win, function()
 			local line = row + 1
-			local fold_start = vim.fn.foldclosed(line)
 
-			if fold_start ~= line then
+			if vim.fn.foldclosed(line) ~= line then
 				return nil
 			end
 
-			local virt  = vim.fn.virtcol({ line, "$" }) or 1
-			local view  = vim.fn.winsaveview() or {}
-			local left  = view.leftcol or 0 -- scrolled-off cols
-			local width = vim.api.nvim_win_get_width(win)
+			---@type integer
+			local line_end_column = vim.fn.virtcol({ line, "$" }) - 1
+			local scroll_offset = vim.fn.winsaveview().leftcol
+			local text_end_win_column = line_end_column - scroll_offset - 1
+			local indicator_win_column = text_end_win_column + 2
 
-			-- 0-based col of the *last real character* in the window
-			local last  = (virt - 2) - left
-
-			-- Hide as soon as the actual text is off the left edge
-			if last < 0 then
+			if text_end_win_column < 0 then
 				return nil
 			end
 
-			-- Keep a 1-cell gap between text and dot
-			local GAP = 1
-			local col = last + 1 + GAP
-
-			-- If there's no room to render the gap+dot on the right, hide
-			if col > (width - 1) then
+			if indicator_win_column > vim.api.nvim_win_get_width(win) - 1 then
 				return nil
 			end
 
-			return col
+			return indicator_win_column
 		end)
 
-		if not win_col then
+		if not win_column then
 			return nil
 		end
 
 		vim.api.nvim_buf_set_extmark(buf, ns, row, 0, {
 			virt_text = { { "⋯", "NonText" } },
-			virt_text_win_col = win_col,
+			virt_text_win_col = win_column,
 			hl_mode = "combine",
 			priority = 200,
 			ephemeral = true,
