@@ -92,10 +92,9 @@ vim.api.nvim_create_autocmd("LspDetach", {
 		local client = assert(vim.lsp.get_client_by_id(lsp_detach_args.data.client_id))
 		local group_name = client_group_name(client.id, buf)
 
-		-- TODO: Uncomment this once nvim properly handles disabling completion.
-		-- if client:supports_method("textDocument/completion", buf) then
-		-- 	vim.lsp.completion.enable(false, client.id, buf)
-		-- end
+		if client:supports_method("textDocument/completion", buf) then
+			vim.lsp.completion.enable(false, client.id, buf)
+		end
 
 		vim.api.nvim_del_augroup_by_name(group_name)
 	end,
