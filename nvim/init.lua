@@ -7,6 +7,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
 vim.o.completeopt = "menuone,noinsert,fuzzy"
+vim.o.fillchars = "fold: ,foldsep: ,foldinner: "
 vim.o.list = true
 vim.o.number = true
 vim.o.pumheight = 10
