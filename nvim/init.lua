@@ -9,6 +9,7 @@ vim.g.maplocalleader = "\\"
 vim.o.completeopt = "menuone,noinsert,fuzzy"
 vim.o.fillchars = "fold: ,foldsep: ,foldinner: "
 vim.o.list = true
+vim.o.listchars = "tab:  ,trail:·,nbsp:␣"
 vim.o.number = true
 vim.o.pumheight = 10
 vim.o.quickfixtextfunc = "v:lua.require'zen.quickfix'.quickfixtextfunc"
