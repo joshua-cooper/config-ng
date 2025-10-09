@@ -36,11 +36,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 				desc = "Format the buffer on save",
 				callback = function(_)
 					---@type unknown
-					local should_format = vim.b[buf].lsp_autoformat
+					local should_format = vim.b[buf].lsp_auto_format
 
 					if should_format == nil then
 						---@type unknown
-						should_format = vim.g.lsp_autoformat
+						should_format = vim.g.lsp_auto_format
 					end
 
 					if should_format == nil then
@@ -104,7 +104,7 @@ vim.keymap.set("n", "grh", toggle_inlay_hints, {
 	desc = "Toggle inlay hints",
 })
 
-if vim.g.lsp_autostart ~= false then
+if vim.g.lsp_auto_start ~= false then
 	for _, path in ipairs(vim.api.nvim_get_runtime_file("lsp/*.lua", true)) do
 		vim.lsp.enable(vim.fn.fnamemodify(path, ":t:r"))
 	end
