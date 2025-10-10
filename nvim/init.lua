@@ -14,6 +14,7 @@ vim.o.number = true
 vim.o.pumheight = 10
 vim.o.quickfixtextfunc = "v:lua.require'zen.quickfix'.quickfixtextfunc"
 vim.o.relativenumber = true
+vim.o.ruler = false
 vim.o.shiftwidth = 0
 vim.o.showcmd = false
 vim.o.softtabstop = 0
