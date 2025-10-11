@@ -1,13 +1,31 @@
----@param command lsp.Command
-local function handle_run_single(command)
-	-- TODO
-	vim.print(command)
-end
+---@param path string
+---@return boolean
+local function is_external_crate(path)
+	local joinpath = vim.fs.joinpath
 
----@param command lsp.Command
-local function handle_debug_single(command)
-	-- TODO
-	vim.print(command)
+	local user_home = assert(vim.uv.os_homedir())
+	local cargo_home = vim.env.CARGO_HOME or joinpath(user_home, ".cargo")
+	local rustup_home = vim.env.RUSTUP_HOME or joinpath(user_home, ".rustup")
+
+	local cargo_registry = joinpath(cargo_home, "registry", "src")
+	local git_registry = joinpath(cargo_home, "git", "checkouts")
+	local toolchains = joinpath(rustup_home, "toolchains")
+	local nix_store = "/nix/store"
+
+	local dirs = {
+		cargo_registry,
+		git_registry,
+		toolchains,
+		nix_store,
+	}
+
+	for _, dir in ipairs(dirs) do
+		if vim.fs.relpath(dir, path) ~= nil then
+			return true
+		end
+	end
+
+	return false
 end
 
 ---@param params lsp.InitializeParams
@@ -83,36 +101,6 @@ local function root_dir(buf, on_dir)
 	end)
 end
 
----@param path string
----@return boolean
-local function is_external_crate(path)
-	local joinpath = vim.fs.joinpath
-
-	local user_home = assert(vim.uv.os_homedir())
-	local cargo_home = vim.env.CARGO_HOME or joinpath(user_home, ".cargo")
-	local rustup_home = vim.env.RUSTUP_HOME or joinpath(user_home, ".rustup")
-
-	local cargo_registry = joinpath(cargo_home, "registry", "src")
-	local git_registry = joinpath(cargo_home, "git", "checkouts")
-	local toolchains = joinpath(rustup_home, "toolchains")
-	local nix_store = "/nix/store"
-
-	local dirs = {
-		cargo_registry,
-		git_registry,
-		toolchains,
-		nix_store,
-	}
-
-	for _, dir in ipairs(dirs) do
-		if vim.fs.relpath(dir, path) ~= nil then
-			return true
-		end
-	end
-
-	return false
-end
-
 ---@param client vim.lsp.Client
 ---@param config vim.lsp.ClientConfig
 ---@return boolean
@@ -131,8 +119,6 @@ local function reuse_client(client, config)
 
 	return false
 end
-
--- TODO: custom commands for stuff like expand macro, reload workspace, etc.
 
 ---@type vim.lsp.Config
 return {
@@ -164,8 +150,12 @@ return {
 		},
 	},
 	commands = {
-		["rust-analyzer.runSingle"] = handle_run_single,
-		["rust-analyzer.debugSingle"] = handle_debug_single,
+		["rust-analyzer.runSingle"] = function(command)
+			require("zen.lsp.rust-analyzer").run_single(command)
+		end,
+		["rust-analyzer.debugSingle"] = function(command)
+			require("zen.lsp.rust-analyzer").debug_single(command)
+		end,
 	},
 	before_init = before_init,
 	root_dir = root_dir,
