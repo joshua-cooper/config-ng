@@ -21,6 +21,10 @@ function M.path(path, known_paths)
 		{
 			("^%s/registry/src/([^/]+)-[0-9a-f]+/([^/]+)/"):format(known_paths.cargo_home),
 			function(registry, crate)
+				if registry == "index.crates.io" then
+					registry = "crates.io"
+				end
+
 				return ("[%s:%s] "):format(registry, crate)
 			end,
 		},
