@@ -71,7 +71,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 				desc = "Refresh codelens",
 				callback = function(args)
 					if args.event ~= "LspProgress" or args.file == "end" then
-						-- TODO: Once `refresh` can be scoped per client, add the client ID here.
 						vim.lsp.codelens.refresh({
 							bufnr = buf,
 						})

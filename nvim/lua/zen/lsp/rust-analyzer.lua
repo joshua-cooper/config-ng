@@ -36,4 +36,10 @@ function M.debug_single(command)
 	run_cargo_command(command)
 end
 
+function M.expand_macro()
+end
+
+function M.reload_workspace()
+end
+
 return M
