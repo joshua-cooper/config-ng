@@ -52,6 +52,7 @@ local function buffer_name(win, buf)
 
 	return require("zen.display").path(name, {
 		cwd = vim.fn.getcwd(),
+		cargo_home = vim.env.CARGO_HOME or vim.fs.joinpath(assert(vim.uv.os_homedir()), ".cargo"),
 	})
 end
 

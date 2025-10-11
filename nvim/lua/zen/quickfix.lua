@@ -110,6 +110,7 @@ function M.quickfixtextfunc(info)
 	---@type KnownPaths
 	local known_paths = {
 		cwd = vim.fn.getcwd(),
+		cargo_home = vim.env.CARGO_HOME or vim.fs.joinpath(assert(vim.uv.os_homedir()), ".cargo"),
 	}
 
 	for i = info.start_idx, info.end_idx do

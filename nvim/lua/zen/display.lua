@@ -1,5 +1,6 @@
 ---@class KnownPaths
 ---@field cwd string
+---@field cargo_home string
 
 local M = {}
 
@@ -16,6 +17,17 @@ function M.path(path, known_paths)
 		{
 			"^/nix/store/[0-9a-z]+%-([^/]+)/",
 			"[nix:%1] ",
+		},
+		{
+			("^%s/registry/src/([^/]+)-[0-9a-f]+/([^/]+)/"):format(known_paths.cargo_home),
+			function(registry, crate)
+				return ("[%s:%s] "):format(registry, crate)
+			end,
+		},
+		{
+			("^%s/git/checkouts/([^/]+)-[0-9a-f]+/[0-9a-f]+/"):format(known_paths.cargo_home),
+			"[cargo-git:%1] ",
+
 		},
 	}
 
