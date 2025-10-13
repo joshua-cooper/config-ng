@@ -1,8 +1,8 @@
+local M = {}
+
 ---@class KnownPaths
 ---@field cwd string
 ---@field cargo_home string
-
-local M = {}
 
 ---@param path string
 ---@param known_paths KnownPaths
