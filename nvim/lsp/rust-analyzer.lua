@@ -28,6 +28,19 @@ local function is_external_crate(path)
 	return false
 end
 
+---@param folders lsp.WorkspaceFolder[]
+---@param path string
+---@return boolean
+local function has_workspace_folder(folders, path)
+	for _, folder in ipairs(folders) do
+		if folder.name == path then
+			return true
+		end
+	end
+
+	return false
+end
+
 ---@param params lsp.InitializeParams
 ---@param config vim.lsp.ClientConfig
 local function before_init(params, config)
@@ -113,11 +126,35 @@ local function reuse_client(client, config)
 		return true
 	end
 
+	if config.root_dir == nil then
+		return false
+	end
+
 	if is_external_crate(config.root_dir) then
 		return true
 	end
 
-	return false
+	client.workspace_folders = client.workspace_folders or {}
+
+	if not has_workspace_folder(client.workspace_folders, config.root_dir) then
+		local workspace_folder = {
+			uri = vim.uri_from_fname(config.root_dir),
+			name = config.root_dir,
+		}
+
+		client:notify("workspace/didChangeWorkspaceFolders", {
+			event = {
+				added = {
+					workspace_folder,
+				},
+				removed = {},
+			},
+		})
+
+		table.insert(client.workspace_folders, workspace_folder)
+	end
+
+	return true
 end
 
 ---@type vim.lsp.Config
