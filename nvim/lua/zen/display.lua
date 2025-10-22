@@ -31,7 +31,6 @@ function M.path(path, known_paths)
 		{
 			("^%s/git/checkouts/([^/]+)-[0-9a-f]+/[0-9a-f]+/"):format(known_paths.cargo_home),
 			"[cargo-git:%1] ",
-
 		},
 	}
 
