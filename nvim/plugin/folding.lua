@@ -16,7 +16,7 @@ vim.api.nvim_set_decoration_provider(ns, {
 			local line = row + 1
 
 			if vim.fn.foldclosed(line) ~= line then
-				return nil
+				return
 			end
 
 			---@type integer
@@ -26,18 +26,18 @@ vim.api.nvim_set_decoration_provider(ns, {
 			local indicator_win_column = text_end_win_column + 2
 
 			if text_end_win_column < 0 then
-				return nil
+				return
 			end
 
 			if indicator_win_column > vim.api.nvim_win_get_width(win) - 1 then
-				return nil
+				return
 			end
 
 			return indicator_win_column
 		end)
 
 		if not win_column then
-			return nil
+			return
 		end
 
 		vim.api.nvim_buf_set_extmark(buf, ns, row, 0, {
