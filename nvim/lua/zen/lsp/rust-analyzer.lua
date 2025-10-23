@@ -1,6 +1,11 @@
--- TODO: custom commands for stuff like expand macro, reload workspace, etc.
-
 local M = {}
+
+---@param error lsp.ResponseError
+local function notify_server_error(error)
+	local message = ("[rust-analyzer] error %d: %s"):format(error.code, error.message)
+	vim.notify(message, vim.log.levels.ERROR)
+end
+
 
 ---@param command lsp.Command
 local function run_cargo_command(command)
@@ -37,6 +42,54 @@ function M.debug_single(command)
 end
 
 function M.expand_macro()
+	local method = "rust-analyzer/expandMacro"
+
+	local clients = vim.lsp.get_clients({
+		bufnr = 0,
+		name = "rust-analyzer",
+	})
+
+	local client = clients[#clients]
+
+	if client == nil then
+		return
+	end
+
+	client:request(
+		method,
+		vim.lsp.util.make_position_params(0, client.offset_encoding or "utf-8"),
+		function(error, result, context)
+			local buf = assert(context.bufnr)
+
+			if vim.api.nvim_get_current_buf() ~= buf then
+				-- Ignore result since buffer changed.
+				return
+			end
+
+			if error ~= nil then
+				notify_server_error(error)
+				return
+			end
+
+			if result == nil then
+				vim.notify("No macro under the cursor")
+				return
+			end
+
+			assert(type(result) == "table")
+			assert(type(result.expansion) == "string")
+
+			local lines = vim.split(result.expansion, "\n", {
+				plain = true,
+				trimempty = true,
+			})
+
+			vim.lsp.util.open_floating_preview(lines, "rust", {
+				focus_id = method,
+				wrap = vim.o.wrap,
+			})
+		end
+	)
 end
 
 function M.reload_workspace()
