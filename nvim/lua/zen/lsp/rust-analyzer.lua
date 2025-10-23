@@ -51,7 +51,7 @@ function M.expand_macro()
 
 	local client = clients[#clients]
 
-	if client == nil then
+	if not client then
 		return
 	end
 
@@ -66,12 +66,12 @@ function M.expand_macro()
 				return
 			end
 
-			if error ~= nil then
+			if error then
 				notify_server_error(error)
 				return
 			end
 
-			if result == nil then
+			if not result then
 				vim.notify("No macro under the cursor")
 				return
 			end

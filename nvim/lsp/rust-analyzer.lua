@@ -20,7 +20,7 @@ local function is_external_crate(path)
 	}
 
 	for _, dir in ipairs(dirs) do
-		if vim.fs.relpath(dir, path) ~= nil then
+		if vim.fs.relpath(dir, path) then
 			return true
 		end
 	end
@@ -54,7 +54,7 @@ end
 local function root_dir(buf, on_dir)
 	local crate_dir = vim.fs.root(buf, "Cargo.toml")
 
-	if crate_dir == nil then
+	if not crate_dir then
 		local rust_project_dir = vim.fs.root(buf, "rust-project.json")
 
 		if rust_project_dir then
@@ -126,7 +126,7 @@ local function reuse_client(client, config)
 		return true
 	end
 
-	if config.root_dir == nil then
+	if not config.root_dir then
 		return false
 	end
 
@@ -157,11 +157,8 @@ local function reuse_client(client, config)
 	return true
 end
 
----@param client vim.lsp.Client
 ---@param buf integer
-local function on_attach(client, buf)
-	local _ = client
-
+local function on_attach(buf)
 	vim.keymap.set(
 		"n",
 		"gre",
@@ -215,5 +212,7 @@ return {
 	before_init = before_init,
 	root_dir = root_dir,
 	reuse_client = reuse_client,
-	on_attach = on_attach,
+	on_attach = function(_, buf)
+		on_attach(buf)
+	end,
 }
