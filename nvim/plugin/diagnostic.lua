@@ -1,11 +1,19 @@
----@param buf? integer
----@return integer?
-local function priority_severity(buf)
-	local counts = vim.diagnostic.count(buf)
+---@type vim.diagnostic.SeverityInt[]
+local SEVERITY_PRIORITY = {
+	vim.diagnostic.severity.ERROR,
+	vim.diagnostic.severity.WARN,
+	vim.diagnostic.severity.INFO,
+	vim.diagnostic.severity.HINT,
+}
 
-	for severity = vim.diagnostic.severity.ERROR, vim.diagnostic.severity.HINT do
-		if counts[severity] and counts[severity] > 0 then
-			return severity
+---@param bufnr? integer
+---@return vim.diagnostic.SeverityInt?
+local function priority_severity(bufnr)
+	local counts = vim.diagnostic.count(bufnr)
+
+	for _, s in ipairs(SEVERITY_PRIORITY) do
+		if counts[s] and counts[s] > 0 then
+			return s
 		end
 	end
 end
@@ -26,7 +34,7 @@ end
 
 local function jump_first()
 	vim.diagnostic.jump({
-		count = -math.huge,
+		count = -math.ceil(math.huge),
 		severity = priority_severity(0),
 		wrap = false,
 	})
@@ -34,7 +42,7 @@ end
 
 local function jump_last()
 	vim.diagnostic.jump({
-		count = math.huge,
+		count = math.ceil(math.huge),
 		severity = priority_severity(0),
 		wrap = false,
 	})
