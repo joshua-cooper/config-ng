@@ -82,7 +82,13 @@ local function handle_attach(bufnr, client)
 			buffer = bufnr,
 			desc = "Refresh codelens",
 			callback = function(args)
-				if args.event ~= "LspProgress" or args.file == "end" then
+				local should_refresh = true
+
+				if args.event == "LspProgress" then
+					should_refresh = args.file == "end"
+				end
+
+				if should_refresh then
 					vim.lsp.codelens.refresh({
 						bufnr = bufnr,
 					})
