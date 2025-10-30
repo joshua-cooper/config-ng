@@ -6,7 +6,6 @@ local function notify_server_error(error)
 	vim.notify(message, vim.log.levels.ERROR)
 end
 
-
 ---@param command lsp.Command
 local function run_cargo_command(command)
 	local args = command.arguments[1].args
@@ -92,7 +91,6 @@ function M.expand_macro()
 	)
 end
 
-function M.reload_workspace()
-end
+function M.reload_workspace() end
 
 return M

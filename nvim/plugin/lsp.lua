@@ -4,11 +4,7 @@ local AUTO_FORMAT = "lsp_auto_format"
 ---@param bufnr integer
 ---@return string
 local function client_group_name(client_id, bufnr)
-	return string.format(
-		"zen.lsp.client:%d_%d",
-		client_id,
-		bufnr
-	)
+	return string.format("zen.lsp.client:%d_%d", client_id, bufnr)
 end
 
 ---@param bufnr integer
@@ -52,8 +48,10 @@ local function handle_attach(bufnr, client)
 		})
 	end
 
-	if not client:supports_method("textDocument/willSaveWaitUntil", bufnr)
-	    and client:supports_method("textDocument/formatting", bufnr) then
+	if
+		not client:supports_method("textDocument/willSaveWaitUntil", bufnr)
+		and client:supports_method("textDocument/formatting", bufnr)
+	then
 		vim.api.nvim_create_autocmd("BufWritePre", {
 			group = group,
 			buffer = bufnr,
@@ -116,10 +114,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	}),
 	desc = "Set up LSP clients",
 	callback = function(args)
-		handle_attach(
-			args.buf,
-			assert(vim.lsp.get_client_by_id(args.data.client_id))
-		)
+		handle_attach(args.buf, assert(vim.lsp.get_client_by_id(args.data.client_id)))
 	end,
 })
 
@@ -129,10 +124,7 @@ vim.api.nvim_create_autocmd("LspDetach", {
 	}),
 	desc = "Clean up LSP clients",
 	callback = function(args)
-		handle_detach(
-			args.buf,
-			assert(vim.lsp.get_client_by_id(args.data.client_id))
-		)
+		handle_detach(args.buf, assert(vim.lsp.get_client_by_id(args.data.client_id)))
 	end,
 })
 

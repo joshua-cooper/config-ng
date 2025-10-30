@@ -87,10 +87,7 @@ end
 function M.statusline()
 	---@type unknown
 	local win = vim.g.statusline_winid or vim.api.nvim_get_current_win()
-	assert(
-		type(win) == "number" and math.floor(win) == win,
-		"vim.g.statusline_winid should be an integer"
-	)
+	assert(type(win) == "number" and math.floor(win) == win, "vim.g.statusline_winid should be an integer")
 	---@cast win integer
 
 	local buf = vim.api.nvim_win_get_buf(win)
@@ -103,10 +100,7 @@ function M.statusline()
 	push_non_empty_string(start_parts, buffer_name(win, buf))
 	push_non_empty_string(start_parts, buffer_flags(buf))
 
-	return ("%s%%=%s"):format(
-		table.concat(start_parts, " "),
-		table.concat(end_parts, " ")
-	)
+	return ("%s%%=%s"):format(table.concat(start_parts, " "), table.concat(end_parts, " "))
 end
 
 return M

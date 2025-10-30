@@ -100,10 +100,7 @@ local function root_dir(buf, on_dir)
 
 		if type(workspace_root) ~= "string" then
 			vim.schedule(function()
-				vim.notify_once(
-					"No workspace_root returned from `cargo metadata`",
-					vim.log.levels.WARN
-				)
+				vim.notify_once("No workspace_root returned from `cargo metadata`", vim.log.levels.WARN)
 			end)
 
 			on_dir(crate_dir)
@@ -159,17 +156,12 @@ end
 
 ---@param buf integer
 local function on_attach(buf)
-	vim.keymap.set(
-		"n",
-		"gre",
-		function()
-			require("zen.lsp.rust-analyzer").expand_macro()
-		end,
-		{
-			desc = "Expand the macro under the cursor",
-			buffer = buf,
-		}
-	)
+	vim.keymap.set("n", "gre", function()
+		require("zen.lsp.rust-analyzer").expand_macro()
+	end, {
+		desc = "Expand the macro under the cursor",
+		buffer = buf,
+	})
 end
 
 ---@type vim.lsp.Config
