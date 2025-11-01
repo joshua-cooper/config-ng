@@ -25,6 +25,7 @@
 - [ ] Disable backups when editing sensitive files
 - [ ] nvim directory based git difftool
 - [ ] `set splitkeep`
+- [ ] `set diffopt+=inline:char`
 
 #### Later
 
@@ -46,6 +47,8 @@
 #### Blocked
 
 - [ ] Refresh codelens scoped per client (not currently supported in `vim.lsp.codelens.refresh`)
+- [ ] Specify return type of `vim.diagnostic.count(bufnr)` to
+  be `table<integer, integer>`
 - [ ] BiDi support <https://github.com/neovim/neovim/issues/553>
 	- [ ] Isolate statusline components (filename, each flag, etc.)
 	- [ ] Independent statusline alignment for vertical splits
