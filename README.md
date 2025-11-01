@@ -11,7 +11,7 @@
 	- [ ] Debuggables
 	- [ ] Open Cargo.toml
 	- [ ] Verify the cargo/git registry patterns against edge case crate names
-- [ ] `busy` in statusline
+- [x] `busy` in statusline
 - [ ] completeopts
 - [ ] Refine options
 - [ ] Keymaps

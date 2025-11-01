@@ -83,6 +83,16 @@ local function buffer_flags(buf)
 	return table.concat(flags)
 end
 
+---@param buf integer
+---@return string
+local function busy_indicator(buf)
+	if vim.bo[buf].busy == 0 then
+		return ""
+	end
+
+	return "◐"
+end
+
 ---@return string
 function M.statusline()
 	---@type unknown
@@ -99,8 +109,12 @@ function M.statusline()
 
 	push_non_empty_string(start_parts, buffer_name(win, buf))
 	push_non_empty_string(start_parts, buffer_flags(buf))
+	push_non_empty_string(end_parts, busy_indicator(buf))
 
-	return ("%s%%=%s"):format(table.concat(start_parts, " "), table.concat(end_parts, " "))
+	local start_string = table.concat(start_parts, " ")
+	local end_string = table.concat(end_parts, " ")
+
+	return string.format("%s%%=%s", start_string, end_string)
 end
 
 return M
