@@ -8,6 +8,7 @@
 	- [x] Reload workspace
 	- [x] Rebuild proc macros
 	- [x] Open Cargo.toml
+	- [ ] Parent module
 	- [ ] Runnables
 	- [ ] Debuggables
 	- [ ] Verify the cargo/git registry patterns against edge case crate names
@@ -16,26 +17,27 @@
 - [ ] Refine options
 - [ ] Keymaps
 - [ ] Highlight indentation using the wrong whitespace (e.g. tabs when `expandtab = true`)
-- [ ] Custom codelens virtual text
 - [ ] Treesitter
   - [ ] Set up parsers
   - [ ] Add treesitter support to foldexpr
 - [ ] Theme
 - [ ] oil?
-- [ ] Termux handling
-	- [ ] path display
-	- [ ] jumping to rust std item complains about std being nightly
 - [ ] Disable backups when editing sensitive files
 - [ ] nvim directory based git difftool
+- [ ] `set splitkeep`
 
 #### Later
 
 - [ ] `foldopen` and `foldclose` `fillchars`
 - [ ] `statuscolumn`
 - [ ] surround plugin
+- [ ] Custom codelens virtual text
 - [ ] Fallback for HOME instead of asserting it
 - [ ] Recalculate folds on LSP attach (`:help zx`)
 - [ ] Consistent `vim.notify` usage
+- [ ] Termux handling
+	- [ ] path display
+	- [ ] jumping to rust std item complains about std being nightly
 
 #### Maybe
 
