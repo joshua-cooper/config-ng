@@ -6,7 +6,7 @@
 	- [x] Figure out how rustaceanvim has 3 r-a processes for 2 projects when we have 4
 	- [x] Expand macro
 	- [x] Reload workspace
-	- [ ] Rebuild proc macros
+	- [x] Rebuild proc macros
 	- [ ] Runnables
 	- [ ] Debuggables
 	- [ ] Open Cargo.toml
@@ -36,6 +36,7 @@
 - [ ] Fallback for HOME instead of asserting it
 - [ ] Recalculate folds on LSP attach (`:help zx`)
 - [ ] Clean up rust-analyzer keymaps on client exit
+- [ ] Consistent `vim.notify` usage
 
 #### Maybe
 

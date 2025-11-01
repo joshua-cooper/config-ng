@@ -111,4 +111,24 @@ function M.reload_workspace()
 	end
 end
 
+function M.rebuild_proc_macros()
+	local method = "rust-analyzer/rebuildProcMacros"
+
+	local clients = vim.lsp.get_clients({
+		bufnr = 0,
+		name = "rust-analyzer",
+	})
+
+	for _, client in ipairs(clients) do
+		client:request(method, nil, function(error, _, _)
+			if error ~= nil then
+				notify_server_error(error)
+				return
+			end
+
+			vim.notify("Rebuilt proc macros")
+		end)
+	end
+end
+
 return M
