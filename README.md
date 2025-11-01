@@ -7,9 +7,9 @@
 	- [x] Expand macro
 	- [x] Reload workspace
 	- [x] Rebuild proc macros
+	- [x] Open Cargo.toml
 	- [ ] Runnables
 	- [ ] Debuggables
-	- [ ] Open Cargo.toml
 	- [ ] Verify the cargo/git registry patterns against edge case crate names
 - [x] `busy` in statusline
 - [ ] completeopts

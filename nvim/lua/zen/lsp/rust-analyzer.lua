@@ -54,41 +54,40 @@ function M.expand_macro()
 		return
 	end
 
-	client:request(
-		method,
-		vim.lsp.util.make_position_params(0, client.offset_encoding or "utf-8"),
-		function(error, result, context)
-			local buf = assert(context.bufnr)
+	local offset_encoding = client.offset_encoding or "utf-8"
+	local params = vim.lsp.util.make_position_params(0, offset_encoding)
 
-			if vim.api.nvim_get_current_buf() ~= buf then
-				-- Ignore result since buffer changed.
-				return
-			end
+	client:request(method, params, function(error, result, context)
+		local buf = assert(context.bufnr)
 
-			if error then
-				notify_server_error(error)
-				return
-			end
-
-			if not result then
-				vim.notify("No macro under the cursor")
-				return
-			end
-
-			assert(type(result) == "table")
-			assert(type(result.expansion) == "string")
-
-			local lines = vim.split(result.expansion, "\n", {
-				plain = true,
-				trimempty = true,
-			})
-
-			vim.lsp.util.open_floating_preview(lines, "rust", {
-				focus_id = method,
-				wrap = vim.o.wrap,
-			})
+		if vim.api.nvim_get_current_buf() ~= buf then
+			-- Ignore result since buffer changed.
+			return
 		end
-	)
+
+		if error then
+			notify_server_error(error)
+			return
+		end
+
+		if not result then
+			vim.notify("No macro under the cursor")
+			return
+		end
+
+		assert(type(result) == "table")
+		assert(type(result.expansion) == "string")
+
+		local lines = vim.split(result.expansion, "\n", {
+			plain = true,
+			trimempty = true,
+		})
+
+		vim.lsp.util.open_floating_preview(lines, "rust", {
+			focus_id = method,
+			wrap = vim.o.wrap,
+		})
+	end)
 end
 
 function M.reload_workspace()
@@ -129,6 +128,36 @@ function M.rebuild_proc_macros()
 			vim.notify("Rebuilt proc macros")
 		end)
 	end
+end
+
+function M.open_cargo_toml()
+	local method = "experimental/openCargoToml"
+
+	local clients = vim.lsp.get_clients({
+		bufnr = 0,
+		name = "rust-analyzer",
+	})
+
+	local client = clients[#clients]
+
+	if not client then
+		return
+	end
+
+	local params = {
+		textDocument = vim.lsp.util.make_text_document_params(0),
+	}
+
+	client:request(method, params, function(error, result, context)
+		if error ~= nil then
+			notify_server_error(error)
+			return
+		end
+
+		local client = assert(vim.lsp.get_client_by_id(context.client_id))
+
+		vim.lsp.util.show_document(result, client.offset_encoding or "utf-8")
+	end)
 end
 
 return M
