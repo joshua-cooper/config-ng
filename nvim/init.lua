@@ -7,6 +7,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
 vim.o.completeopt = "menuone,noinsert,fuzzy"
+vim.o.exrc = true
 vim.o.fillchars = "fold: ,foldsep: ,foldinner: ,eob: ,trunc:›,truncrl:‹"
 vim.o.list = true
 vim.o.listchars = "tab:  ,trail:·,nbsp:␣"

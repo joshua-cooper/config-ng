@@ -1,3 +1,6 @@
 # vi: ft=gitignore
 
+.exrc
+.nvimrc
+.nvim.lua
 **/.claude/settings.local.json
