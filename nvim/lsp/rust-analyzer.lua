@@ -154,16 +154,6 @@ local function reuse_client(client, config)
 	return true
 end
 
----@param buf integer
-local function on_attach(buf)
-	vim.keymap.set("n", "gre", function()
-		require("zen.lsp.rust-analyzer").expand_macro()
-	end, {
-		desc = "Expand the macro under the cursor",
-		buffer = buf,
-	})
-end
-
 ---@type vim.lsp.Config
 return {
 	cmd = {
@@ -204,7 +194,4 @@ return {
 	before_init = before_init,
 	root_dir = root_dir,
 	reuse_client = reuse_client,
-	on_attach = function(_, buf)
-		on_attach(buf)
-	end,
 }

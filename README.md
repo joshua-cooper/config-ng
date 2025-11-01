@@ -35,7 +35,6 @@
 - [ ] surround plugin
 - [ ] Fallback for HOME instead of asserting it
 - [ ] Recalculate folds on LSP attach (`:help zx`)
-- [ ] Clean up rust-analyzer keymaps on client exit
 - [ ] Consistent `vim.notify` usage
 
 #### Maybe
