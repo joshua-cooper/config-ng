@@ -5,7 +5,7 @@
 - [ ] Rust support
 	- [x] Figure out how rustaceanvim has 3 r-a processes for 2 projects when we have 4
 	- [x] Expand macro
-	- [ ] Reload workspace
+	- [x] Reload workspace
 	- [ ] Rebuild proc macros
 	- [ ] Runnables
 	- [ ] Debuggables
