@@ -14,7 +14,7 @@ function M.foldexpr(line)
 		return vim.lsp.foldexpr(line)
 	end
 
-	return "0"
+	return vim.treesitter.foldexpr(line)
 end
 
 return M

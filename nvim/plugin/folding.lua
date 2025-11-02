@@ -1,3 +1,5 @@
+local FOLDEXPR = "v:lua.require'zen.folding'.foldexpr()"
+
 local ns = vim.api.nvim_create_namespace("zen.folding.extmarks")
 
 vim.api.nvim_set_decoration_provider(ns, {
@@ -51,7 +53,19 @@ vim.api.nvim_set_decoration_provider(ns, {
 	end,
 })
 
-vim.o.foldexpr = "v:lua.require'zen.folding'.foldexpr()"
+-- Override the foldexpr from the default lua ftplugin.
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "lua",
+	group = vim.api.nvim_create_augroup("zen.folding.foldexpr", {
+		clear = true,
+	}),
+	desc = "Use custom foldexpr for lua files",
+	callback = function(_)
+		vim.wo.foldexpr = FOLDEXPR
+	end,
+})
+
+vim.o.foldexpr = FOLDEXPR
 vim.o.foldlevelstart = 99
 vim.o.foldmethod = "expr"
 vim.o.foldtext = ""

@@ -19,13 +19,14 @@
 - [ ] Highlight indentation using the wrong whitespace (e.g. tabs when `expandtab = true`)
 - [ ] Treesitter
   - [ ] Set up parsers
-  - [ ] Add treesitter support to foldexpr
+  - [x] Add treesitter support to foldexpr
 - [ ] Theme
 - [ ] oil?
 - [ ] Disable backups when editing sensitive files
 - [ ] nvim directory based git difftool
 - [ ] `set splitkeep`
 - [ ] `set diffopt+=inline:char`
+- [ ] Check `vim.wo.{opt}` vs `vim.wo[winnr][bufnr].{opt}`
 
 #### Later
 
