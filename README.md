@@ -10,7 +10,6 @@
 	- [x] Open Cargo.toml
 	- [x] Parent module
 	- [x] Runnables
-	- [ ] Debuggables
 	- [ ] Verify the cargo/git registry patterns against edge case crate names
 - [x] `busy` in statusline
 - [ ] completeopts
@@ -40,6 +39,7 @@
 - [ ] Termux handling
 	- [ ] path display
 	- [ ] jumping to rust std item complains about std being nightly
+- [ ] rust-analyzer debuggables
 
 #### Maybe
 

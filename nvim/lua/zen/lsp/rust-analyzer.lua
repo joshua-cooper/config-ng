@@ -7,7 +7,7 @@ local function notify_server_error(error)
 end
 
 ---@param command lsp.Command
-local function run_cargo_command(command)
+function M.run_single(command)
 	local args = command.arguments[1].args
 	local cargo_command = { "cargo" }
 
@@ -31,16 +31,6 @@ local function run_cargo_command(command)
 	vim.fn.termopen(cargo_command, {
 		cwd = args.workspaceRoot,
 	})
-end
-
----@param command lsp.Command
-function M.run_single(command)
-	run_cargo_command(command)
-end
-
----@param command lsp.Command
-function M.debug_single(command)
-	run_cargo_command(command)
 end
 
 function M.expand_macro()

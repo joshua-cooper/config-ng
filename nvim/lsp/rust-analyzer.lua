@@ -168,7 +168,6 @@ return {
 			commands = {
 				commands = {
 					"rust-analyzer.runSingle",
-					"rust-analyzer.debugSingle",
 				},
 			},
 		},
@@ -186,9 +185,6 @@ return {
 	commands = {
 		["rust-analyzer.runSingle"] = function(command)
 			require("zen.lsp.rust-analyzer").run_single(command)
-		end,
-		["rust-analyzer.debugSingle"] = function(command)
-			require("zen.lsp.rust-analyzer").debug_single(command)
 		end,
 	},
 	before_init = before_init,
