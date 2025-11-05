@@ -192,4 +192,36 @@ function M.parent_module()
 	end)
 end
 
+function M.external_docs()
+	local method = "experimental/externalDocs"
+
+	local clients = vim.lsp.get_clients({
+		bufnr = 0,
+		name = "rust-analyzer",
+	})
+
+	local client = clients[#clients]
+
+	if not client then
+		return
+	end
+
+	local offset_encoding = client.offset_encoding or "utf-8"
+	local params = vim.lsp.util.make_position_params(0, offset_encoding)
+
+	client:request(method, params, function(error, result, _)
+		if error ~= nil then
+			notify_server_error(error)
+			return
+		end
+
+		if not result then
+			return
+		end
+
+		assert(type(result) == "string")
+		vim.ui.open(result)
+	end)
+end
+
 return M
