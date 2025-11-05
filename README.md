@@ -9,7 +9,7 @@
 	- [x] Rebuild proc macros
 	- [x] Open Cargo.toml
 	- [x] Parent module
-	- [ ] Runnables
+	- [x] Runnables
 	- [ ] Debuggables
 	- [ ] Verify the cargo/git registry patterns against edge case crate names
 - [x] `busy` in statusline

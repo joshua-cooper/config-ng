@@ -25,9 +25,12 @@ local function run_cargo_command(command)
 		table.insert(cargo_command, arg)
 	end
 
-	vim.print(cargo_command)
-
-	-- TODO: run `cargo_command` with terminal in `args.workspaceRoot`
+	vim.cmd("botright split")
+	local bufnr = vim.api.nvim_create_buf(true, false)
+	vim.api.nvim_set_current_buf(bufnr)
+	vim.fn.termopen(cargo_command, {
+		cwd = args.workspaceRoot,
+	})
 end
 
 ---@param command lsp.Command
