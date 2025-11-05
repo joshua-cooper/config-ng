@@ -93,6 +93,104 @@ function M.expand_macro()
 	end)
 end
 
+function M.view_mir()
+	local method = "rust-analyzer/viewMir"
+
+	local clients = vim.lsp.get_clients({
+		bufnr = 0,
+		name = "rust-analyzer",
+	})
+
+	local client = clients[#clients]
+
+	if not client then
+		return
+	end
+
+	local offset_encoding = client.offset_encoding or "utf-8"
+	local params = vim.lsp.util.make_position_params(0, offset_encoding)
+
+	client:request(method, params, function(error, result, context)
+		local buf = assert(context.bufnr)
+
+		if vim.api.nvim_get_current_buf() ~= buf then
+			-- Ignore result since buffer changed.
+			return
+		end
+
+		if error then
+			notify_server_error(error)
+			return
+		end
+
+		if not result then
+			vim.notify("Not inside a function body")
+			return
+		end
+
+		assert(type(result) == "string")
+
+		local lines = vim.split(result, "\n", {
+			plain = true,
+			trimempty = true,
+		})
+
+		vim.lsp.util.open_floating_preview(lines, "rust", {
+			focus_id = method,
+			wrap = vim.o.wrap,
+		})
+	end)
+end
+
+function M.view_hir()
+	local method = "rust-analyzer/viewHir"
+
+	local clients = vim.lsp.get_clients({
+		bufnr = 0,
+		name = "rust-analyzer",
+	})
+
+	local client = clients[#clients]
+
+	if not client then
+		return
+	end
+
+	local offset_encoding = client.offset_encoding or "utf-8"
+	local params = vim.lsp.util.make_position_params(0, offset_encoding)
+
+	client:request(method, params, function(error, result, context)
+		local buf = assert(context.bufnr)
+
+		if vim.api.nvim_get_current_buf() ~= buf then
+			-- Ignore result since buffer changed.
+			return
+		end
+
+		if error then
+			notify_server_error(error)
+			return
+		end
+
+		if not result then
+			vim.notify("Not inside a lowerable item")
+			return
+		end
+
+		assert(type(result) == "string")
+
+		local lines = vim.split(result, "\n", {
+			plain = true,
+			trimempty = true,
+		})
+
+		vim.lsp.util.open_floating_preview(lines, "rust", {
+			focus_id = method,
+			wrap = vim.o.wrap,
+		})
+	end)
+end
+
 function M.reload_workspace()
 	local method = "rust-analyzer/reloadWorkspace"
 
