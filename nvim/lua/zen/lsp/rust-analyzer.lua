@@ -155,8 +155,37 @@ function M.open_cargo_toml()
 		end
 
 		local client = assert(vim.lsp.get_client_by_id(context.client_id))
-
 		vim.lsp.util.show_document(result, client.offset_encoding or "utf-8")
+	end)
+end
+
+function M.parent_module()
+	local method = "experimental/parentModule"
+
+	local clients = vim.lsp.get_clients({
+		bufnr = 0,
+		name = "rust-analyzer",
+	})
+
+	local client = clients[#clients]
+
+	if not client then
+		return
+	end
+
+	local offset_encoding = client.offset_encoding or "utf-8"
+	local params = vim.lsp.util.make_position_params(0, offset_encoding)
+
+	client:request(method, params, function(error, result, context)
+		if error ~= nil then
+			notify_server_error(error)
+			return
+		end
+
+		assert(vim.islist(result))
+		local location = assert(result[1])
+		local client = assert(vim.lsp.get_client_by_id(context.client_id))
+		vim.lsp.util.show_document(location, client.offset_encoding or "utf-8")
 	end)
 end
 

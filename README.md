@@ -8,7 +8,7 @@
 	- [x] Reload workspace
 	- [x] Rebuild proc macros
 	- [x] Open Cargo.toml
-	- [ ] Parent module
+	- [x] Parent module
 	- [ ] Runnables
 	- [ ] Debuggables
 	- [ ] Verify the cargo/git registry patterns against edge case crate names
