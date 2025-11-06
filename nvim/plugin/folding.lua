@@ -53,12 +53,14 @@ vim.api.nvim_set_decoration_provider(ns, {
 	end,
 })
 
+local group = vim.api.nvim_create_augroup("zen.folding", {
+	clear = true,
+})
+
 -- Override the foldexpr from the default lua ftplugin.
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "lua",
-	group = vim.api.nvim_create_augroup("zen.folding.foldexpr", {
-		clear = true,
-	}),
+	group = group,
 	desc = "Use custom foldexpr for lua files",
 	callback = function(_)
 		vim.wo.foldexpr = FOLDEXPR

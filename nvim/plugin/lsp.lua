@@ -108,10 +108,12 @@ local function handle_detach(bufnr, client)
 	vim.api.nvim_del_augroup_by_name(group_name)
 end
 
+local group = vim.api.nvim_create_augroup("zen.lsp", {
+	clear = true,
+})
+
 vim.api.nvim_create_autocmd("LspAttach", {
-	group = vim.api.nvim_create_augroup("zen.lsp.attach", {
-		clear = true,
-	}),
+	group = group,
 	desc = "Set up LSP clients",
 	callback = function(args)
 		handle_attach(args.buf, assert(vim.lsp.get_client_by_id(args.data.client_id)))
@@ -119,9 +121,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 vim.api.nvim_create_autocmd("LspDetach", {
-	group = vim.api.nvim_create_augroup("zen.lsp.detach", {
-		clear = true,
-	}),
+	group = group,
 	desc = "Clean up LSP clients",
 	callback = function(args)
 		handle_detach(args.buf, assert(vim.lsp.get_client_by_id(args.data.client_id)))

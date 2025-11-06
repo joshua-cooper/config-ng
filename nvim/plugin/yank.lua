@@ -1,7 +1,9 @@
+local group = vim.api.nvim_create_augroup("zen.yank", {
+	clear = true,
+})
+
 vim.api.nvim_create_autocmd("TextYankPost", {
-	group = vim.api.nvim_create_augroup("zen.yank", {
-		clear = true,
-	}),
+	group = group,
 	desc = "Highlight text that was yanked",
 	callback = function(_)
 		vim.hl.on_yank({
