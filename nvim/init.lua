@@ -8,12 +8,12 @@ vim.g.maplocalleader = "\\"
 
 -- UI
 
-vim.o.fillchars = "fold: ,foldsep: ,foldinner: ,eob: ,trunc:›,truncrl:‹"
-vim.o.quickfixtextfunc = "v:lua.require'zen.quickfix'.quickfixtextfunc"
-vim.o.ruler = false
 vim.o.showcmd = false
-vim.o.tabline = "%!v:lua.require'zen.tabline'.tabline()"
+vim.o.ruler = false
 vim.o.winborder = "solid"
+vim.o.fillchars = "fold: ,foldsep: ,foldinner: ,eob: ,trunc:›,truncrl:‹"
+vim.o.tabline = "%!v:lua.require'zen.tabline'.tabline()"
+vim.o.quickfixtextfunc = "v:lua.require'zen.quickfix'.quickfixtextfunc"
 
 -- Indentation
 
@@ -27,13 +27,14 @@ vim.o.smartcase = true
 
 -- Completion
 
-vim.o.completeopt = "menuone,noinsert,fuzzy"
 vim.o.pumheight = 10
+vim.o.completeopt = "menuone,noinsert,fuzzy"
 
 -- Splits
 
 vim.o.splitbelow = true
 vim.o.splitright = true
+vim.o.splitkeep = "cursor"
 
 -- Scrolling
 
