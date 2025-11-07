@@ -11,6 +11,7 @@
 	- [x] Parent module
 	- [x] Runnables
 	- [ ] Verify the cargo/git registry patterns against edge case crate names
+	- [ ] Do `G` for codelens runners to hug bottom of terminal
 - [x] `busy` in statusline
 - [x] completeopts
 - [x] Refine options
