@@ -26,6 +26,7 @@
 - [x] `set diffopt+=inline:char`
 - [ ] Check `vim.wo.{opt}` vs `vim.wo[winnr][bufnr].{opt}`
 - [ ] variable to prevent lsp auto start
+- [ ] make vim global lsp work in .nvim.lua files
 - [ ] final audit missing options
 
 #### Later
