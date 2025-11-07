@@ -24,8 +24,7 @@
 - [ ] Disable backups when editing sensitive files
 - [ ] nvim directory based git difftool
 - [x] `set splitkeep`
-- [ ] `set formatoptions`
-- [ ] `set diffopt+=inline:char`
+- [x] `set diffopt+=inline:char`
 - [ ] Check `vim.wo.{opt}` vs `vim.wo[winnr][bufnr].{opt}`
 - [ ] variable to prevent lsp auto start
 - [ ] final audit missing options
@@ -46,6 +45,7 @@
 - [ ] Figure out a solution for overriding options from .nvim.lua (e.g. init.lua vs plugin/X.lua source order)
 - [ ] Manual truncation of statusline when too long (avoids default `>`)
 - [ ] Fix c-n, c-p with 1 (or any?) match when using `fuzzy` completeopt. Currently the first is skipped.
+- [ ] `set formatoptions` (add `n` and `/`)
 
 #### Maybe
 
