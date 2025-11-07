@@ -15,7 +15,6 @@
 - [x] completeopts
 - [x] Refine options
 - [ ] Keymaps
-- [ ] Highlight indentation using the wrong whitespace (e.g. tabs when `expandtab = true`)
 - [ ] Treesitter
   - [ ] Set up parsers
   - [x] Add treesitter support to foldexpr
@@ -46,6 +45,7 @@
 - [ ] Manual truncation of statusline when too long (avoids default `>`)
 - [ ] Fix c-n, c-p with 1 (or any?) match when using `fuzzy` completeopt. Currently the first is skipped.
 - [ ] `set formatoptions` (add `n` and `/`)
+- [ ] Highlight indentation using the wrong whitespace (e.g. tabs when `expandtab = true`)
 
 #### Maybe
 
