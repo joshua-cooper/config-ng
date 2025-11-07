@@ -12,8 +12,8 @@
 	- [x] Runnables
 	- [ ] Verify the cargo/git registry patterns against edge case crate names
 - [x] `busy` in statusline
-- [ ] completeopts
-- [ ] Refine options
+- [x] completeopts
+- [x] Refine options
 - [ ] Keymaps
 - [ ] Highlight indentation using the wrong whitespace (e.g. tabs when `expandtab = true`)
 - [ ] Treesitter
@@ -28,6 +28,7 @@
 - [ ] `set diffopt+=inline:char`
 - [ ] Check `vim.wo.{opt}` vs `vim.wo[winnr][bufnr].{opt}`
 - [ ] variable to prevent lsp auto start
+- [ ] final audit missing options
 
 #### Later
 
@@ -42,6 +43,9 @@
 	- [ ] path display
 	- [ ] jumping to rust std item complains about std being nightly
 - [ ] rust-analyzer debuggables
+- [ ] Figure out a solution for overriding options from .nvim.lua (e.g. init.lua vs plugin/X.lua source order)
+- [ ] Manual truncation of statusline when too long (avoids default `>`)
+- [ ] Fix c-n, c-p with 1 (or any?) match when using `fuzzy` completeopt. Currently the first is skipped.
 
 #### Maybe
 
