@@ -33,7 +33,6 @@ vim.o.pumheight = 10
 -- Splits
 
 vim.o.splitbelow = true
-vim.o.splitkeep = "screen"
 vim.o.splitright = true
 
 -- Scrolling
