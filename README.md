@@ -24,6 +24,7 @@
 - [ ] Disable backups when editing sensitive files
 - [ ] nvim directory based git difftool
 - [ ] `set splitkeep`
+- [ ] `set formatoptions`
 - [ ] `set diffopt+=inline:char`
 - [ ] Check `vim.wo.{opt}` vs `vim.wo[winnr][bufnr].{opt}`
 - [ ] variable to prevent lsp auto start
