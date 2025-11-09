@@ -25,11 +25,18 @@ function M.run_single(command)
 		table.insert(cargo_command, arg)
 	end
 
-	vim.cmd("botright split")
 	local bufnr = vim.api.nvim_create_buf(true, false)
-	vim.api.nvim_set_current_buf(bufnr)
-	vim.fn.termopen(cargo_command, {
+	local winnr = vim.api.nvim_open_win(bufnr, true, {
+		win = -1,
+		split = "below",
+	})
+	vim.fn.jobstart(cargo_command, {
 		cwd = args.workspaceRoot,
+		term = true,
+	})
+	vim.api.nvim_win_set_cursor(winnr, {
+		vim.api.nvim_buf_line_count(bufnr),
+		0,
 	})
 end
 

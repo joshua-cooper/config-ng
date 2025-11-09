@@ -11,7 +11,7 @@
 	- [x] Parent module
 	- [x] Runnables
 	- [ ] Verify the cargo/git registry patterns against edge case crate names
-	- [ ] Do `G` for codelens runners to hug bottom of terminal
+	- [x] Do `G` for codelens runners to hug bottom of terminal
 - [x] `busy` in statusline
 - [x] completeopts
 - [x] Refine options
@@ -49,6 +49,7 @@
 - [ ] `set formatoptions` (add `n` and `/`)
 - [ ] Highlight indentation using the wrong whitespace (e.g. tabs when `expandtab = true`)
 - [ ] Make sensitive module compatible with macos/bsd/etc.
+- [ ] Support `vertical` `horizontal` and `tab` for rust-analyzer codelens runner
 
 #### Maybe
 
