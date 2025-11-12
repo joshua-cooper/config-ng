@@ -15,23 +15,24 @@
 - [x] `busy` in statusline
 - [x] completeopts
 - [x] Refine options
-- [ ] Keymaps
 - [ ] Treesitter
   - [ ] Set up parsers
   - [x] Add treesitter support to foldexpr
 - [ ] Theme
-- [ ] oil?
 - [x] Disable backups when editing sensitive files
-- [ ] nvim directory based git difftool
 - [x] `set splitkeep`
 - [x] `set diffopt+=inline:char`
 - [ ] Check `vim.wo.{opt}` vs `vim.wo[winnr][bufnr].{opt}`
 - [ ] variable to prevent lsp auto start
 - [ ] make vim global lsp work in .nvim.lua files
+- [ ] keymaps
+- [ ] fix emmylua vim runtime (`nvim_create_autocmd` not working properly)
 - [ ] final audit missing options
 
 #### Later
 
+- [ ] oil?
+- [ ] nvim directory based git difftool
 - [ ] `foldopen` and `foldclose` `fillchars`
 - [ ] `statuscolumn`
 - [ ] surround plugin
@@ -50,10 +51,6 @@
 - [ ] Highlight indentation using the wrong whitespace (e.g. tabs when `expandtab = true`)
 - [ ] Make sensitive module compatible with macos/bsd/etc.
 - [ ] Support `vertical` `horizontal` and `tab` for rust-analyzer codelens runner
-
-#### Maybe
-
-- [ ] Special case fugitive buffer names in statusline
 
 #### Blocked
 
