@@ -21,7 +21,7 @@
   - [x] Add treesitter support to foldexpr
 - [ ] Theme
 - [ ] oil?
-- [ ] Disable backups when editing sensitive files
+- [x] Disable backups when editing sensitive files
 - [ ] nvim directory based git difftool
 - [x] `set splitkeep`
 - [x] `set diffopt+=inline:char`
@@ -48,6 +48,7 @@
 - [ ] Fix c-n, c-p with 1 (or any?) match when using `fuzzy` completeopt. Currently the first is skipped.
 - [ ] `set formatoptions` (add `n` and `/`)
 - [ ] Highlight indentation using the wrong whitespace (e.g. tabs when `expandtab = true`)
+- [ ] Make sensitive module compatible with macos/bsd/etc.
 
 #### Maybe
 
