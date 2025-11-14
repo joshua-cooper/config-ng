@@ -49,13 +49,13 @@ local function before_init(params, config)
 	end
 end
 
----@param buf integer
+---@param bufnr integer
 ---@param on_dir fun(root_dir?: string)
-local function root_dir(buf, on_dir)
-	local crate_dir = vim.fs.root(buf, "Cargo.toml")
+local function root_dir(bufnr, on_dir)
+	local crate_dir = vim.fs.root(bufnr, "Cargo.toml")
 
 	if not crate_dir then
-		local rust_project_dir = vim.fs.root(buf, "rust-project.json")
+		local rust_project_dir = vim.fs.root(bufnr, "rust-project.json")
 
 		if rust_project_dir then
 			on_dir(rust_project_dir)
