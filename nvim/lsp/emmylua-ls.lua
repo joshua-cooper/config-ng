@@ -3,6 +3,8 @@
 -- - verify if symlinks to MYVIMRC work well from both src and target
 -- - should we actually just be using runtimepath instead of VIMRUNTIME and other stuff?
 
+local uv = vim.uv or vim.loop
+
 local ROOT_MARKERS = {
 	".emmyrc.json",
 	".luarc.json",
@@ -15,13 +17,14 @@ local function normalize(path)
 		return nil
 	end
 
-	return vim.fs.normalize(path)
+	local normalized = vim.fs.normalize(path)
+	local realpath = uv and uv.fs_realpath(normalized) or nil
+
+	return realpath or normalized
 end
 
-local RUNTIME_ROOT = normalize(vim.env.VIMRUNTIME)
-
 ---@return string?
-local function resolve_myvimrc_root()
+local function myvimrc_root()
 	local myvimrc = normalize(vim.env.MYVIMRC)
 
 	if myvimrc then
@@ -31,7 +34,36 @@ local function resolve_myvimrc_root()
 	return normalize(vim.fn.stdpath("config"))
 end
 
-local MYVIMRC_ROOT = resolve_myvimrc_root()
+---@return string[]
+local function vim_dirs()
+	local dirs = {}
+	local seen = {}
+
+	local function add(path)
+		if not path or seen[path] then
+			return
+		end
+
+		table.insert(dirs, path)
+		seen[path] = true
+	end
+
+	local runtimepath = vim.o.runtimepath
+
+	if type(runtimepath) == "string" and runtimepath ~= "" then
+		for _, entry in
+			ipairs(vim.split(runtimepath, ",", {
+				trimempty = true,
+			}))
+		do
+			add(normalize(entry))
+		end
+	end
+
+	add(myvimrc_root())
+
+	return dirs
+end
 
 ---@param path string?
 ---@param root string?
@@ -55,9 +87,33 @@ local function is_descendant(path, root)
 end
 
 ---@param path string?
+---@return string?
+local function resolve_runtime_root(path)
+	if not path then
+		return nil
+	end
+
+	for _, dir in ipairs(vim_dirs()) do
+		if is_descendant(path, dir) then
+			return dir
+		end
+	end
+end
+
+---@param path string?
 ---@return boolean
-local function is_vim_root(path)
-	return path == RUNTIME_ROOT or path == MYVIMRC_ROOT
+local function is_runtime_root(path)
+	if not path then
+		return false
+	end
+
+	for _, dir in ipairs(vim_dirs()) do
+		if dir == path then
+			return true
+		end
+	end
+
+	return false
 end
 
 ---@param bufnr integer
@@ -66,15 +122,10 @@ local function root_dir(bufnr, on_dir)
 	local buf_name = vim.api.nvim_buf_get_name(bufnr)
 
 	if buf_name ~= "" then
-		local normalized = vim.fs.normalize(buf_name)
+		local runtime_root = resolve_runtime_root(normalize(buf_name))
 
-		if is_descendant(normalized, RUNTIME_ROOT) then
-			on_dir(RUNTIME_ROOT)
-			return
-		end
-
-		if is_descendant(normalized, MYVIMRC_ROOT) then
-			on_dir(MYVIMRC_ROOT)
+		if runtime_root then
+			on_dir(runtime_root)
 			return
 		end
 	end
@@ -87,7 +138,7 @@ end
 local function before_init(_, config)
 	local root = normalize(config.root_dir)
 
-	if not is_vim_root(root) then
+	if not is_runtime_root(root) then
 		return
 	end
 
@@ -115,8 +166,9 @@ local function before_init(_, config)
 		table.insert(library, path)
 	end
 
-	add_library(RUNTIME_ROOT)
-	add_library(MYVIMRC_ROOT)
+	for _, dir in ipairs(vim_dirs()) do
+		add_library(dir)
+	end
 
 	workspace.library = library
 end
@@ -132,7 +184,7 @@ local function reuse_client(client, config)
 	local client_root = normalize(client.root_dir)
 	local config_root = normalize(config.root_dir)
 
-	if is_vim_root(client_root) and is_vim_root(config_root) then
+	if is_runtime_root(client_root) and is_runtime_root(config_root) then
 		return true
 	end
 
