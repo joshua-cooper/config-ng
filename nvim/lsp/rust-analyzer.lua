@@ -187,7 +187,7 @@ return {
 			require("zen.lsp.rust-analyzer").run_single(command)
 		end,
 	},
-	before_init = before_init,
 	root_dir = root_dir,
 	reuse_client = reuse_client,
+	before_init = before_init,
 }

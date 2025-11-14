@@ -25,6 +25,7 @@
 - [ ] Check `vim.wo.{opt}` vs `vim.wo[winnr][bufnr].{opt}`
 - [ ] variable to prevent lsp auto start
 - [ ] make vim global lsp work in .nvim.lua files
+- [ ] use lsp omnifunc in lua files when lsp is active
 - [ ] keymaps
 - [ ] fix emmylua vim runtime (`nvim_create_autocmd` not working properly)
 - [ ] final audit missing options
