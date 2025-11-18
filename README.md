@@ -21,7 +21,6 @@
 - [x] make vim global lsp work in .nvim.lua files
 - [x] fix emmylua vim runtime (`nvim_create_autocmd` not working properly)
 - [ ] verify that symlinks for MYVIMRC and non symlinks work as expected
-- [ ] use lsp omnifunc in lua files when lsp is active
 - [ ] variable to prevent lsp auto start
 - [ ] Check `vim.wo.{opt}` vs `vim.wo[winnr][bufnr].{opt}`
 - [ ] Treesitter
@@ -39,6 +38,7 @@
 - [ ] `statuscolumn`
 - [ ] surround plugin
 - [ ] Custom codelens virtual text
+- [ ] use lsp omnifunc in lua files when lsp is active (all files? need to check how default ftplugins interact here)
 - [ ] Fallback for HOME instead of asserting it
 - [ ] Recalculate folds on LSP attach (`:help zx`)
 - [ ] Consistent `vim.notify` usage
