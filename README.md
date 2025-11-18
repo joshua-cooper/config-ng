@@ -2,7 +2,7 @@
 
 ### nvim
 
-- [ ] Rust support
+- [x] Rust support
 	- [x] Figure out how rustaceanvim has 3 r-a processes for 2 projects when we have 4
 	- [x] Expand macro
 	- [x] Reload workspace
@@ -10,7 +10,7 @@
 	- [x] Open Cargo.toml
 	- [x] Parent module
 	- [x] Runnables
-	- [ ] Verify the cargo/git registry patterns against edge case crate names
+	- [x] Verify the cargo/git registry patterns against edge case crate names
 	- [x] Do `G` for codelens runners to hug bottom of terminal
 - [x] `busy` in statusline
 - [x] completeopts
