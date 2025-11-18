@@ -26,9 +26,11 @@
 - [ ] Treesitter
   - [ ] Set up parsers
   - [x] Add treesitter support to foldexpr
-- [ ] keymaps
 - [ ] Theme
+- [ ] keymaps
+- [ ] Figure out a solution for overriding options from .nvim.lua (e.g. init.lua vs plugin/X.lua source order)
 - [ ] final audit missing options
+- [ ] final audit code quality
 
 #### Later
 
@@ -46,7 +48,6 @@
 	- [ ] path display
 	- [ ] jumping to rust std item complains about std being nightly
 - [ ] rust-analyzer debuggables
-- [ ] Figure out a solution for overriding options from .nvim.lua (e.g. init.lua vs plugin/X.lua source order)
 - [ ] Manual truncation of statusline when too long (avoids default `>`)
 - [ ] Fix c-n, c-p with 1 (or any?) match when using `fuzzy` completeopt. Currently the first is skipped.
 - [ ] `set formatoptions` (add `n` and `/`)
