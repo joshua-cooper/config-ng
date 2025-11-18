@@ -1,8 +1,3 @@
--- TODO:
--- - handle .nvim.lua files as part of the vim scoped client (need to figure out what root_dir to use)
--- - verify if symlinks to MYVIMRC work well from both src and target
--- - should we actually just be using runtimepath instead of VIMRUNTIME and other stuff?
-
 local uv = vim.uv or vim.loop
 
 local ROOT_MARKERS = {
@@ -65,6 +60,28 @@ local function vim_dirs()
 	return dirs
 end
 
+local nvim_local_dirs = {}
+
+---@param path string?
+---@return boolean
+local function is_nvim_local_file(path)
+	if not path then
+		return false
+	end
+
+	return vim.fs.basename(path) == ".nvim.lua"
+end
+
+---@param path string?
+---@return boolean
+local function is_nvim_local_root(path)
+	if not path then
+		return false
+	end
+
+	return nvim_local_dirs[path] == true
+end
+
 ---@param path string?
 ---@param root string?
 ---@return boolean
@@ -122,11 +139,23 @@ local function root_dir(bufnr, on_dir)
 	local buf_name = vim.api.nvim_buf_get_name(bufnr)
 
 	if buf_name ~= "" then
-		local runtime_root = resolve_runtime_root(normalize(buf_name))
+		local normalized = normalize(buf_name)
+
+		local runtime_root = resolve_runtime_root(normalized)
 
 		if runtime_root then
 			on_dir(runtime_root)
 			return
+		end
+
+		if is_nvim_local_file(normalized) then
+			local parent = normalize(vim.fs.dirname(normalized))
+
+			if parent then
+				nvim_local_dirs[parent] = true
+				on_dir(parent)
+				return
+			end
 		end
 	end
 
@@ -138,7 +167,10 @@ end
 local function before_init(_, config)
 	local root = normalize(config.root_dir)
 
-	if not is_runtime_root(root) then
+	local is_runtime = is_runtime_root(root)
+	local is_local = is_nvim_local_root(root)
+
+	if not is_runtime and not is_local then
 		return
 	end
 
@@ -186,6 +218,10 @@ local function reuse_client(client, config)
 
 	if is_runtime_root(client_root) and is_runtime_root(config_root) then
 		return true
+	end
+
+	if is_nvim_local_root(client_root) and is_nvim_local_root(config_root) then
+		return client_root == config_root
 	end
 
 	return client_root ~= nil and client_root == config_root

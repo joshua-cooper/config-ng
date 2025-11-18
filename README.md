@@ -15,19 +15,20 @@
 - [x] `busy` in statusline
 - [x] completeopts
 - [x] Refine options
-- [ ] Treesitter
-  - [ ] Set up parsers
-  - [x] Add treesitter support to foldexpr
-- [ ] Theme
 - [x] Disable backups when editing sensitive files
 - [x] `set splitkeep`
 - [x] `set diffopt+=inline:char`
-- [ ] Check `vim.wo.{opt}` vs `vim.wo[winnr][bufnr].{opt}`
-- [ ] variable to prevent lsp auto start
-- [ ] make vim global lsp work in .nvim.lua files
+- [x] make vim global lsp work in .nvim.lua files
+- [x] fix emmylua vim runtime (`nvim_create_autocmd` not working properly)
+- [ ] verify that symlinks for MYVIMRC and non symlinks work as expected
 - [ ] use lsp omnifunc in lua files when lsp is active
+- [ ] variable to prevent lsp auto start
+- [ ] Check `vim.wo.{opt}` vs `vim.wo[winnr][bufnr].{opt}`
+- [ ] Treesitter
+  - [ ] Set up parsers
+  - [x] Add treesitter support to foldexpr
 - [ ] keymaps
-- [ ] fix emmylua vim runtime (`nvim_create_autocmd` not working properly)
+- [ ] Theme
 - [ ] final audit missing options
 
 #### Later
