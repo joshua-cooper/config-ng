@@ -20,7 +20,7 @@
 - [x] `set diffopt+=inline:char`
 - [x] make vim global lsp work in .nvim.lua files
 - [x] fix emmylua vim runtime (`nvim_create_autocmd` not working properly)
-- [ ] verify that symlinks for MYVIMRC and non symlinks work as expected
+- [x] verify that symlinks for MYVIMRC and non symlinks work as expected
 - [ ] variable to prevent lsp auto start
 - [ ] Check `vim.wo.{opt}` vs `vim.wo[winnr][bufnr].{opt}`
 - [ ] Treesitter
@@ -34,7 +34,7 @@
 
 - [ ] oil?
 - [ ] nvim directory based git difftool
-- [ ] `foldopen` and `foldclose` `fillchars`
+- [x] `foldopen` and `foldclose` `fillchars`
 - [ ] `statuscolumn`
 - [ ] surround plugin
 - [ ] Custom codelens virtual text
