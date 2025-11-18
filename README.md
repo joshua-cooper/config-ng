@@ -22,7 +22,7 @@
 - [x] fix emmylua vim runtime (`nvim_create_autocmd` not working properly)
 - [x] verify that symlinks for MYVIMRC and non symlinks work as expected
 - [ ] variable to prevent lsp auto start
-- [ ] Check `vim.wo.{opt}` vs `vim.wo[winnr][bufnr].{opt}`
+- [x] Check `vim.wo.{opt}` vs `vim.wo[winnr][bufnr].{opt}`
 - [ ] Treesitter
   - [ ] Set up parsers
   - [x] Add treesitter support to foldexpr

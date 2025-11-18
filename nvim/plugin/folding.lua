@@ -63,7 +63,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	group = group,
 	desc = "Use custom foldexpr for lua files",
 	callback = function(_)
-		vim.wo.foldexpr = FOLDEXPR
+		vim.wo[0][0].foldexpr = FOLDEXPR
 	end,
 })
 
