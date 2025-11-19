@@ -178,8 +178,13 @@ local function before_init(_, config)
 	config.settings.emmylua = config.settings.emmylua or {}
 	config.settings.emmylua.workspace = config.settings.emmylua.workspace or {}
 	config.settings.emmylua.runtime = config.settings.emmylua.runtime or {}
+	config.settings.emmylua.strict = config.settings.emmylua.strict or {}
 
 	config.settings.emmylua.runtime.version = "LuaJIT"
+	config.settings.emmylua.strict.requirePath = true
+	config.settings.emmylua.strict.typeCall = true
+	config.settings.emmylua.strict.arrayIndex = true
+	config.settings.emmylua.strict.metaOverrideFileDefine = true
 
 	local workspace = config.settings.emmylua.workspace
 	local library = workspace.library and vim.deepcopy(workspace.library) or {}
