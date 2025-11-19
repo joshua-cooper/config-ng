@@ -238,6 +238,9 @@ return {
 	root_markers = ROOT_MARKERS,
 	settings = {
 		emmylua = {
+			codeLens = {
+				enable = false,
+			},
 			format = {
 				externalTool = {
 					program = "stylua",
