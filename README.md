@@ -34,6 +34,7 @@
 - [ ] Figure out a solution for overriding options from .nvim.lua (e.g. init.lua vs plugin/X.lua source order)
 - [ ] final audit missing options
 - [ ] final audit code quality
+  - [ ] use `vim.api.nvim_get_runtime_file("", true)` in emmylua nvim setup
 
 #### Later
 
