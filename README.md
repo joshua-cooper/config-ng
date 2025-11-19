@@ -28,6 +28,9 @@
   - [x] Add treesitter support to foldexpr
 - [ ] Theme
 - [ ] keymaps
+- [ ] lsp busy integration
+- [ ] directory setup
+- [ ] use strict emmylua for nvim config files
 - [ ] Figure out a solution for overriding options from .nvim.lua (e.g. init.lua vs plugin/X.lua source order)
 - [ ] final audit missing options
 - [ ] final audit code quality
