@@ -2,7 +2,10 @@ local M = {}
 
 ---@param error lsp.ResponseError
 local function notify_server_error(error)
-	local message = ("[rust-analyzer] error %d: %s"):format(error.code, error.message)
+	local message = ("[rust-analyzer] error %d: %s"):format(
+		error.code,
+		error.message
+	)
 	vim.notify(message, vim.log.levels.ERROR)
 end
 
@@ -252,8 +255,12 @@ function M.open_cargo_toml()
 			return
 		end
 
-		local client = assert(vim.lsp.get_client_by_id(context.client_id))
-		vim.lsp.util.show_document(result, client.offset_encoding or "utf-8")
+		local client =
+			assert(vim.lsp.get_client_by_id(context.client_id))
+		vim.lsp.util.show_document(
+			result,
+			client.offset_encoding or "utf-8"
+		)
 	end)
 end
 
@@ -282,8 +289,12 @@ function M.parent_module()
 
 		assert(vim.islist(result))
 		local location = assert(result[1])
-		local client = assert(vim.lsp.get_client_by_id(context.client_id))
-		vim.lsp.util.show_document(location, client.offset_encoding or "utf-8")
+		local client =
+			assert(vim.lsp.get_client_by_id(context.client_id))
+		vim.lsp.util.show_document(
+			location,
+			client.offset_encoding or "utf-8"
+		)
 	end)
 end
 

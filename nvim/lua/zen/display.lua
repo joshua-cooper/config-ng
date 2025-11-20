@@ -19,7 +19,9 @@ function M.path(path, known_paths)
 			"[nix:%1] ",
 		},
 		{
-			("^%s/registry/src/([^/]+)-[0-9a-f]+/([^/]+)/"):format(known_paths.cargo_home),
+			("^%s/registry/src/([^/]+)-[0-9a-f]+/([^/]+)/"):format(
+				known_paths.cargo_home
+			),
 			function(registry, crate)
 				if registry == "index.crates.io" then
 					registry = "crates.io"
@@ -29,7 +31,9 @@ function M.path(path, known_paths)
 			end,
 		},
 		{
-			("^%s/git/checkouts/([^/]+)-[0-9a-f]+/[0-9a-f]+/"):format(known_paths.cargo_home),
+			("^%s/git/checkouts/([^/]+)-[0-9a-f]+/[0-9a-f]+/"):format(
+				known_paths.cargo_home
+			),
 			"[cargo-git:%1] ",
 		},
 	}

@@ -22,16 +22,22 @@ vim.api.nvim_set_decoration_provider(ns, {
 			end
 
 			---@type integer
-			local line_end_column = vim.fn.virtcol({ line, "$" }) - 1
+			local line_end_column = vim.fn.virtcol({ line, "$" })
+				- 1
 			local scroll_offset = vim.fn.winsaveview().leftcol
-			local text_end_win_column = line_end_column - scroll_offset - 1
+			local text_end_win_column = line_end_column
+				- scroll_offset
+				- 1
 			local indicator_win_column = text_end_win_column + 2
 
 			if text_end_win_column < 0 then
 				return
 			end
 
-			if indicator_win_column > vim.api.nvim_win_get_width(win) - 1 then
+			if
+				indicator_win_column
+				> vim.api.nvim_win_get_width(win) - 1
+			then
 				return
 			end
 

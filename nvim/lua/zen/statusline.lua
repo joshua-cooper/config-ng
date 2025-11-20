@@ -32,7 +32,9 @@ local function buffer_name(win, buf)
 	end
 
 	if vim.bo[buf].buftype == "terminal" then
-		return ("[term] %s"):format((name:gsub("^term://.-//[0-9]+:", "")))
+		return ("[term] %s"):format(
+			(name:gsub("^term://.-//[0-9]+:", ""))
+		)
 	end
 
 	---@type string, string
@@ -52,7 +54,10 @@ local function buffer_name(win, buf)
 
 	return require("zen.display").path(name, {
 		cwd = vim.fn.getcwd(),
-		cargo_home = vim.env.CARGO_HOME or vim.fs.joinpath(assert(vim.uv.os_homedir()), ".cargo"),
+		cargo_home = vim.env.CARGO_HOME or vim.fs.joinpath(
+			assert(vim.uv.os_homedir()),
+			".cargo"
+		),
 	})
 end
 
@@ -97,7 +102,10 @@ end
 function M.statusline()
 	---@type unknown
 	local win = vim.g.statusline_winid or vim.api.nvim_get_current_win()
-	assert(type(win) == "number" and math.floor(win) == win, "vim.g.statusline_winid should be an integer")
+	assert(
+		type(win) == "number" and math.floor(win) == win,
+		"vim.g.statusline_winid should be an integer"
+	)
 	---@cast win integer
 
 	local buf = vim.api.nvim_win_get_buf(win)

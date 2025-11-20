@@ -9,7 +9,8 @@ function M.tabline()
 	local parts = {}
 
 	for i, tab in ipairs(tabs) do
-		local hl_group = tab == current_tab and "#TabLineSel#" or "#TabLine#"
+		local hl_group = tab == current_tab and "#TabLineSel#"
+			or "#TabLine#"
 		parts[#parts + 1] = ("%%%s%%%dT %d %%T"):format(hl_group, i, i)
 	end
 

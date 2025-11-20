@@ -5,7 +5,8 @@ local function is_external_crate(path)
 
 	local user_home = assert(vim.uv.os_homedir())
 	local cargo_home = vim.env.CARGO_HOME or joinpath(user_home, ".cargo")
-	local rustup_home = vim.env.RUSTUP_HOME or joinpath(user_home, ".rustup")
+	local rustup_home = vim.env.RUSTUP_HOME
+		or joinpath(user_home, ".rustup")
 
 	local cargo_registry = joinpath(cargo_home, "registry", "src")
 	local git_registry = joinpath(cargo_home, "git", "checkouts")
@@ -85,8 +86,10 @@ local function root_dir(bufnr, on_dir)
 	vim.system(command, opts, function(result)
 		if result.code ~= 0 then
 			vim.schedule(function()
-				local message_format = "Got an error from `cargo metadata`:\n\n%s"
-				local message = message_format:format(result.stderr)
+				local message_format =
+					"Got an error from `cargo metadata`:\n\n%s"
+				local message =
+					message_format:format(result.stderr)
 				vim.notify_once(message, vim.log.levels.ERROR)
 			end)
 
@@ -100,7 +103,10 @@ local function root_dir(bufnr, on_dir)
 
 		if type(workspace_root) ~= "string" then
 			vim.schedule(function()
-				vim.notify_once("No workspace_root returned from `cargo metadata`", vim.log.levels.WARN)
+				vim.notify_once(
+					"No workspace_root returned from `cargo metadata`",
+					vim.log.levels.WARN
+				)
 			end)
 
 			on_dir(crate_dir)
@@ -133,7 +139,12 @@ local function reuse_client(client, config)
 
 	client.workspace_folders = client.workspace_folders or {}
 
-	if not has_workspace_folder(client.workspace_folders, config.root_dir) then
+	if
+		not has_workspace_folder(
+			client.workspace_folders,
+			config.root_dir
+		)
+	then
 		local workspace_folder = {
 			uri = vim.uri_from_fname(config.root_dir),
 			name = config.root_dir,
