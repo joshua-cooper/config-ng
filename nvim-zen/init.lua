@@ -4,8 +4,11 @@ vim.o.splitright = true
 vim.o.undofile = true
 vim.o.wrap = false
 vim.o.winborder = "solid"
-vim.o.statusline = "%!v:lua.require'zen'.statusline()"
 vim.o.colorcolumn = "80"
+vim.o.showcmd = false
+
+vim.o.statusline = "%!v:lua.require'zen'.statusline()"
+vim.o.tabline = "%!v:lua.require'zen'.tabline()"
 
 -- Completion
 

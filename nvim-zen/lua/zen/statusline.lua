@@ -34,7 +34,7 @@ local function buffer_name(winnr, bufnr)
 	end
 
 	if buftype == "help" then
-		local help_page = vim.fn.fnamemodify(name, ":t")
+		local help_page = vim.fs.basename(name)
 		return string.format("[help] %s", help_page)
 	end
 
