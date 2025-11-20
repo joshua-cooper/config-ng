@@ -48,10 +48,14 @@ local function buffer_name(winnr, bufnr)
 		return string.format("[terminal] %s", command)
 	end
 
-	local protocol, content = name:match("^([%w%-]+)://(.*)$")
+	local scheme, resource = name:match("^([%w%-]+)://(.*)$")
 
-	if protocol then
-		return string.format("[%s] %s", protocol, content or "")
+	if scheme then
+		if resource then
+			return string.format("[%s] %s", scheme, resource)
+		else
+			return string.format("[%s]", scheme)
+		end
 	end
 
 	if buftype ~= "" then

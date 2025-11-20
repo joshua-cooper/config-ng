@@ -39,10 +39,10 @@ local function tab_label(tabnr)
 		return "[terminal]"
 	end
 
-	local protocol = name:match("^([%w%-]+)://.*$")
+	local scheme = name:match("^([%w%-]+)://.*$")
 
-	if protocol then
-		return string.format("[%s]", protocol)
+	if scheme then
+		return string.format("[%s]", scheme)
 	end
 
 	if name == "" then
