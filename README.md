@@ -62,7 +62,8 @@
 
 #### Blocked
 
-- [ ] stylua assumes tabs are 4 spaces with editorconfig `max_width` from CLI
+- [ ] emmylua-ls doesn't pick up some stuff (e.g. `vim.lsp.buf.format`) until
+      you go to definition on part of it.
 - [ ] Refresh codelens scoped per client (not currently supported in `vim.lsp.codelens.refresh`)
 - [ ] BiDi support <https://github.com/neovim/neovim/issues/553>
 	- [ ] Isolate statusline components (filename, each flag, etc.)
