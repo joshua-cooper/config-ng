@@ -62,8 +62,13 @@
 
 #### Blocked
 
+- [ ] stylua assumes tabs are 4 spaces with editorconfig `max_width` from CLI
 - [ ] Refresh codelens scoped per client (not currently supported in `vim.lsp.codelens.refresh`)
-- [ ] Specify return type of `vim.diagnostic.count(bufnr)` to be `table<integer, integer>`
 - [ ] BiDi support <https://github.com/neovim/neovim/issues/553>
 	- [ ] Isolate statusline components (filename, each flag, etc.)
 	- [ ] Independent statusline alignment for vertical splits
+
+#### Upstream types
+
+- [ ] `vim.diagnostic.count(bufnr)` to be `table<integer, integer>`
+- [ ] `LspClient:supports_method` to return `boolean`
