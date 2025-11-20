@@ -33,10 +33,14 @@ local GLOBAL_EMMYLUA_SETTINGS = {
 
 ---@return string[]
 local function list_runtime_paths()
-	return vim.tbl_map(
-		vim.uv.fs_realpath,
-		vim.api.nvim_list_runtime_paths()
-	)
+	local paths = vim.api.nvim_list_runtime_paths()
+	local vimrc = vim.env.MYVIMRC
+
+	if vimrc then
+		paths[#paths + 1] = vim.fs.dirname(vim.uv.fs_realpath(vimrc))
+	end
+
+	return vim.tbl_map(vim.uv.fs_realpath, paths)
 end
 
 ---@param path string
