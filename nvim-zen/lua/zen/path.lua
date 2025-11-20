@@ -2,6 +2,7 @@ local M = {}
 
 ---@class KnownPaths
 ---@field cwd string
+---@field home string
 ---@field cargo_home string
 
 local NIX_STORE_PATTERN = {
@@ -54,15 +55,26 @@ local function cwd_pattern(cwd)
 	}
 end
 
+---@param home string
+---@return [string, string]
+local function home_pattern(home)
+	return {
+		(home == "" or home == "/") and "^$"
+			or string.format("^%s/", vim.pesc(home)),
+		"~/",
+	}
+end
+
 ---@param winnr integer
 ---@return KnownPaths
 function M.known_paths(winnr)
+	local home = assert(vim.uv.os_homedir())
+
 	return {
 		cwd = vim.fn.getcwd(winnr),
-		cargo_home = vim.env.CARGO_HOME or vim.fs.joinpath(
-			assert(vim.uv.os_homedir()),
-			".cargo"
-		),
+		home = home,
+		cargo_home = vim.env.CARGO_HOME
+			or vim.fs.joinpath(home, ".cargo"),
 	}
 end
 
@@ -79,6 +91,7 @@ function M.format(path, known_paths)
 		cargo_registry_pattern(known_paths.cargo_home),
 		cargo_git_pattern(known_paths.cargo_home),
 		cwd_pattern(known_paths.cwd),
+		home_pattern(known_paths.home),
 	}
 
 	for _, pattern in ipairs(patterns) do
