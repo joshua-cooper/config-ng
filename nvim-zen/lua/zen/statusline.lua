@@ -21,6 +21,11 @@ local function buffer_name(winnr, bufnr)
 	local name = vim.api.nvim_buf_get_name(bufnr)
 	local buftype = vim.bo[bufnr].buftype
 
+	if vim.bo[bufnr].filetype == "netrw" then
+		name = vim.b[bufnr].netrw_curdir
+		assert(type(name) == "string")
+	end
+
 	if buftype == "quickfix" then
 		local win_type = vim.fn.win_gettype(winnr)
 		local title = vim.w[winnr].quickfix_title
@@ -43,19 +48,14 @@ local function buffer_name(winnr, bufnr)
 		return string.format("[terminal] %s", command)
 	end
 
-	local protocol, content = name:match("^([%w%-]+)://(.+)$")
+	local protocol, content = name:match("^([%w%-]+)://(.*)$")
 
-	if protocol and content then
-		return string.format("[%s] %s", protocol, content)
+	if protocol then
+		return string.format("[%s] %s", protocol, content or "")
 	end
 
 	if buftype ~= "" then
 		return name
-	end
-
-	if vim.bo[bufnr].filetype == "netrw" then
-		name = vim.b[bufnr].netrw_curdir
-		assert(type(name) == "string")
 	end
 
 	if name == "" then
@@ -111,7 +111,8 @@ local function statusline()
 
 	local name = buffer_name(winnr, bufnr)
 	local flags = buffer_flags(bufnr)
-	local is_busy = vim.bo[bufnr].busy ~= 0
+	-- local is_busy = vim.bo[bufnr].busy ~= 0
+	local is_busy = vim.b[bufnr].busy ~= 0
 
 	start_parts[#start_parts + 1] = name
 

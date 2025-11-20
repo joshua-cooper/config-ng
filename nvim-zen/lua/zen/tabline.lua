@@ -22,17 +22,27 @@ local function tab_label(tabnr)
 	local name = vim.api.nvim_buf_get_name(bufnr)
 	local buftype = vim.bo[bufnr].buftype
 
+	if vim.bo[bufnr].filetype == "netrw" then
+		name = vim.b[bufnr].netrw_curdir
+		assert(type(name) == "string")
+	end
+
 	if buftype == "quickfix" then
 		return string.format("[%s]", vim.fn.win_gettype(winnr))
+	end
+
+	if buftype == "help" then
+		return "[help]"
 	end
 
 	if buftype == "terminal" then
 		return "[terminal]"
 	end
 
-	if vim.bo[bufnr].filetype == "netrw" then
-		name = vim.b[bufnr].netrw_curdir
-		assert(type(name) == "string")
+	local protocol = name:match("^([%w%-]+)://.*$")
+
+	if protocol then
+		return string.format("[%s]", protocol)
 	end
 
 	if name == "" then
