@@ -51,10 +51,12 @@ local function buffer_name(winnr, bufnr)
 	local scheme, resource = name:match("^([%w%-]+)://(.*)$")
 
 	if scheme then
-		if resource then
-			return string.format("[%s] %s", scheme, resource)
-		else
+		assert(type(resource) == "string")
+
+		if resource == "" then
 			return string.format("[%s]", scheme)
+		else
+			return string.format("[%s] %s", scheme, resource)
 		end
 	end
 
@@ -115,8 +117,7 @@ local function statusline()
 
 	local name = buffer_name(winnr, bufnr)
 	local flags = buffer_flags(bufnr)
-	-- local is_busy = vim.bo[bufnr].busy ~= 0
-	local is_busy = vim.b[bufnr].busy ~= 0
+	local is_busy = vim.fn.has("nvim-0.12") == 1 and vim.bo[bufnr].busy ~= 0
 
 	start_parts[#start_parts + 1] = name
 
