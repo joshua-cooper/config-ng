@@ -11,7 +11,8 @@ vim.g.maplocalleader = "\\"
 vim.o.showcmd = false
 vim.o.ruler = false
 vim.o.winborder = "solid"
-vim.o.fillchars = "fold: ,foldopen:▼,foldclose:▶,foldsep: ,foldinner: ,eob: ,trunc:›,truncrl:‹"
+vim.o.fillchars =
+	"fold: ,foldopen:▼,foldclose:▶,foldsep: ,foldinner: ,eob: ,trunc:›,truncrl:‹"
 vim.o.tabline = "%!v:lua.require'zen.tabline'.tabline()"
 vim.o.quickfixtextfunc = "v:lua.require'zen.quickfix'.quickfixtextfunc"
 

@@ -176,7 +176,8 @@ local function before_init(_, config)
 
 	config.settings = config.settings or {}
 	config.settings.emmylua = config.settings.emmylua or {}
-	config.settings.emmylua.workspace = config.settings.emmylua.workspace or {}
+	config.settings.emmylua.workspace = config.settings.emmylua.workspace
+		or {}
 	config.settings.emmylua.runtime = config.settings.emmylua.runtime or {}
 	config.settings.emmylua.strict = config.settings.emmylua.strict or {}
 
@@ -187,7 +188,8 @@ local function before_init(_, config)
 	config.settings.emmylua.strict.metaOverrideFileDefine = true
 
 	local workspace = config.settings.emmylua.workspace
-	local library = workspace.library and vim.deepcopy(workspace.library) or {}
+	local library = workspace.library and vim.deepcopy(workspace.library)
+		or {}
 
 	local function add_library(path)
 		if not path then
@@ -225,7 +227,10 @@ local function reuse_client(client, config)
 		return true
 	end
 
-	if is_nvim_local_root(client_root) and is_nvim_local_root(config_root) then
+	if
+		is_nvim_local_root(client_root)
+		and is_nvim_local_root(config_root)
+	then
 		return client_root == config_root
 	end
 

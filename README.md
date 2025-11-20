@@ -35,6 +35,7 @@
 - [ ] final audit missing options
 - [ ] final audit code quality
   - [ ] use `vim.api.nvim_get_runtime_file("", true)` in emmylua nvim setup
+  - [ ] don't use `error` variable names (`error` is a built in function)
 
 #### Later
 
