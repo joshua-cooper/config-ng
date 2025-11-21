@@ -7,6 +7,7 @@ vim.o.winborder = "solid"
 vim.o.colorcolumn = "80"
 vim.o.showcmd = false
 
+vim.o.foldexpr = "v:lua.require'zen.folding'.foldexpr()"
 vim.o.statusline = "%!v:lua.require'zen'.statusline()"
 vim.o.tabline = "%!v:lua.require'zen'.tabline()"
 
