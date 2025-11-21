@@ -65,13 +65,13 @@ local function home_pattern(home)
 	}
 end
 
----@param winnr integer
+---@param winnr integer?
 ---@return KnownPaths
 function M.known_paths(winnr)
 	local home = assert(vim.uv.os_homedir())
 
 	return {
-		cwd = vim.fn.getcwd(winnr),
+		cwd = winnr and vim.fn.getcwd(winnr) or vim.fn.getcwd(),
 		home = home,
 		cargo_home = vim.env.CARGO_HOME
 			or vim.fs.joinpath(home, ".cargo"),
