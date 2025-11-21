@@ -35,4 +35,5 @@ vim.diagnostic.config({
 
 vim.lsp.enable({
 	"zen/emmylua-ls",
+	"zen/rust-analyzer",
 })
