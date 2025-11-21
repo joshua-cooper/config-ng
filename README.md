@@ -2,78 +2,51 @@
 
 ### nvim
 
-- [x] Rust support
-	- [x] Figure out how rustaceanvim has 3 r-a processes for 2 projects when we have 4
-	- [x] Expand macro
-	- [x] Reload workspace
-	- [x] Rebuild proc macros
-	- [x] Open Cargo.toml
-	- [x] Parent module
-	- [x] Runnables
-	- [x] Verify the cargo/git registry patterns against edge case crate names
-	- [x] Do `G` for codelens runners to hug bottom of terminal
-- [x] `busy` in statusline
-- [x] completeopts
-- [x] Refine options
-- [x] Disable backups when editing sensitive files
-- [x] `set splitkeep`
-- [x] `set diffopt+=inline:char`
-- [x] fix emmylua vim runtime (`nvim_create_autocmd` not working properly)
-- [x] verify that symlinks for MYVIMRC and non symlinks work as expected
-- [x] Check `vim.wo.{opt}` vs `vim.wo[winnr][bufnr].{opt}`
-- [ ] Treesitter
-  - [ ] Set up parsers
-  - [x] Add treesitter support to foldexpr
+- [ ] Set up tree-sitter parsers
 - [ ] Theme
-- [ ] keymaps
-- [ ] lsp busy integration
-- [ ] directory browser setup
-- [x] use strict emmylua for nvim config files
-- [x] Figure out a solution for overriding options from .nvim.lua (e.g. init.lua vs plugin/X.lua source order)
-- [ ] final audit missing options
-- [ ] final audit code quality
-  - [x] use `vim.api.nvim_get_runtime_file("", true)` in emmylua nvim setup
-  - [x] don't use `error` variable names (`error` is a built in function)
+- [ ] Keymaps
+- [ ] LSP busy integration
+- [ ] Directory browser setup (netrw/oil?)
+- [ ] Audit missing options
 
 #### Later
 
-- [ ] oil?
-- [ ] nvim directory based git difftool
-- [x] `foldopen` and `foldclose` `fillchars`
 - [ ] `statuscolumn`
-- [ ] surround plugin
+- [ ] Directory based git difftool (new in 0.12)
+- [ ] Surround plugin
 - [ ] Custom codelens virtual text
-- [ ] use lsp omnifunc in lua files when lsp is active (all files? need to check how default ftplugins interact here)
-- [ ] Fallback for HOME instead of asserting it
+- [ ] Use LSP omnifunc in lua files when lsp is active (all files? need to check
+      how default ftplugins interact here)
 - [ ] Recalculate folds on LSP attach (`:help zx`)
-- [ ] Consistent `vim.notify` usage
 - [ ] Termux handling
-	- [ ] path display
-	- [ ] jumping to rust std item complains about std being nightly
+  - [ ] Path display (this might apply to non nixos distros too, like
+        arch/debian)
+  - [ ] Jumping to rust std item complains about std being nightly
 - [ ] rust-analyzer debuggables
 - [ ] Manual truncation of statusline when too long (avoids default `>`)
-- [ ] Fix c-n, c-p with 1 (or any?) match when using `fuzzy` completeopt. Currently the first is skipped.
+- [ ] Fix c-n, c-p with 1 (or any?) match when using `fuzzy` completeopt.
+      Currently the first is skipped.
 - [ ] `set formatoptions` (add `n` and `/`)
-- [ ] Highlight indentation using the wrong whitespace (e.g. tabs when `expandtab = true`)
-- [x] Make sensitive module compatible with macos/bsd/etc.
-- [ ] Support `vertical` `horizontal` and `tab` for rust-analyzer codelens runner
-- [ ] variable to prevent lsp auto start
-- [ ] variable to prevent lsp auto format
-- [ ] make vim global lsp work in .nvim.lua files
+- [ ] Highlight indentation using the wrong whitespace (e.g. tabs when
+      `expandtab = true`)
+- [ ] Variable to prevent lsp auto start
+- [ ] Variable to prevent lsp auto format
+- [ ] Make vim global LSP work in .nvim.lua files
 
 #### Blocked
 
 - [ ] emmylua-ls doesn't pick up some stuff (e.g. `vim.lsp.buf.format`) until
-      you go to definition on part of it.
-- [ ] Refresh codelens scoped per client (not currently supported in `vim.lsp.codelens.refresh`)
+      you go to definition on part of it. (should be fixed in next release)
+- [ ] Refresh codelens scoped per client (not currently supported in
+      `vim.lsp.codelens.refresh`)
 - [ ] BiDi support <https://github.com/neovim/neovim/issues/553>
-	- [ ] Isolate statusline components (filename, each flag, etc.)
-	- [ ] Independent statusline alignment for vertical splits
+  - [ ] Isolate statusline components (filename, each flag, etc.)
+  - [ ] Independent statusline alignment for vertical splits
 
 #### Upstream types
 
 - [ ] `vim.diagnostic.count(bufnr)` to be `table<integer, integer>`
 - [ ] `LspClient:supports_method` to return `boolean`
 - [ ] `vim.api.nvim_win_call` to return generic return type of callback
-- [ ] remove `---@diagnostic disable-next-line: assign-type-mismatch` (emmylua bug)
-
+- [ ] remove `---@diagnostic disable-next-line: assign-type-mismatch` (emmylua
+      bug)
