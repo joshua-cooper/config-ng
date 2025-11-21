@@ -18,10 +18,8 @@
 - [x] Disable backups when editing sensitive files
 - [x] `set splitkeep`
 - [x] `set diffopt+=inline:char`
-- [x] make vim global lsp work in .nvim.lua files
 - [x] fix emmylua vim runtime (`nvim_create_autocmd` not working properly)
 - [x] verify that symlinks for MYVIMRC and non symlinks work as expected
-- [ ] variable to prevent lsp auto start
 - [x] Check `vim.wo.{opt}` vs `vim.wo[winnr][bufnr].{opt}`
 - [ ] Treesitter
   - [ ] Set up parsers
@@ -29,13 +27,13 @@
 - [ ] Theme
 - [ ] keymaps
 - [ ] lsp busy integration
-- [ ] directory setup
+- [ ] directory browser setup
 - [x] use strict emmylua for nvim config files
-- [ ] Figure out a solution for overriding options from .nvim.lua (e.g. init.lua vs plugin/X.lua source order)
+- [x] Figure out a solution for overriding options from .nvim.lua (e.g. init.lua vs plugin/X.lua source order)
 - [ ] final audit missing options
 - [ ] final audit code quality
-  - [ ] use `vim.api.nvim_get_runtime_file("", true)` in emmylua nvim setup
-  - [ ] don't use `error` variable names (`error` is a built in function)
+  - [x] use `vim.api.nvim_get_runtime_file("", true)` in emmylua nvim setup
+  - [x] don't use `error` variable names (`error` is a built in function)
 
 #### Later
 
@@ -57,8 +55,11 @@
 - [ ] Fix c-n, c-p with 1 (or any?) match when using `fuzzy` completeopt. Currently the first is skipped.
 - [ ] `set formatoptions` (add `n` and `/`)
 - [ ] Highlight indentation using the wrong whitespace (e.g. tabs when `expandtab = true`)
-- [ ] Make sensitive module compatible with macos/bsd/etc.
+- [x] Make sensitive module compatible with macos/bsd/etc.
 - [ ] Support `vertical` `horizontal` and `tab` for rust-analyzer codelens runner
+- [ ] variable to prevent lsp auto start
+- [ ] variable to prevent lsp auto format
+- [ ] make vim global lsp work in .nvim.lua files
 
 #### Blocked
 
