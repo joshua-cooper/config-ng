@@ -1,3 +1,5 @@
+vim.cmd.colorscheme("zen")
+
 vim.o.exrc = true
 vim.o.splitbelow = true
 vim.o.splitright = true

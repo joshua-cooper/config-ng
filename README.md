@@ -2,12 +2,13 @@
 
 ### nvim
 
+- [x] Theme
 - [ ] Set up tree-sitter parsers
-- [ ] Theme
 - [ ] Keymaps
 - [ ] LSP busy integration
 - [ ] Directory browser setup (netrw/oil?)
 - [ ] Audit missing options
+- [ ] Remove the lazy lua magic
 
 #### Later
 
