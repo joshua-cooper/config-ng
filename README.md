@@ -4,11 +4,11 @@
 
 - [x] Theme
 - [x] Remove the lazy lua magic
+- [x] Audit missing options
 - [ ] Set up tree-sitter parsers
 - [ ] Keymaps
 - [ ] LSP busy integration
 - [ ] Directory browser setup (netrw/oil?)
-- [ ] Audit missing options
 
 #### Later
 
