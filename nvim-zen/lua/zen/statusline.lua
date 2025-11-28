@@ -1,3 +1,5 @@
+local M = {}
+
 ---@return integer?
 local function statusline_winid()
 	local winnr = vim.g.statusline_winid
@@ -108,7 +110,7 @@ local function buffer_flags(bufnr)
 end
 
 ---@return string
-local function statusline()
+function M.statusline()
 	local winnr = statusline_winid() or vim.api.nvim_get_current_win()
 	local bufnr = vim.api.nvim_win_get_buf(winnr)
 
@@ -136,4 +138,4 @@ local function statusline()
 	)
 end
 
-return statusline
+return M

@@ -1,3 +1,5 @@
+local M = {}
+
 ---@param is_current_tab boolean
 ---@return string
 local function tab_highlight_group(is_current_tab)
@@ -53,7 +55,7 @@ local function tab_label(tabnr)
 end
 
 ---@return string
-local function tabline()
+function M.tabline()
 	local tabs = vim.api.nvim_list_tabpages()
 	local current_tab = vim.api.nvim_get_current_tabpage()
 
@@ -74,4 +76,4 @@ local function tabline()
 	return table.concat(parts)
 end
 
-return tabline
+return M

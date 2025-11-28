@@ -5,7 +5,8 @@ vim.api.nvim_create_autocmd("FileType", {
 	group = group,
 	desc = "Set custom statusline for quickfix windows",
 	callback = function(_)
-		vim.wo[0][0].statusline = "%!v:lua.require'zen'.statusline()"
+		vim.wo[0][0].statusline =
+			"%!v:lua.require'zen.statusline'.statusline()"
 	end,
 })
 
