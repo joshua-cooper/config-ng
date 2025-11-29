@@ -17,7 +17,8 @@ vim.o.ruler = false
 vim.o.showcmd = false
 vim.o.pumheight = 10
 vim.o.winborder = "solid"
-vim.o.foldexpr = "v:lua.require'zen.folding'.foldexpr()"
+vim.o.fillchars =
+	"fold: ,foldopen:▼,foldclose:▶,foldsep: ,foldinner: ,eob: ,trunc:›,truncrl:‹"
 vim.o.quickfixtextfunc = "v:lua.require'zen.quickfix'.quickfixtextfunc"
 vim.o.statusline = "%!v:lua.require'zen.statusline'.statusline()"
 vim.o.tabline = "%!v:lua.require'zen.tabline'.tabline()"
@@ -46,6 +47,13 @@ vim.o.splitkeep = "cursor"
 
 vim.o.scrolloff = 3
 vim.o.sidescrolloff = 3
+
+-- Folding
+
+vim.o.foldtext = ""
+vim.o.foldmethod = "expr"
+vim.o.foldlevelstart = 99
+vim.o.foldexpr = "v:lua.require'zen.folding'.foldexpr()"
 
 -- Persistence
 
