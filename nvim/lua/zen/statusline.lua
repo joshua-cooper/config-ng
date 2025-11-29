@@ -115,7 +115,7 @@ function M.statusline()
 
 	local name = buffer_name(winnr, bufnr)
 	local flags = buffer_flags(bufnr)
-	local is_busy = vim.fn.has("nvim-0.12") == 1 and vim.bo[bufnr].busy ~= 0
+	local is_busy = vim.bo[bufnr].busy ~= 0
 
 	start_parts[#start_parts + 1] = name
 
