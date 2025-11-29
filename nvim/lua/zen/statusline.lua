@@ -62,10 +62,6 @@ local function buffer_name(winnr, bufnr)
 		end
 	end
 
-	if buftype ~= "" and buftype ~= "acwrite" then
-		return name
-	end
-
 	if name == "" then
 		return "[scratch]"
 	end
