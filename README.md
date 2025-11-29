@@ -8,13 +8,17 @@
 - [x] Keymaps
 - [x] LSP busy integration
 - [x] Directory browser setup (netrw/oil?)
-- [ ] Set up tree-sitter parsers
+- [ ] Remove code TODOs
 
 #### Later
 
 - [x] Surround plugin
 - [x] Directory based git difftool (new in 0.12)
-- [ ] `statuscolumn`
+- [ ] Set up tree-sitter parsers
+- [ ] `statuscolumn` (default is good if number + foldcolumn is enabled, but if
+       only foldcolumn, it's too cramped. We want the same as default, but with
+       a space between the buffer content and foldcolumn if only it is enabled)
+- [ ] LSP codelens
 - [ ] Custom codelens virtual text
 - [ ] Use LSP omnifunc and foldexpr in lua files when lsp is active (all files?
       need to check how default ftplugins interact here)
@@ -24,6 +28,7 @@
         arch/debian)
   - [ ] Jumping to rust std item complains about std being nightly
 - [ ] rust-analyzer debuggables
+- [ ] rust-analyzer user commands
 - [ ] Manual truncation of statusline when too long (avoids default `>`)
 - [ ] Fix c-n, c-p with 1 (or any?) match when using `fuzzy` completeopt.
       Currently the first is skipped.
