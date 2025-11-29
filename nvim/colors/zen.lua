@@ -367,6 +367,9 @@ hl("gitcommitDiscardedFile", { fg = palette.red, bold = true })
 hl("gitcommitSelectedFile", { fg = palette.green, bold = true })
 hl("gitcommitUnmergedFile", { fg = palette.yellow, bold = true })
 
+-- Plugins
+hl("MiniTrailspace", { link = "DiffDelete" })
+
 -- Terminal
 vim.g.terminal_color_0 = palette.bg
 vim.g.terminal_color_1 = palette.red

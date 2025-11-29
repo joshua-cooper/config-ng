@@ -5,6 +5,11 @@
       "src": "https://github.com/nvim-mini/mini.surround",
       "version": "0.16.0 - 0.17.0"
     },
+    "mini.trailspace": {
+      "rev": "39a0460",
+      "src": "https://github.com/nvim-mini/mini.trailspace",
+      "version": "0.16.0 - 0.17.0"
+    },
     "oil.nvim": {
       "rev": "975a77c",
       "src": "https://github.com/stevearc/oil.nvim",

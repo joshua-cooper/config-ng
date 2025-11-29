@@ -106,7 +106,12 @@ vim.pack.add({
 		src = "https://github.com/nvim-mini/mini.surround",
 		version = vim.version.range("0.16"),
 	},
+	{
+		src = "https://github.com/nvim-mini/mini.trailspace",
+		version = vim.version.range("0.16"),
+	},
 })
 
 require("oil").setup()
 require("mini.surround").setup()
+require("mini.trailspace").setup()
