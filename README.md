@@ -13,8 +13,8 @@
 #### Later
 
 - [x] Surround plugin
+- [x] Directory based git difftool (new in 0.12)
 - [ ] `statuscolumn`
-- [ ] Directory based git difftool (new in 0.12)
 - [ ] Custom codelens virtual text
 - [ ] Use LSP omnifunc and foldexpr in lua files when lsp is active (all files?
       need to check how default ftplugins interact here)
