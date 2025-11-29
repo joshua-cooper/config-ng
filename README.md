@@ -7,8 +7,8 @@
 - [x] Audit missing options
 - [x] Keymaps
 - [x] LSP busy integration
+- [x] Directory browser setup (netrw/oil?)
 - [ ] Set up tree-sitter parsers
-- [ ] Directory browser setup (netrw/oil?)
 
 #### Later
 

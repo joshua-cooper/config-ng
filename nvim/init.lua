@@ -68,6 +68,7 @@ vim.keymap.set("n", "<leader>f", ":find ")
 vim.keymap.set("n", "<leader>w", "<cmd>write<cr>")
 vim.keymap.set("n", "<leader>k", "<cmd>confirm bdelete<cr>")
 vim.keymap.set("n", "<leader>q", "<cmd>confirm quitall<cr>")
+vim.keymap.set("n", "-", "<cmd>Oil<cr>")
 
 -- Diagnostics
 
@@ -93,3 +94,14 @@ vim.lsp.enable({
 	"zen/emmylua-ls",
 	"zen/rust-analyzer",
 })
+
+-- Plugins
+
+vim.pack.add({
+	{
+		src = "https://github.com/stevearc/oil.nvim",
+		version = vim.version.range("2.15"),
+	},
+})
+
+require("oil").setup()

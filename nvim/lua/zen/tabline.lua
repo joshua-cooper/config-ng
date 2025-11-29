@@ -23,10 +23,10 @@ local function tab_label(tabnr)
 	local bufnr = vim.api.nvim_win_get_buf(winnr)
 	local name = vim.api.nvim_buf_get_name(bufnr)
 	local buftype = vim.bo[bufnr].buftype
+	local filetype = vim.bo[bufnr].filetype
 
-	if vim.bo[bufnr].filetype == "netrw" then
-		name = vim.b[bufnr].netrw_curdir
-		assert(type(name) == "string")
+	if filetype == "oil" then
+		name = name:gsub("^oil://", ""):gsub("/$", "")
 	end
 
 	if buftype == "quickfix" then

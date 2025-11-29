@@ -22,10 +22,10 @@ end
 local function buffer_name(winnr, bufnr)
 	local name = vim.api.nvim_buf_get_name(bufnr)
 	local buftype = vim.bo[bufnr].buftype
+	local filetype = vim.bo[bufnr].filetype
 
-	if vim.bo[bufnr].filetype == "netrw" then
-		name = vim.b[bufnr].netrw_curdir
-		assert(type(name) == "string")
+	if filetype == "oil" then
+		name = name:gsub("^oil://", ""):gsub("/$", "")
 	end
 
 	if buftype == "quickfix" then
@@ -62,7 +62,7 @@ local function buffer_name(winnr, bufnr)
 		end
 	end
 
-	if buftype ~= "" then
+	if buftype ~= "" and buftype ~= "acwrite" then
 		return name
 	end
 
