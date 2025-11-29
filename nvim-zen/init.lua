@@ -17,8 +17,10 @@ vim.o.ruler = false
 vim.o.showcmd = false
 vim.o.pumheight = 10
 vim.o.winborder = "solid"
-vim.o.fillchars =
-	"fold: ,foldopen:▼,foldclose:▶,foldsep: ,foldinner: ,eob: ,trunc:›,truncrl:‹"
+if vim.fn.has("nvim-0.12") == 1 then
+	vim.o.fillchars =
+		"fold: ,foldopen:▼,foldclose:▶,foldsep: ,foldinner: ,eob: ,trunc:›,truncrl:‹"
+end
 vim.o.quickfixtextfunc = "v:lua.require'zen.quickfix'.quickfixtextfunc"
 vim.o.statusline = "%!v:lua.require'zen.statusline'.statusline()"
 vim.o.tabline = "%!v:lua.require'zen.tabline'.tabline()"

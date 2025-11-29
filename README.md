@@ -6,8 +6,8 @@
 - [x] Remove the lazy lua magic
 - [x] Audit missing options
 - [x] Keymaps
+- [x] LSP busy integration
 - [ ] Set up tree-sitter parsers
-- [ ] LSP busy integration
 - [ ] Directory browser setup (netrw/oil?)
 
 #### Later
