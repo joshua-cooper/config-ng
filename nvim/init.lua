@@ -17,6 +17,8 @@ vim.o.ruler = false
 vim.o.showcmd = false
 vim.o.pumheight = 10
 vim.o.winborder = "solid"
+vim.o.list = true
+vim.o.listchars = "tab:  ,nbsp:⍽"
 vim.o.fillchars =
 	"fold: ,foldopen:▼,foldclose:▶,foldsep: ,foldinner: ,eob: ,trunc:›,truncrl:‹"
 vim.o.quickfixtextfunc = "v:lua.require'zen.quickfix'.quickfixtextfunc"
