@@ -16,8 +16,8 @@
 - [ ] Directory based git difftool (new in 0.12)
 - [ ] Surround plugin
 - [ ] Custom codelens virtual text
-- [ ] Use LSP omnifunc in lua files when lsp is active (all files? need to check
-      how default ftplugins interact here)
+- [ ] Use LSP omnifunc and foldexpr in lua files when lsp is active (all files?
+      need to check how default ftplugins interact here)
 - [ ] Recalculate folds on LSP attach (`:help zx`)
 - [ ] Termux handling
   - [ ] Path display (this might apply to non nixos distros too, like
