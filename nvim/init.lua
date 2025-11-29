@@ -100,6 +100,11 @@ vim.pack.add({
 		src = "https://github.com/stevearc/oil.nvim",
 		version = vim.version.range("2.15"),
 	},
+	{
+		src = "https://github.com/nvim-mini/mini.surround",
+		version = vim.version.range("0.16"),
+	},
 })
 
 require("oil").setup()
+require("mini.surround").setup()
