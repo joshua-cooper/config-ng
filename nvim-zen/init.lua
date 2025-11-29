@@ -51,6 +51,14 @@ vim.o.sidescrolloff = 3
 
 vim.o.undofile = true
 
+-- Keymaps
+
+vim.keymap.set("n", "<leader>b", "<cmd>ls<cr>:buffer ")
+vim.keymap.set("n", "<leader>f", ":find ")
+vim.keymap.set("n", "<leader>w", "<cmd>write<cr>")
+vim.keymap.set("n", "<leader>k", "<cmd>confirm bdelete<cr>")
+vim.keymap.set("n", "<leader>q", "<cmd>confirm quitall<cr>")
+
 -- Diagnostics
 
 vim.diagnostic.config({
