@@ -1,15 +1,12 @@
-local STATUSLINE = "%!v:lua.require'zen.statusline'.statusline()"
-
-local group = vim.api.nvim_create_augroup("zen.statusline", {
-	clear = true,
-})
+local group = vim.api.nvim_create_augroup("zen.statusline", {})
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "qf",
 	group = group,
 	desc = "Set custom statusline for quickfix windows",
 	callback = function(_)
-		vim.wo[0][0].statusline = STATUSLINE
+		vim.wo[0][0].statusline =
+			"%!v:lua.require'zen.statusline'.statusline()"
 	end,
 })
 
@@ -22,5 +19,3 @@ vim.api.nvim_create_autocmd("DiagnosticChanged", {
 		})
 	end,
 })
-
-vim.o.statusline = STATUSLINE

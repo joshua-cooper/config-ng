@@ -1,12 +1,17 @@
+-- TODO: Refactor this module
+
 local M = {}
 
----@param error lsp.ResponseError
-local function notify_server_error(error)
-	local message = ("[rust-analyzer] error %d: %s"):format(
-		error.code,
-		error.message
+---@param err lsp.ResponseError
+local function notify_server_error(err)
+	vim.notify(
+		string.format(
+			"[rust-analyzer] error %d: %s",
+			err.code,
+			err.message
+		),
+		vim.log.levels.ERROR
 	)
-	vim.notify(message, vim.log.levels.ERROR)
 end
 
 ---@param command lsp.Command
@@ -48,7 +53,7 @@ function M.expand_macro()
 
 	local clients = vim.lsp.get_clients({
 		bufnr = 0,
-		name = "rust-analyzer",
+		name = "zen/rust-analyzer",
 	})
 
 	local client = clients[#clients]
@@ -60,7 +65,7 @@ function M.expand_macro()
 	local offset_encoding = client.offset_encoding or "utf-8"
 	local params = vim.lsp.util.make_position_params(0, offset_encoding)
 
-	client:request(method, params, function(error, result, context)
+	client:request(method, params, function(err, result, context)
 		local buf = assert(context.bufnr)
 
 		if vim.api.nvim_get_current_buf() ~= buf then
@@ -68,8 +73,8 @@ function M.expand_macro()
 			return
 		end
 
-		if error then
-			notify_server_error(error)
+		if err then
+			notify_server_error(err)
 			return
 		end
 
@@ -98,7 +103,7 @@ function M.view_mir()
 
 	local clients = vim.lsp.get_clients({
 		bufnr = 0,
-		name = "rust-analyzer",
+		name = "zen/rust-analyzer",
 	})
 
 	local client = clients[#clients]
@@ -110,7 +115,7 @@ function M.view_mir()
 	local offset_encoding = client.offset_encoding or "utf-8"
 	local params = vim.lsp.util.make_position_params(0, offset_encoding)
 
-	client:request(method, params, function(error, result, context)
+	client:request(method, params, function(err, result, context)
 		local buf = assert(context.bufnr)
 
 		if vim.api.nvim_get_current_buf() ~= buf then
@@ -118,8 +123,8 @@ function M.view_mir()
 			return
 		end
 
-		if error then
-			notify_server_error(error)
+		if err then
+			notify_server_error(err)
 			return
 		end
 
@@ -147,7 +152,7 @@ function M.view_hir()
 
 	local clients = vim.lsp.get_clients({
 		bufnr = 0,
-		name = "rust-analyzer",
+		name = "zen/rust-analyzer",
 	})
 
 	local client = clients[#clients]
@@ -159,7 +164,7 @@ function M.view_hir()
 	local offset_encoding = client.offset_encoding or "utf-8"
 	local params = vim.lsp.util.make_position_params(0, offset_encoding)
 
-	client:request(method, params, function(error, result, context)
+	client:request(method, params, function(err, result, context)
 		local buf = assert(context.bufnr)
 
 		if vim.api.nvim_get_current_buf() ~= buf then
@@ -167,8 +172,8 @@ function M.view_hir()
 			return
 		end
 
-		if error then
-			notify_server_error(error)
+		if err then
+			notify_server_error(err)
 			return
 		end
 
@@ -196,13 +201,13 @@ function M.reload_workspace()
 
 	local clients = vim.lsp.get_clients({
 		bufnr = 0,
-		name = "rust-analyzer",
+		name = "zen/rust-analyzer",
 	})
 
 	for _, client in ipairs(clients) do
-		client:request(method, nil, function(error, _, _)
-			if error ~= nil then
-				notify_server_error(error)
+		client:request(method, nil, function(err, _, _)
+			if err ~= nil then
+				notify_server_error(err)
 				return
 			end
 
@@ -216,13 +221,13 @@ function M.rebuild_proc_macros()
 
 	local clients = vim.lsp.get_clients({
 		bufnr = 0,
-		name = "rust-analyzer",
+		name = "zen/rust-analyzer",
 	})
 
 	for _, client in ipairs(clients) do
-		client:request(method, nil, function(error, _, _)
-			if error ~= nil then
-				notify_server_error(error)
+		client:request(method, nil, function(err, _, _)
+			if err ~= nil then
+				notify_server_error(err)
 				return
 			end
 
@@ -236,7 +241,7 @@ function M.open_cargo_toml()
 
 	local clients = vim.lsp.get_clients({
 		bufnr = 0,
-		name = "rust-analyzer",
+		name = "zen/rust-analyzer",
 	})
 
 	local client = clients[#clients]
@@ -249,9 +254,9 @@ function M.open_cargo_toml()
 		textDocument = vim.lsp.util.make_text_document_params(0),
 	}
 
-	client:request(method, params, function(error, result, context)
-		if error ~= nil then
-			notify_server_error(error)
+	client:request(method, params, function(err, result, context)
+		if err ~= nil then
+			notify_server_error(err)
 			return
 		end
 
@@ -269,7 +274,7 @@ function M.parent_module()
 
 	local clients = vim.lsp.get_clients({
 		bufnr = 0,
-		name = "rust-analyzer",
+		name = "zen/rust-analyzer",
 	})
 
 	local client = clients[#clients]
@@ -281,9 +286,9 @@ function M.parent_module()
 	local offset_encoding = client.offset_encoding or "utf-8"
 	local params = vim.lsp.util.make_position_params(0, offset_encoding)
 
-	client:request(method, params, function(error, result, context)
-		if error ~= nil then
-			notify_server_error(error)
+	client:request(method, params, function(err, result, context)
+		if err ~= nil then
+			notify_server_error(err)
 			return
 		end
 
@@ -303,7 +308,7 @@ function M.external_docs()
 
 	local clients = vim.lsp.get_clients({
 		bufnr = 0,
-		name = "rust-analyzer",
+		name = "zen/rust-analyzer",
 	})
 
 	local client = clients[#clients]
@@ -315,9 +320,9 @@ function M.external_docs()
 	local offset_encoding = client.offset_encoding or "utf-8"
 	local params = vim.lsp.util.make_position_params(0, offset_encoding)
 
-	client:request(method, params, function(error, result, _)
-		if error ~= nil then
-			notify_server_error(error)
+	client:request(method, params, function(err, result, _)
+		if err ~= nil then
+			notify_server_error(err)
 			return
 		end
 

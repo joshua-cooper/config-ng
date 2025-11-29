@@ -1,13 +1,11 @@
-local group = vim.api.nvim_create_augroup("zen.sensitive", {
-	clear = true,
-})
+local group = vim.api.nvim_create_augroup("zen.sensitive", {})
 
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 	group = group,
 	pattern = {
-		"/dev/shm/pass.*",
-		"/dev/shm/passage.*",
-		"/dev/shm/gopass-*",
+		"*/pass.*",
+		"*/passage.*",
+		"*/gopass-*",
 	},
 	desc = "Prevent leaking sensitive buffer contents",
 	callback = function(args)

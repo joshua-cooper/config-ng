@@ -1,3 +1,5 @@
+local M = {}
+
 ---@class QuickfixTextFuncInfo
 ---@field quickfix 1|0
 ---@field winid integer
@@ -19,10 +21,15 @@
 ---@field valid 0|1
 ---@field vcol 0|1
 
-local M = {}
+local TYPE_LABELS = {
+	E = "error",
+	W = "warning",
+	I = "info",
+	N = "note",
+}
 
 ---@param info QuickfixTextFuncInfo
----@return QuickfixItem[]
+---@return QuickfixItem[], integer?
 local function get_items(info)
 	local opts = {
 		id = info.id,
@@ -30,9 +37,9 @@ local function get_items(info)
 	}
 
 	if info.quickfix == 1 then
-		return vim.fn.getqflist(opts).items
+		return vim.fn.getqflist(opts).items, nil
 	else
-		return vim.fn.getloclist(info.winid, opts).items
+		return vim.fn.getloclist(info.winid, opts).items, info.winid
 	end
 end
 
@@ -50,41 +57,28 @@ local function format_label(item, known_paths)
 		label = vim.api.nvim_buf_get_name(item.bufnr)
 	end
 
-	return require("zen.display").path(label, known_paths)
+	return require("zen.path").format(label, known_paths)
 end
 
 ---@param item QuickfixItem
 ---@return string
 local function format_metadata(item)
-	---@type string[]
-	local parts = {}
+	local parts = {} ---@as string[]
 
 	if item.lnum > 0 then
 		local col = math.max(item.col, 1)
-		parts[#parts + 1] = ("%d:%d"):format(item.lnum, col)
+		parts[#parts + 1] = string.format("%d:%d", item.lnum, col)
 	elseif item.pattern ~= "" then
 		parts[#parts + 1] = item.pattern
 	end
 
 	if item.type ~= "" then
-		local type = item.type
-
-		if type == "E" then
-			type = "error"
-		elseif type == "W" then
-			type = "warning"
-		elseif type == "I" then
-			type = "info"
-		elseif type == "N" then
-			type = "note"
-		end
-
-		parts[#parts + 1] = type
+		parts[#parts + 1] = TYPE_LABELS[item.type] or item.type
 	end
 
 	if item.nr > 0 then
 		if item.type == "" then
-			parts[#parts + 1] = "error"
+			parts[#parts + 1] = TYPE_LABELS["E"]
 		end
 
 		parts[#parts + 1] = tostring(item.nr)
@@ -102,25 +96,13 @@ end
 ---@param info QuickfixTextFuncInfo
 ---@return string[]
 function M.quickfixtextfunc(info)
-	local items = get_items(info)
-
-	---@type string[]
-	local formatted_items = {}
-
-	---@type KnownPaths
-	local known_paths = {
-		cwd = vim.fn.getcwd(),
-		cargo_home = vim.env.CARGO_HOME or vim.fs.joinpath(
-			assert(vim.uv.os_homedir()),
-			".cargo"
-		),
-	}
+	local items, winnr = get_items(info)
+	local formatted_items = {} ---@as string[]
+	local known_paths = require("zen.path").known_paths(winnr)
 
 	for i = info.start_idx, info.end_idx do
-		---@type string[]
-		local parts = {}
-
-		local item = items[i]
+		local parts = {} ---@as string[]
+		local item = assert(items[i])
 		local label = format_label(item, known_paths)
 		local metadata = format_metadata(item)
 		local message = format_message(item.text)
@@ -129,7 +111,7 @@ function M.quickfixtextfunc(info)
 			parts[#parts + 1] = label
 		end
 
-		parts[#parts + 1] = ("|%s|"):format(metadata)
+		parts[#parts + 1] = string.format("|%s|", metadata)
 
 		if message ~= "" then
 			parts[#parts + 1] = message
