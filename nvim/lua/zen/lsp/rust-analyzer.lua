@@ -36,6 +36,58 @@ local function show_in_float(method, text)
 	})
 end
 
+---@param method string
+---@param empty_message string
+---@param get_text fun(result: any): string
+local function request_float_preview(method, empty_message, get_text)
+	local client = get_client()
+
+	if not client then
+		return
+	end
+
+	local encoding = client.offset_encoding or "utf-8"
+	local params = vim.lsp.util.make_position_params(0, encoding)
+
+	client:request(method, params, function(err, result, context, _)
+		if vim.api.nvim_get_current_buf() ~= context.bufnr then
+			return
+		end
+
+		if err then
+			notify_server_error(err)
+			return
+		end
+
+		if not result then
+			vim.notify(empty_message)
+			return
+		end
+
+		show_in_float(method, get_text(result))
+	end)
+end
+
+---@param method string
+---@param success_message string
+local function broadcast_request(method, success_message)
+	local clients = vim.lsp.get_clients({
+		bufnr = 0,
+		name = "zen/rust-analyzer",
+	})
+
+	for _, client in ipairs(clients) do
+		client:request(method, nil, function(err, _, _, _)
+			if err then
+				notify_server_error(err)
+				return
+			end
+
+			vim.notify(success_message)
+		end)
+	end
+end
+
 ---@param command lsp.Command
 function M.run_single(command)
 	---@diagnostic disable-next-line: param-type-mismatch
@@ -80,138 +132,48 @@ function M.run_single(command)
 end
 
 function M.expand_macro()
-	local client = get_client()
-
-	if not client then
-		return
-	end
-
-	local encoding = client.offset_encoding or "utf-8"
-	local params = vim.lsp.util.make_position_params(0, encoding)
-	local method = "rust-analyzer/expandMacro"
-
-	client:request(method, params, function(err, result, context, _)
-		if vim.api.nvim_get_current_buf() ~= context.bufnr then
-			return
+	request_float_preview(
+		"rust-analyzer/expandMacro",
+		"No macro under the cursor",
+		function(result)
+			assert(type(result) == "table")
+			assert(type(result.expansion) == "string")
+			return result.expansion
 		end
-
-		if err then
-			notify_server_error(err)
-			return
-		end
-
-		if not result then
-			vim.notify("No macro under the cursor")
-			return
-		end
-
-		assert(type(result) == "table")
-		assert(type(result.expansion) == "string")
-
-		show_in_float(method, result.expansion)
-	end)
+	)
 end
 
 function M.view_mir()
-	local client = get_client()
-
-	if not client then
-		return
-	end
-
-	local encoding = client.offset_encoding or "utf-8"
-	local params = vim.lsp.util.make_position_params(0, encoding)
-	local method = "rust-analyzer/viewMir"
-
-	client:request(method, params, function(err, result, context, _)
-		if vim.api.nvim_get_current_buf() ~= context.bufnr then
-			return
+	request_float_preview(
+		"rust-analyzer/viewMir",
+		"Not inside a function body",
+		function(result)
+			assert(type(result) == "string")
+			return result
 		end
-
-		if err then
-			notify_server_error(err)
-			return
-		end
-
-		if not result then
-			vim.notify("Not inside a function body")
-			return
-		end
-
-		assert(type(result) == "string")
-
-		show_in_float(method, result)
-	end)
+	)
 end
 
 function M.view_hir()
-	local client = get_client()
-
-	if not client then
-		return
-	end
-
-	local encoding = client.offset_encoding or "utf-8"
-	local params = vim.lsp.util.make_position_params(0, encoding)
-	local method = "rust-analyzer/viewHir"
-
-	client:request(method, params, function(err, result, context, _)
-		if vim.api.nvim_get_current_buf() ~= context.bufnr then
-			return
+	request_float_preview(
+		"rust-analyzer/viewHir",
+		"Not inside a lowerable item",
+		function(result)
+			assert(type(result) == "string")
+			return result
 		end
-
-		if err then
-			notify_server_error(err)
-			return
-		end
-
-		if not result then
-			vim.notify("Not inside a lowerable item")
-			return
-		end
-
-		assert(type(result) == "string")
-
-		show_in_float(method, result)
-	end)
+	)
 end
 
 function M.reload_workspace()
-	local method = "rust-analyzer/reloadWorkspace"
-	local clients = vim.lsp.get_clients({
-		bufnr = 0,
-		name = "zen/rust-analyzer",
-	})
-
-	for _, client in ipairs(clients) do
-		client:request(method, nil, function(err, _, _, _)
-			if err then
-				notify_server_error(err)
-				return
-			end
-
-			vim.notify("Workspace reloaded")
-		end)
-	end
+	broadcast_request("rust-analyzer/reloadWorkspace", "Workspace reloaded")
 end
 
 function M.rebuild_proc_macros()
-	local method = "rust-analyzer/rebuildProcMacros"
-	local clients = vim.lsp.get_clients({
-		bufnr = 0,
-		name = "zen/rust-analyzer",
-	})
-
-	for _, client in ipairs(clients) do
-		client:request(method, nil, function(err, _, _, _)
-			if err then
-				notify_server_error(err)
-				return
-			end
-
-			vim.notify("Rebuilt proc macros")
-		end)
-	end
+	broadcast_request(
+		"rust-analyzer/rebuildProcMacros",
+		"Rebuilt proc macros"
+	)
 end
 
 function M.open_cargo_toml()
@@ -229,6 +191,11 @@ function M.open_cargo_toml()
 	client:request(method, params, function(err, result, context, _)
 		if err then
 			notify_server_error(err)
+			return
+		end
+
+		if not result then
+			vim.notify("No Cargo.toml found")
 			return
 		end
 
@@ -259,6 +226,11 @@ function M.parent_module()
 			return
 		end
 
+		if not result then
+			vim.notify("No parent module found")
+			return
+		end
+
 		assert(vim.islist(result))
 		local location = assert(result[1])
 		assert(type(location.uri) == "string")
@@ -286,6 +258,11 @@ function M.external_docs()
 	client:request(method, params, function(err, result, _, _)
 		if err then
 			notify_server_error(err)
+			return
+		end
+
+		if not result then
+			vim.notify("No external item under the cursor")
 			return
 		end
 
