@@ -233,7 +233,7 @@ function M.parent_module()
 
 		assert(vim.islist(result))
 		local location = assert(result[1])
-		assert(type(location.uri) == "string")
+		assert(location.uri or location.targetUri)
 		local client_id = context.client_id
 		local client = assert(vim.lsp.get_client_by_id(client_id))
 
