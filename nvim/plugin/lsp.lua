@@ -22,24 +22,13 @@ vim.api.nvim_create_autocmd("LspDetach", {
 	end,
 })
 
--- TODO: refactor this
 vim.api.nvim_create_autocmd("LspProgress", {
 	group = group,
 	desc = "Update busy status on LSP progress",
 	callback = function(args)
-		local kind = args.data.params.value.kind
-		local client =
-			assert(vim.lsp.get_client_by_id(args.data.client_id))
-		-- TODO: this is deprecated
-		local buffers = vim.lsp.get_buffers_by_client_id(client.id)
-
-		for _, bufnr in ipairs(buffers) do
-			if kind == "begin" then
-				vim.bo[bufnr].busy = vim.bo[bufnr].busy + 1
-			elseif kind == "end" then
-				vim.bo[bufnr].busy =
-					math.max(0, vim.bo[bufnr].busy - 1)
-			end
-		end
+		require("zen.lsp").on_progress(
+			assert(vim.lsp.get_client_by_id(args.data.client_id)),
+			args.data.params.value.kind
+		)
 	end,
 })

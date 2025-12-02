@@ -58,4 +58,18 @@ function M.on_detach(client, bufnr)
 	end
 end
 
+---@param client vim.lsp.Client
+---@param kind string
+function M.on_progress(client, kind)
+	for bufnr, _ in pairs(client.attached_buffers) do
+		local n = vim.bo[bufnr].busy
+
+		if kind == "begin" then
+			vim.bo[bufnr].busy = n + 1
+		elseif kind == "end" then
+			vim.bo[bufnr].busy = math.max(0, n - 1)
+		end
+	end
+end
+
 return M
