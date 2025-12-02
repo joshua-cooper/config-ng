@@ -30,6 +30,7 @@ vim.api.nvim_create_autocmd("LspProgress", {
 		local kind = args.data.params.value.kind
 		local client =
 			assert(vim.lsp.get_client_by_id(args.data.client_id))
+		-- TODO: this is deprecated
 		local buffers = vim.lsp.get_buffers_by_client_id(client.id)
 
 		for _, bufnr in ipairs(buffers) do

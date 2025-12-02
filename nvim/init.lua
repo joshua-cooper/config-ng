@@ -75,9 +75,28 @@ vim.keymap.set("n", "-", "<cmd>Oil<cr>")
 vim.diagnostic.config({
 	float = {
 		header = "",
+		prefix = function(_, i, total)
+			if total == 1 then
+				return "", ""
+			end
+
+			return string.format("%d. ", i), ""
+		end,
 	},
 	jump = {
-		float = true,
+		on_jump = function(diagnostic, _)
+			assert(diagnostic)
+
+			vim.diagnostic.open_float({
+				bufnr = diagnostic.bufnr,
+				namespace = diagnostic.namespace,
+				pos = {
+					diagnostic.lnum,
+					diagnostic.col,
+				},
+				severity = diagnostic.severity,
+			})
+		end,
 		wrap = true,
 	},
 	severity_sort = true,
