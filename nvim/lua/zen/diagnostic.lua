@@ -62,4 +62,10 @@ function M.setloclist()
 	})
 end
 
+function M.open_float()
+	vim.diagnostic.open_float({
+		severity = priority_severity(0),
+	})
+end
+
 return M

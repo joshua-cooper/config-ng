@@ -37,3 +37,7 @@ vim.keymap.set("n", "<leader>d", lazy("setqflist"), {
 vim.keymap.set("n", "<localleader>d", lazy("setloclist"), {
 	desc = "Add priority diagnostics to loclist",
 })
+
+vim.keymap.set("n", "<c-w>d", lazy("open_float"), {
+	desc = "Show priority diagnostics under the cursor",
+})
