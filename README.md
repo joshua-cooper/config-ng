@@ -55,5 +55,4 @@
 - [ ] `vim.diagnostic.count(bufnr)` to be `table<integer, integer>`
 - [ ] `LspClient:supports_method` to return `boolean`
 - [ ] `vim.api.nvim_win_call` to return generic return type of callback
-- [ ] remove `---@diagnostic disable-next-line: assign-type-mismatch` (emmylua
-      bug)
+- [ ] remove `---@diagnostic disable-next-line: *` (emmylua bug)
