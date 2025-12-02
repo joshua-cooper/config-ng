@@ -8,6 +8,7 @@
 - [x] Keymaps
 - [x] LSP busy integration
 - [x] Directory browser setup (netrw/oil?)
+- [ ] Fix status/tabline for command line windows (ctrl-f)
 - [ ] Remove code TODOs
 
 #### Later
