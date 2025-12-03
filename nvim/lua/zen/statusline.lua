@@ -21,6 +21,7 @@ end
 ---@return string
 local function buffer_name(winnr, bufnr)
 	local name = vim.api.nvim_buf_get_name(bufnr)
+	local wintype = vim.fn.win_gettype(winnr)
 	local buftype = vim.bo[bufnr].buftype
 	local filetype = vim.bo[bufnr].filetype
 
@@ -28,15 +29,18 @@ local function buffer_name(winnr, bufnr)
 		name = name:gsub("^oil://", ""):gsub("/$", "")
 	end
 
-	if buftype == "quickfix" then
-		local win_type = vim.fn.win_gettype(winnr)
+	if wintype == "command" then
+		return "[command]"
+	end
+
+	if wintype == "quickfix" or wintype == "loclist" then
 		local title = vim.w[winnr].quickfix_title
 
 		if title == nil then
-			return string.format("[%s]", win_type)
+			return string.format("[%s]", wintype)
 		else
 			assert(type(title) == "string")
-			return string.format("[%s] %s", win_type, title)
+			return string.format("[%s] %s", wintype, title)
 		end
 	end
 

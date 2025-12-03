@@ -22,6 +22,7 @@ local function tab_label(tabnr)
 	local winnr = vim.api.nvim_tabpage_get_win(tabnr)
 	local bufnr = vim.api.nvim_win_get_buf(winnr)
 	local name = vim.api.nvim_buf_get_name(bufnr)
+	local wintype = vim.fn.win_gettype(winnr)
 	local buftype = vim.bo[bufnr].buftype
 	local filetype = vim.bo[bufnr].filetype
 
@@ -29,8 +30,12 @@ local function tab_label(tabnr)
 		name = name:gsub("^oil://", ""):gsub("/$", "")
 	end
 
-	if buftype == "quickfix" then
-		return string.format("[%s]", vim.fn.win_gettype(winnr))
+	if wintype == "command" then
+		return "[command]"
+	end
+
+	if wintype == "quickfix" or wintype == "loclist" then
+		return string.format("[%s]", wintype)
 	end
 
 	if buftype == "help" then

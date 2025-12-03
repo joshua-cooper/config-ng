@@ -8,7 +8,7 @@
 - [x] Keymaps
 - [x] LSP busy integration
 - [x] Directory browser setup (netrw/oil?)
-- [ ] Fix status/tabline for command line windows (ctrl-f)
+- [x] Fix status/tabline for command line windows (ctrl-f)
 - [ ] Fix rust analyzer util type warnings
 - [ ] Remove code TODOs
 
