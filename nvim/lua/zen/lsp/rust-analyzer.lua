@@ -59,7 +59,7 @@ local function request_float_preview(method, empty_message, get_text)
 			return
 		end
 
-		if not result then
+		if not result or result == empty_message then
 			vim.notify(empty_message)
 			return
 		end
