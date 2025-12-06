@@ -49,6 +49,3 @@
 
 [user]
 	useConfigOnly = true
-
-[include]
-	path = config.local
