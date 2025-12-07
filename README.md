@@ -16,6 +16,7 @@
 
 - [x] Surround plugin
 - [x] Directory based git difftool (new in 0.12)
+- [ ] Decide on fish formatting (use spaces for indent?)
 - [ ] Set up tree-sitter parsers
 - [ ] `statuscolumn` (default is good if number + foldcolumn is enabled, but if
        only foldcolumn, it's too cramped. We want the same as default, but with
