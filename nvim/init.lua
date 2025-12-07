@@ -22,6 +22,7 @@ vim.o.listchars = "tab:  ,nbsp:⍽"
 vim.o.fillchars =
 	"fold: ,foldopen:▼,foldclose:▶,foldsep: ,foldinner: ,eob: ,trunc:›,truncrl:‹"
 vim.o.quickfixtextfunc = "v:lua.require'zen.quickfix'.quickfixtextfunc"
+vim.o.statuscolumn = "%!v:lua.require'zen.statuscolumn'.statuscolumn()"
 vim.o.statusline = "%!v:lua.require'zen.statusline'.statusline()"
 vim.o.tabline = "%!v:lua.require'zen.tabline'.tabline()"
 

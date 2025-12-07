@@ -16,11 +16,11 @@
 
 - [x] Surround plugin
 - [x] Directory based git difftool (new in 0.12)
-- [ ] Decide on fish formatting (use spaces for indent?)
-- [ ] Set up tree-sitter parsers
-- [ ] `statuscolumn` (default is good if number + foldcolumn is enabled, but if
+- [x] `statuscolumn` (default is good if number + foldcolumn is enabled, but if
        only foldcolumn, it's too cramped. We want the same as default, but with
        a space between the buffer content and foldcolumn if only it is enabled)
+- [ ] Decide on fish formatting (use spaces for indent?)
+- [ ] Set up tree-sitter parsers
 - [ ] LSP codelens
 - [ ] Custom codelens virtual text
 - [ ] Use LSP omnifunc and foldexpr in lua files when lsp is active (all files?
