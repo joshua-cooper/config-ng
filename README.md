@@ -11,6 +11,7 @@
 - [x] Fix status/tabline for command line windows (ctrl-f)
 - [ ] Fix rust analyzer util type warnings for emmylua + lua-ls
 - [ ] Refactor colorscheme
+- [ ] Check if @as type defs are correct or not
 
 #### Later
 
@@ -19,6 +20,7 @@
 - [x] `statuscolumn` (default is good if number + foldcolumn is enabled, but if
        only foldcolumn, it's too cramped. We want the same as default, but with
        a space between the buffer content and foldcolumn if only it is enabled)
+- [x] Double click statuscolumn handler
 - [ ] Decide on fish formatting (use spaces for indent?)
 - [ ] Set up tree-sitter parsers
 - [ ] LSP codelens
@@ -33,8 +35,6 @@
 - [ ] rust-analyzer debuggables
 - [ ] rust-analyzer user commands
 - [ ] Manual truncation of statusline when too long (avoids default `>`)
-- [ ] Fix c-n, c-p with 1 (or any?) match when using `fuzzy` completeopt.
-      Currently the first is skipped.
 - [ ] `set formatoptions` (add `n` and `/`)
 - [ ] Highlight indentation using the wrong whitespace (e.g. tabs when
       `expandtab = true`)
@@ -48,6 +48,8 @@
       you go to definition on part of it. (should be fixed in next release)
 - [ ] Refresh codelens scoped per client (not currently supported in
       `vim.lsp.codelens.refresh`)
+- [ ] Fix c-n, c-p with 1 (or any?) match when using `fuzzy` completeopt.
+      Currently the first is skipped.
 - [ ] BiDi support <https://github.com/neovim/neovim/issues/553>
   - [ ] Isolate statusline components (filename, each flag, etc.)
   - [ ] Independent statusline alignment for vertical splits
