@@ -9,8 +9,8 @@
 - [x] LSP busy integration
 - [x] Directory browser setup (netrw/oil?)
 - [x] Fix status/tabline for command line windows (ctrl-f)
+- [x] Refactor colorscheme
 - [ ] Fix rust analyzer util type warnings for emmylua + lua-ls
-- [ ] Refactor colorscheme
 - [ ] Check if @as type defs are correct or not
 
 #### Later

@@ -1,16 +1,14 @@
--- TODO: Refactor this file
+vim.cmd.highlight("clear")
 
-vim.cmd("highlight clear")
-
-if vim.fn.exists("syntax_on") then
+if vim.fn.exists("syntax_on") == 1 then
 	vim.cmd("syntax reset")
 end
 
 vim.g.colors_name = "zen"
 
--- Dark palette (Kanagawa Dragon)
 local dark = {
 	-- Base
+
 	bg = "#181616",
 	bg_light = "#282727",
 	bg_lighter = "#393836",
@@ -19,25 +17,29 @@ local dark = {
 	fg_darker = "#737c73",
 
 	-- UI
+
 	border = "#625e5a",
 	cursor_line = "#282727",
 	visual = "#394b70",
-	pmenu = "#1D1C19",
+	pmenu = "#1d1c19",
 	float = "#0d0c0c",
 
 	-- Diagnostics
+
 	error = "#c4746e",
 	warning = "#c4b28a",
 	info = "#8ea4a2",
 	hint = "#949fb5",
 
 	-- Diff
+
 	diff_add = "#87a987",
 	diff_delete = "#c4746e",
 	diff_change = "#b6927b",
 	diff_text = "#12120f",
 
-	-- Syntax
+	-- Colors
+
 	red = "#c4746e",
 	orange = "#b6927b",
 	yellow = "#c4b28a",
@@ -49,9 +51,9 @@ local dark = {
 	magenta = "#a292a3",
 }
 
--- Light palette (Kanagawa Lotus with pure white background)
 local light = {
 	-- Base
+
 	bg = "#ffffff",
 	bg_light = "#f5f5f5",
 	bg_lighter = "#ebebeb",
@@ -60,6 +62,7 @@ local light = {
 	fg_darker = "#8a8980",
 
 	-- UI
+
 	border = "#c0c0c0",
 	cursor_line = "#f8f8f8",
 	visual = "#c7d7e0",
@@ -67,18 +70,21 @@ local light = {
 	float = "#fafafa",
 
 	-- Diagnostics
+
 	error = "#e82424",
 	warning = "#e98a00",
 	info = "#597b75",
 	hint = "#5a7785",
 
 	-- Diff
+
 	diff_add = "#6f894e",
 	diff_delete = "#c84053",
 	diff_change = "#836f4a",
 	diff_text = "#d7e3d8",
 
-	-- Syntax
+	-- Colors
+
 	red = "#c84053",
 	orange = "#cc6d00",
 	yellow = "#836f4a",
@@ -90,131 +96,134 @@ local light = {
 	magenta = "#b35b79",
 }
 
-local palette = vim.o.background == "dark" and dark or light
+local p = vim.o.background == "dark" and dark or light
 
 local function hl(group, opts)
 	vim.api.nvim_set_hl(0, group, opts)
 end
 
 -- Base
-hl("Normal", { fg = palette.fg, bg = palette.bg })
-hl("NormalFloat", { fg = palette.fg, bg = palette.float })
-hl("FloatBorder", { fg = palette.border, bg = palette.float })
-hl("FloatTitle", { fg = palette.fg, bg = palette.float, bold = true })
-hl("ColorColumn", { bg = palette.bg_light })
-hl("Conceal", { fg = palette.fg_darker })
-hl("Cursor", { fg = palette.bg, bg = palette.fg })
+
+hl("Normal", { fg = p.fg, bg = p.bg })
+hl("NormalFloat", { fg = p.fg, bg = p.float })
+hl("FloatBorder", { fg = p.border, bg = p.float })
+hl("FloatTitle", { fg = p.fg, bg = p.float, bold = true })
+hl("ColorColumn", { bg = p.bg_light })
+hl("Conceal", { fg = p.fg_darker })
+hl("Cursor", { fg = p.bg, bg = p.fg })
 hl("lCursor", { link = "Cursor" })
 hl("CursorIM", { link = "Cursor" })
-hl("CursorLine", { bg = palette.cursor_line })
+hl("CursorLine", { bg = p.cursor_line })
 hl("CursorColumn", { link = "CursorLine" })
-hl("Directory", { fg = palette.blue })
-hl("DiffAdd", { bg = palette.diff_add, fg = palette.bg })
-hl("DiffChange", { bg = palette.diff_change, fg = palette.bg })
-hl("DiffDelete", { bg = palette.diff_delete, fg = palette.bg })
-hl("DiffText", { bg = palette.diff_text, fg = palette.fg })
-hl("EndOfBuffer", { fg = palette.bg })
-hl("ErrorMsg", { fg = palette.error, bold = true })
-hl("VertSplit", { fg = palette.border })
+hl("Directory", { fg = p.blue })
+hl("DiffAdd", { bg = p.diff_add, fg = p.bg })
+hl("DiffChange", { bg = p.diff_change, fg = p.bg })
+hl("DiffDelete", { bg = p.diff_delete, fg = p.bg })
+hl("DiffText", { bg = p.diff_text, fg = p.fg })
+hl("EndOfBuffer", { fg = p.bg })
+hl("ErrorMsg", { fg = p.error, bold = true })
+hl("VertSplit", { fg = p.border })
 hl("WinSeparator", { link = "VertSplit" })
-hl("Folded", { fg = palette.fg_darker, bg = palette.bg_light })
-hl("FoldColumn", { fg = palette.fg_darker })
-hl("SignColumn", { fg = palette.fg_darker })
-hl("IncSearch", { fg = palette.bg, bg = palette.orange, bold = true })
+hl("Folded", { fg = p.fg_darker, bg = p.bg_light })
+hl("FoldColumn", { fg = p.fg_darker })
+hl("SignColumn", { fg = p.fg_darker })
+hl("IncSearch", { fg = p.bg, bg = p.orange, bold = true })
 hl("Substitute", { link = "IncSearch" })
-hl("LineNr", { fg = palette.fg_darker })
-hl("CursorLineNr", { fg = palette.fg_dark, bold = true })
-hl("MatchParen", { fg = palette.orange, bold = true })
-hl("ModeMsg", { fg = palette.fg, bold = true })
-hl("MsgArea", { fg = palette.fg })
-hl("MoreMsg", { fg = palette.green, bold = true })
-hl("NonText", { fg = palette.fg_darker })
-hl("Pmenu", { fg = palette.fg, bg = palette.pmenu })
-hl("PmenuSel", { fg = palette.bg, bg = palette.blue })
-hl("PmenuSbar", { bg = palette.bg_light })
-hl("PmenuThumb", { bg = palette.fg_darker })
-hl("Question", { fg = palette.green, bold = true })
-hl("QuickFixLine", { fg = palette.bg, bg = palette.blue })
-hl("Search", { fg = palette.bg, bg = palette.yellow })
-hl("SpecialKey", { fg = palette.fg_darker })
-hl("SpellBad", { sp = palette.error, undercurl = true })
-hl("SpellCap", { sp = palette.warning, undercurl = true })
-hl("SpellLocal", { sp = palette.info, undercurl = true })
-hl("SpellRare", { sp = palette.hint, undercurl = true })
-hl("StatusLine", { fg = palette.fg, bg = palette.bg_light })
-hl("StatusLineNC", { fg = palette.fg_darker, bg = palette.bg_light })
-hl("TabLine", { fg = palette.fg_dark, bg = palette.bg_light })
-hl("TabLineFill", { bg = palette.bg_light })
-hl("TabLineSel", { fg = palette.fg, bg = palette.bg })
-hl("Title", { fg = palette.blue, bold = true })
-hl("Visual", { bg = palette.visual })
+hl("LineNr", { fg = p.fg_darker })
+hl("CursorLineNr", { fg = p.fg_dark, bold = true })
+hl("MatchParen", { fg = p.orange, bold = true })
+hl("ModeMsg", { fg = p.fg, bold = true })
+hl("MsgArea", { fg = p.fg })
+hl("MoreMsg", { fg = p.green, bold = true })
+hl("NonText", { fg = p.fg_darker })
+hl("Pmenu", { fg = p.fg, bg = p.pmenu })
+hl("PmenuSel", { fg = p.bg, bg = p.blue })
+hl("PmenuSbar", { bg = p.bg_light })
+hl("PmenuThumb", { bg = p.fg_darker })
+hl("Question", { fg = p.green, bold = true })
+hl("QuickFixLine", { fg = p.bg, bg = p.blue })
+hl("Search", { fg = p.bg, bg = p.yellow })
+hl("SpecialKey", { fg = p.fg_darker })
+hl("SpellBad", { sp = p.error, undercurl = true })
+hl("SpellCap", { sp = p.warning, undercurl = true })
+hl("SpellLocal", { sp = p.info, undercurl = true })
+hl("SpellRare", { sp = p.hint, undercurl = true })
+hl("StatusLine", { fg = p.fg, bg = p.bg_light })
+hl("StatusLineNC", { fg = p.fg_darker, bg = p.bg_light })
+hl("TabLine", { fg = p.fg_dark, bg = p.bg_light })
+hl("TabLineFill", { bg = p.bg_light })
+hl("TabLineSel", { fg = p.fg, bg = p.bg })
+hl("Title", { fg = p.blue, bold = true })
+hl("Visual", { bg = p.visual })
 hl("VisualNOS", { link = "Visual" })
-hl("WarningMsg", { fg = palette.warning, bold = true })
-hl("Whitespace", { fg = palette.fg_darker })
+hl("WarningMsg", { fg = p.warning, bold = true })
+hl("Whitespace", { fg = p.fg_darker })
 hl("WildMenu", { link = "PmenuSel" })
-hl("WinBar", { fg = palette.fg, bold = true })
-hl("WinBarNC", { fg = palette.fg_dark })
+hl("WinBar", { fg = p.fg, bold = true })
+hl("WinBarNC", { fg = p.fg_dark })
 
 -- Syntax
-hl("Comment", { fg = palette.fg_darker, italic = true })
 
-hl("Constant", { fg = palette.orange })
-hl("String", { fg = palette.green })
+hl("Comment", { fg = p.fg_darker, italic = true })
+
+hl("Constant", { fg = p.orange })
+hl("String", { fg = p.green })
 hl("Character", { link = "String" })
-hl("Number", { fg = palette.purple })
-hl("Boolean", { fg = palette.orange, bold = true })
+hl("Number", { fg = p.purple })
+hl("Boolean", { fg = p.orange, bold = true })
 hl("Float", { link = "Number" })
 
-hl("Identifier", { fg = palette.fg })
-hl("Function", { fg = palette.blue })
+hl("Identifier", { fg = p.fg })
+hl("Function", { fg = p.blue })
 
-hl("Statement", { fg = palette.purple, bold = true })
+hl("Statement", { fg = p.purple, bold = true })
 hl("Conditional", { link = "Statement" })
 hl("Repeat", { link = "Statement" })
 hl("Label", { link = "Statement" })
-hl("Operator", { fg = palette.red })
+hl("Operator", { fg = p.red })
 hl("Keyword", { link = "Statement" })
 hl("Exception", { link = "Statement" })
 
-hl("PreProc", { fg = palette.red })
+hl("PreProc", { fg = p.red })
 hl("Include", { link = "PreProc" })
 hl("Define", { link = "PreProc" })
 hl("Macro", { link = "PreProc" })
 hl("PreCondit", { link = "PreProc" })
 
-hl("Type", { fg = palette.cyan })
+hl("Type", { fg = p.cyan })
 hl("StorageClass", { link = "Type" })
 hl("Structure", { link = "Type" })
 hl("Typedef", { link = "Type" })
 
-hl("Special", { fg = palette.red })
+hl("Special", { fg = p.red })
 hl("SpecialChar", { link = "Special" })
 hl("Tag", { link = "Special" })
-hl("Delimiter", { fg = palette.fg_dark })
-hl("SpecialComment", { fg = palette.fg_darker, bold = true })
+hl("Delimiter", { fg = p.fg_dark })
+hl("SpecialComment", { fg = p.fg_darker, bold = true })
 hl("Debug", { link = "Special" })
 
 hl("Underlined", { underline = true })
-hl("Ignore", { fg = palette.bg })
-hl("Error", { fg = palette.error, bold = true })
-hl("Todo", { fg = palette.bg, bg = palette.yellow, bold = true })
+hl("Ignore", { fg = p.bg })
+hl("Error", { fg = p.error, bold = true })
+hl("Todo", { fg = p.bg, bg = p.yellow, bold = true })
 
 -- Treesitter
-hl("@variable", { fg = palette.fg })
-hl("@variable.builtin", { fg = palette.red })
-hl("@variable.parameter", { fg = palette.fg })
-hl("@variable.member", { fg = palette.fg })
+
+hl("@variable", { fg = p.fg })
+hl("@variable.builtin", { fg = p.red })
+hl("@variable.parameter", { fg = p.fg })
+hl("@variable.member", { fg = p.fg })
 
 hl("@constant", { link = "Constant" })
 hl("@constant.builtin", { link = "Constant" })
 hl("@constant.macro", { link = "Constant" })
 
-hl("@module", { fg = palette.cyan })
-hl("@label", { fg = palette.blue })
+hl("@module", { fg = p.cyan })
+hl("@label", { fg = p.blue })
 
 hl("@string", { link = "String" })
-hl("@string.regexp", { fg = palette.orange })
-hl("@string.escape", { fg = palette.red })
+hl("@string.regexp", { fg = p.orange })
+hl("@string.escape", { fg = p.red })
 hl("@string.special", { link = "SpecialChar" })
 
 hl("@character", { link = "Character" })
@@ -231,7 +240,7 @@ hl("@function.macro", { link = "Macro" })
 hl("@function.method", { link = "Function" })
 hl("@function.method.call", { link = "Function" })
 
-hl("@constructor", { fg = palette.cyan })
+hl("@constructor", { fg = p.cyan })
 hl("@operator", { link = "Operator" })
 
 hl("@keyword", { link = "Keyword" })
@@ -243,56 +252,57 @@ hl("@keyword.repeat", { link = "Repeat" })
 hl("@keyword.exception", { link = "Exception" })
 
 hl("@type", { link = "Type" })
-hl("@type.builtin", { fg = palette.cyan, italic = true })
+hl("@type.builtin", { fg = p.cyan, italic = true })
 hl("@type.definition", { link = "Type" })
 
-hl("@attribute", { fg = palette.purple })
-hl("@property", { fg = palette.fg })
+hl("@attribute", { fg = p.purple })
+hl("@property", { fg = p.fg })
 
 hl("@comment", { link = "Comment" })
-hl("@comment.documentation", { fg = palette.fg_dark, italic = true })
+hl("@comment.documentation", { fg = p.fg_dark, italic = true })
 
-hl("@punctuation", { fg = palette.fg_dark })
+hl("@punctuation", { fg = p.fg_dark })
 hl("@punctuation.delimiter", { link = "Delimiter" })
-hl("@punctuation.bracket", { fg = palette.fg_dark })
-hl("@punctuation.special", { fg = palette.red })
+hl("@punctuation.bracket", { fg = p.fg_dark })
+hl("@punctuation.special", { fg = p.red })
 
 hl("@markup.strong", { bold = true })
 hl("@markup.italic", { italic = true })
 hl("@markup.strikethrough", { strikethrough = true })
 hl("@markup.underline", { underline = true })
 
-hl("@markup.heading", { fg = palette.blue, bold = true })
-hl("@markup.heading.1", { fg = palette.red, bold = true })
-hl("@markup.heading.2", { fg = palette.orange, bold = true })
-hl("@markup.heading.3", { fg = palette.yellow, bold = true })
-hl("@markup.heading.4", { fg = palette.green, bold = true })
-hl("@markup.heading.5", { fg = palette.cyan, bold = true })
-hl("@markup.heading.6", { fg = palette.purple, bold = true })
+hl("@markup.heading", { fg = p.blue, bold = true })
+hl("@markup.heading.1", { fg = p.red, bold = true })
+hl("@markup.heading.2", { fg = p.orange, bold = true })
+hl("@markup.heading.3", { fg = p.yellow, bold = true })
+hl("@markup.heading.4", { fg = p.green, bold = true })
+hl("@markup.heading.5", { fg = p.cyan, bold = true })
+hl("@markup.heading.6", { fg = p.purple, bold = true })
 
-hl("@markup.quote", { fg = palette.fg_dark, italic = true })
-hl("@markup.math", { fg = palette.blue })
+hl("@markup.quote", { fg = p.fg_dark, italic = true })
+hl("@markup.math", { fg = p.blue })
 
-hl("@markup.link", { fg = palette.cyan, underline = true })
-hl("@markup.link.label", { fg = palette.blue })
-hl("@markup.link.url", { fg = palette.cyan, underline = true })
+hl("@markup.link", { fg = p.cyan, underline = true })
+hl("@markup.link.label", { fg = p.blue })
+hl("@markup.link.url", { fg = p.cyan, underline = true })
 
-hl("@markup.raw", { fg = palette.green })
-hl("@markup.raw.block", { fg = palette.fg })
+hl("@markup.raw", { fg = p.green })
+hl("@markup.raw.block", { fg = p.fg })
 
-hl("@markup.list", { fg = palette.red })
-hl("@markup.list.checked", { fg = palette.green })
-hl("@markup.list.unchecked", { fg = palette.fg_darker })
+hl("@markup.list", { fg = p.red })
+hl("@markup.list.checked", { fg = p.green })
+hl("@markup.list.unchecked", { fg = p.fg_darker })
 
-hl("@diff.plus", { fg = palette.diff_add })
-hl("@diff.minus", { fg = palette.diff_delete })
-hl("@diff.delta", { fg = palette.diff_change })
+hl("@diff.plus", { fg = p.diff_add })
+hl("@diff.minus", { fg = p.diff_delete })
+hl("@diff.delta", { fg = p.diff_change })
 
-hl("@tag", { fg = palette.red })
-hl("@tag.attribute", { fg = palette.yellow })
-hl("@tag.delimiter", { fg = palette.fg_dark })
+hl("@tag", { fg = p.red })
+hl("@tag.attribute", { fg = p.yellow })
+hl("@tag.delimiter", { fg = p.fg_dark })
 
 -- LSP Semantic Tokens
+
 hl("@lsp.type.class", { link = "Type" })
 hl("@lsp.type.decorator", { link = "@attribute" })
 hl("@lsp.type.enum", { link = "Type" })
@@ -313,20 +323,21 @@ hl("@lsp.mod.readonly", { italic = true })
 hl("@lsp.mod.deprecated", { strikethrough = true })
 
 -- Diagnostics
-hl("DiagnosticError", { fg = palette.error })
-hl("DiagnosticWarn", { fg = palette.warning })
-hl("DiagnosticInfo", { fg = palette.info })
-hl("DiagnosticHint", { fg = palette.hint })
 
-hl("DiagnosticUnderlineError", { sp = palette.error, undercurl = true })
-hl("DiagnosticUnderlineWarn", { sp = palette.warning, undercurl = true })
-hl("DiagnosticUnderlineInfo", { sp = palette.info, undercurl = true })
-hl("DiagnosticUnderlineHint", { sp = palette.hint, undercurl = true })
+hl("DiagnosticError", { fg = p.error })
+hl("DiagnosticWarn", { fg = p.warning })
+hl("DiagnosticInfo", { fg = p.info })
+hl("DiagnosticHint", { fg = p.hint })
 
-hl("DiagnosticVirtualTextError", { fg = palette.error, bg = palette.bg_light })
-hl("DiagnosticVirtualTextWarn", { fg = palette.warning, bg = palette.bg_light })
-hl("DiagnosticVirtualTextInfo", { fg = palette.info, bg = palette.bg_light })
-hl("DiagnosticVirtualTextHint", { fg = palette.hint, bg = palette.bg_light })
+hl("DiagnosticUnderlineError", { sp = p.error, undercurl = true })
+hl("DiagnosticUnderlineWarn", { sp = p.warning, undercurl = true })
+hl("DiagnosticUnderlineInfo", { sp = p.info, undercurl = true })
+hl("DiagnosticUnderlineHint", { sp = p.hint, undercurl = true })
+
+hl("DiagnosticVirtualTextError", { fg = p.error, bg = p.bg_light })
+hl("DiagnosticVirtualTextWarn", { fg = p.warning, bg = p.bg_light })
+hl("DiagnosticVirtualTextInfo", { fg = p.info, bg = p.bg_light })
+hl("DiagnosticVirtualTextHint", { fg = p.hint, bg = p.bg_light })
 
 hl("DiagnosticSignError", { link = "DiagnosticError" })
 hl("DiagnosticSignWarn", { link = "DiagnosticWarn" })
@@ -339,51 +350,52 @@ hl("DiagnosticFloatingInfo", { link = "DiagnosticInfo" })
 hl("DiagnosticFloatingHint", { link = "DiagnosticHint" })
 
 -- LSP
-hl("LspReferenceText", { bg = palette.bg_lighter })
-hl("LspReferenceRead", { bg = palette.bg_lighter })
-hl("LspReferenceWrite", { bg = palette.bg_lighter })
 
-hl("LspSignatureActiveParameter", { fg = palette.orange, bold = true })
-
-hl("LspCodeLens", { fg = palette.fg_darker, italic = true })
-hl("LspCodeLensSeparator", { fg = palette.fg_darker })
-
-hl("LspInlayHint", { fg = palette.fg_darker, bg = palette.bg_light })
+hl("LspReferenceText", { bg = p.bg_lighter })
+hl("LspReferenceRead", { bg = p.bg_lighter })
+hl("LspReferenceWrite", { bg = p.bg_lighter })
+hl("LspSignatureActiveParameter", { fg = p.orange, bold = true })
+hl("LspCodeLens", { fg = p.fg_darker, italic = true })
+hl("LspCodeLensSeparator", { fg = p.fg_darker })
+hl("LspInlayHint", { fg = p.fg_darker, bg = p.bg_light })
 
 -- Git
-hl("gitcommitSummary", { fg = palette.fg })
+
+hl("gitcommitSummary", { fg = p.fg })
 hl("gitcommitComment", { link = "Comment" })
 hl("gitcommitUntracked", { link = "Comment" })
 hl("gitcommitDiscarded", { link = "Comment" })
 hl("gitcommitSelected", { link = "Comment" })
-hl("gitcommitUnmerged", { fg = palette.green, bold = true })
-hl("gitcommitOnBranch", { fg = palette.fg_dark, bold = true })
-hl("gitcommitBranch", { fg = palette.purple, bold = true })
+hl("gitcommitUnmerged", { fg = p.green, bold = true })
+hl("gitcommitOnBranch", { fg = p.fg_dark, bold = true })
+hl("gitcommitBranch", { fg = p.purple, bold = true })
 hl("gitcommitNoBranch", { link = "gitcommitBranch" })
-hl("gitcommitDiscardedType", { fg = palette.red })
-hl("gitcommitSelectedType", { fg = palette.green })
-hl("gitcommitUnmergedType", { fg = palette.yellow })
-hl("gitcommitDiscardedFile", { fg = palette.red, bold = true })
-hl("gitcommitSelectedFile", { fg = palette.green, bold = true })
-hl("gitcommitUnmergedFile", { fg = palette.yellow, bold = true })
+hl("gitcommitDiscardedType", { fg = p.red })
+hl("gitcommitSelectedType", { fg = p.green })
+hl("gitcommitUnmergedType", { fg = p.yellow })
+hl("gitcommitDiscardedFile", { fg = p.red, bold = true })
+hl("gitcommitSelectedFile", { fg = p.green, bold = true })
+hl("gitcommitUnmergedFile", { fg = p.yellow, bold = true })
 
 -- Plugins
+
 hl("MiniTrailspace", { link = "DiffDelete" })
 
--- Terminal
-vim.g.terminal_color_0 = palette.bg
-vim.g.terminal_color_1 = palette.red
-vim.g.terminal_color_2 = palette.green
-vim.g.terminal_color_3 = palette.yellow
-vim.g.terminal_color_4 = palette.blue
-vim.g.terminal_color_5 = palette.purple
-vim.g.terminal_color_6 = palette.cyan
-vim.g.terminal_color_7 = palette.fg
-vim.g.terminal_color_8 = palette.fg_darker
-vim.g.terminal_color_9 = palette.red
-vim.g.terminal_color_10 = palette.green
-vim.g.terminal_color_11 = palette.yellow
-vim.g.terminal_color_12 = palette.blue
-vim.g.terminal_color_13 = palette.purple
-vim.g.terminal_color_14 = palette.cyan
-vim.g.terminal_color_15 = palette.fg
+-- Terminal colors
+
+vim.g.terminal_color_0 = p.bg
+vim.g.terminal_color_1 = p.red
+vim.g.terminal_color_2 = p.green
+vim.g.terminal_color_3 = p.yellow
+vim.g.terminal_color_4 = p.blue
+vim.g.terminal_color_5 = p.purple
+vim.g.terminal_color_6 = p.cyan
+vim.g.terminal_color_7 = p.fg
+vim.g.terminal_color_8 = p.fg_darker
+vim.g.terminal_color_9 = p.red
+vim.g.terminal_color_10 = p.green
+vim.g.terminal_color_11 = p.yellow
+vim.g.terminal_color_12 = p.blue
+vim.g.terminal_color_13 = p.purple
+vim.g.terminal_color_14 = p.cyan
+vim.g.terminal_color_15 = p.fg
