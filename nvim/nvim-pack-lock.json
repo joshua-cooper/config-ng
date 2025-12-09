@@ -10,6 +10,11 @@
       "src": "https://github.com/nvim-mini/mini.trailspace",
       "version": "0.16.0 - 0.17.0"
     },
+    "nvim-treesitter": {
+      "rev": "42fc28ba918343ebfd5565147a42a26580579482",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter",
+      "version": "0.10.0 - 0.11.0"
+    },
     "oil.nvim": {
       "rev": "975a77c",
       "src": "https://github.com/stevearc/oil.nvim",

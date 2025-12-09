@@ -1,5 +1,18 @@
 ## TODO
 
+### ghostty
+
+- [ ] Custom Light + dark theme
+
+### fish
+
+- [ ] theme using terminal colors
+- [ ] custom prompt
+
+### tmux
+
+- [ ] custom theme
+
 ### nvim
 
 - [x] Theme
@@ -12,6 +25,8 @@
 - [x] Refactor colorscheme
 - [ ] Fix rust analyzer util type warnings for emmylua + lua-ls
 - [ ] Check if @as type defs are correct or not
+- [ ] Theme
+- [ ] Set up tree-sitter parsers
 
 #### Later
 
@@ -22,7 +37,6 @@
        a space between the buffer content and foldcolumn if only it is enabled)
 - [x] Double click statuscolumn handler
 - [ ] Decide on fish formatting (use spaces for indent?)
-- [ ] Set up tree-sitter parsers
 - [ ] LSP codelens
 - [ ] Custom codelens virtual text
 - [ ] Use LSP omnifunc and foldexpr in lua files when lsp is active (all files?

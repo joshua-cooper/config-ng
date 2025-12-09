@@ -1,4 +1,4 @@
-vim.cmd.colorscheme("zen")
+vim.cmd.colorscheme("zen-alpha")
 
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
@@ -118,6 +118,10 @@ vim.lsp.enable({
 -- Plugins
 
 vim.pack.add({
+	{
+		src = "https://github.com/nvim-treesitter/nvim-treesitter",
+		version = vim.version.range("0.10"),
+	},
 	{
 		src = "https://github.com/stevearc/oil.nvim",
 		version = vim.version.range("2.15"),
