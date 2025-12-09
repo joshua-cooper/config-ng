@@ -6,8 +6,8 @@
 
 ### fish
 
-- [ ] theme using terminal colors
 - [ ] custom prompt
+- [ ] theme using terminal colors
 
 ### tmux
 
