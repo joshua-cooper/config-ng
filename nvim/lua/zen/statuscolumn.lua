@@ -16,13 +16,6 @@ local function statusline_winid()
 	return winnr ---@as integer
 end
 
----@param button string
-function M.on_fold_click(_, _, button, _)
-	if button == "l" then
-		vim.cmd("silent! normal! za")
-	end
-end
-
 ---@return string
 function M.statuscolumn()
 	local winnr = statusline_winid() or vim.api.nvim_get_current_win()
@@ -32,8 +25,7 @@ function M.statuscolumn()
 	local parts = {} ---@as string[]
 
 	if has_foldcolumn then
-		local on_click = "v:lua.require'zen.statuscolumn'.on_fold_click"
-		parts[#parts + 1] = string.format("%%@%s@%%C%%X ", on_click)
+		parts[#parts + 1] = "%C "
 	end
 
 	if has_number then
