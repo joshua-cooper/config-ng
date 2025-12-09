@@ -1,0 +1,9 @@
+app-notifications = no-config-reload,no-clipboard-copy
+resize-overlay = never
+font-feature = -calt, -liga, -dlig
+
+window-padding-x = 4
+window-padding-y = 4
+window-padding-balance = true
+
+keybind = ctrl+enter=ignore
