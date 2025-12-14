@@ -19,8 +19,8 @@ vim.o.pumheight = 10
 vim.o.winborder = "solid"
 vim.o.list = true
 vim.o.listchars = "tab:  ,nbsp:⍽"
-vim.o.fillchars =
-	"fold: ,foldopen:▼,foldclose:▶,foldsep: ,foldinner: ,eob: ,trunc:›,truncrl:‹"
+vim.o.fillchars = "eob: ,trunc:›,truncrl:‹"
+	.. ",fold: ,foldsep: ,foldinner: ,foldopen:▼,foldclose:▶"
 vim.o.quickfixtextfunc = "v:lua.require'zen.quickfix'.quickfixtextfunc"
 vim.o.statuscolumn = "%!v:lua.require'zen.statuscolumn'.statuscolumn()"
 vim.o.statusline = "%!v:lua.require'zen.statusline'.statusline()"
@@ -117,10 +117,26 @@ vim.lsp.enable({
 
 -- Plugins
 
+vim.api.nvim_create_autocmd("PackChanged", {
+	group = vim.api.nvim_create_augroup("zen.pack", {}),
+	desc = "Execute pack callbacks",
+	callback = function(args)
+		require("zen.pack").on_changed(args.data.kind, args.data.spec)
+	end,
+})
+
 vim.pack.add({
 	{
 		src = "https://github.com/nvim-treesitter/nvim-treesitter",
-		version = vim.version.range("0.10"),
+		version = "main",
+		data = {
+			on_install = function(_)
+				require("zen.tree-sitter").on_install()
+			end,
+			on_update = function(_)
+				require("zen.tree-sitter").on_update()
+			end,
+		},
 	},
 	{
 		src = "https://github.com/stevearc/oil.nvim",

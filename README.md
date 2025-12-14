@@ -23,10 +23,11 @@
 - [x] Directory browser setup (netrw/oil?)
 - [x] Fix status/tabline for command line windows (ctrl-f)
 - [x] Refactor colorscheme
+- [ ] Set up tree-sitter parsers
 - [ ] Fix rust analyzer util type warnings for emmylua + lua-ls
 - [ ] Check if @as type defs are correct or not
+- [ ] Check if we can use `vim.tbl_get` anywhere
 - [ ] Theme
-- [ ] Set up tree-sitter parsers
 
 #### Later
 

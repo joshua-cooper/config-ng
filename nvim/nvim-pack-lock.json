@@ -1,7 +1,7 @@
 {
   "plugins": {
     "mini.surround": {
-      "rev": "5aab42f",
+      "rev": "5aab42fcdcf31fa010f012771eda5631c077840a",
       "src": "https://github.com/nvim-mini/mini.surround",
       "version": "0.16.0 - 0.17.0"
     },
@@ -11,9 +11,9 @@
       "version": "0.16.0 - 0.17.0"
     },
     "nvim-treesitter": {
-      "rev": "42fc28ba918343ebfd5565147a42a26580579482",
+      "rev": "d3218d988f72ed34414959c9ccd802d393432d6e",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
-      "version": "0.10.0 - 0.11.0"
+      "version": "'main'"
     },
     "oil.nvim": {
       "rev": "975a77c",
