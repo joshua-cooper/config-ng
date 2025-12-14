@@ -128,11 +128,8 @@ vim.api.nvim_create_autocmd("PackChanged", {
 vim.pack.add({
 	{
 		src = "https://github.com/nvim-treesitter/nvim-treesitter",
-		version = "main",
+		version = vim.version.range("0.10"),
 		data = {
-			on_install = function(_)
-				require("zen.tree-sitter").on_install()
-			end,
 			on_update = function(_)
 				require("zen.tree-sitter").on_update()
 			end,
@@ -149,6 +146,24 @@ vim.pack.add({
 	{
 		src = "https://github.com/nvim-mini/mini.trailspace",
 		version = vim.version.range("0.16"),
+	},
+})
+
+require("nvim-treesitter.configs").setup({
+	modules = {},
+	auto_install = false,
+	sync_install = true,
+	ignore_install = {},
+	ensure_installed = {
+		"css",
+		"fish",
+		"html",
+		"javascript",
+		"json",
+		"nix",
+		"rust",
+		"toml",
+		"yaml",
 	},
 })
 

@@ -6,17 +6,17 @@
       "version": "0.16.0 - 0.17.0"
     },
     "mini.trailspace": {
-      "rev": "39a0460",
+      "rev": "39a0460c025a605519fdd6bea1ce870642429996",
       "src": "https://github.com/nvim-mini/mini.trailspace",
       "version": "0.16.0 - 0.17.0"
     },
     "nvim-treesitter": {
-      "rev": "d3218d988f72ed34414959c9ccd802d393432d6e",
+      "rev": "42fc28ba918343ebfd5565147a42a26580579482",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
-      "version": "'main'"
+      "version": "0.10.0 - 0.11.0"
     },
     "oil.nvim": {
-      "rev": "975a77c",
+      "rev": "975a77cce3c8cb742bc1b3629f4328f5ca977dad",
       "src": "https://github.com/stevearc/oil.nvim",
       "version": "2.15.0 - 2.16.0"
     }
