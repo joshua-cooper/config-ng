@@ -13,7 +13,9 @@ local function statusline_winid()
 		"vim.g.statusline_winid should be an integer"
 	)
 
-	return winnr ---@as integer
+	---@cast winnr integer
+
+	return winnr
 end
 
 ---@param winnr integer
@@ -79,12 +81,13 @@ end
 ---@param bufnr integer
 ---@return string?
 local function buffer_flags(bufnr)
-	local flags = {} ---@as string[]
-
 	local fileencoding = vim.bo[bufnr].fileencoding
 	local fileformat = vim.bo[bufnr].fileformat
 	local has_diagnostics = #vim.diagnostic.get(bufnr) > 0
 	local is_modified = vim.bo[bufnr].modified
+
+	---@type string[]
+	local flags = {}
 
 	if fileencoding ~= "" and fileencoding ~= "utf-8" then
 		flags[#flags + 1] = string.format("[%s]", fileencoding)
@@ -113,13 +116,15 @@ end
 function M.statusline()
 	local winnr = statusline_winid() or vim.api.nvim_get_current_win()
 	local bufnr = vim.api.nvim_win_get_buf(winnr)
-
-	local start_parts = {} ---@as string[]
-	local end_parts = {} ---@as string[]
-
 	local name = buffer_name(winnr, bufnr)
 	local flags = buffer_flags(bufnr)
 	local is_busy = vim.bo[bufnr].busy ~= 0
+
+	---@type string[]
+	local start_parts = {}
+
+	---@type string[]
+	local end_parts = {}
 
 	start_parts[#start_parts + 1] = name
 

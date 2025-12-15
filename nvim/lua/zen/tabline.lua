@@ -64,7 +64,8 @@ function M.tabline()
 	local tabs = vim.api.nvim_list_tabpages()
 	local current_tab = vim.api.nvim_get_current_tabpage()
 
-	local parts = {} ---@as string[]
+	---@type string[]
+	local parts = {}
 
 	for i, tab in ipairs(tabs) do
 		parts[#parts + 1] = string.format(

@@ -86,7 +86,8 @@ function M.format(path, known_paths)
 		return path
 	end
 
-	local patterns = { ---@as [string, string|function][]
+	---@type [string, string|function][]
+	local patterns = {
 		NIX_STORE_PATTERN,
 		cargo_registry_pattern(known_paths.cargo_home),
 		cargo_git_pattern(known_paths.cargo_home),

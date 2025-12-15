@@ -25,8 +25,8 @@
 - [x] Refactor colorscheme
 - [x] Set up tree-sitter parsers
 - [x] Check if we can use `vim.tbl_get` anywhere
+- [x] Check if @as type defs are correct or not
 - [ ] Fix rust analyzer util type warnings for emmylua + lua-ls
-- [ ] Check if @as type defs are correct or not
 - [ ] Theme
 
 #### Later

@@ -63,7 +63,8 @@ end
 ---@param item QuickfixItem
 ---@return string
 local function format_metadata(item)
-	local parts = {} ---@as string[]
+	---@type string[]
+	local parts = {}
 
 	if item.lnum > 0 then
 		local col = math.max(item.col, 1)
@@ -97,15 +98,19 @@ end
 ---@return string[]
 function M.quickfixtextfunc(info)
 	local items, winnr = get_items(info)
-	local formatted_items = {} ---@as string[]
 	local known_paths = require("zen.path").known_paths(winnr)
 
+	---@type string[]
+	local formatted_items = {}
+
 	for i = info.start_idx, info.end_idx do
-		local parts = {} ---@as string[]
 		local item = assert(items[i])
 		local label = format_label(item, known_paths)
 		local metadata = format_metadata(item)
 		local message = format_message(item.text)
+
+		---@type string[]
+		local parts = {}
 
 		if label ~= "" then
 			parts[#parts + 1] = label

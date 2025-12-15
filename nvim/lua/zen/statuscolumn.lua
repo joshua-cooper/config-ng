@@ -13,7 +13,9 @@ local function statusline_winid()
 		"vim.g.statusline_winid should be an integer"
 	)
 
-	return winnr ---@as integer
+	---@cast winnr integer
+
+	return winnr
 end
 
 ---@return string
@@ -22,7 +24,8 @@ function M.statuscolumn()
 	local has_foldcolumn = vim.wo[winnr].foldcolumn ~= "0"
 	local has_number = vim.wo[winnr].number or vim.wo[winnr].relativenumber
 
-	local parts = {} ---@as string[]
+	---@type string[]
+	local parts = {}
 
 	if has_foldcolumn then
 		parts[#parts + 1] = "%C "
