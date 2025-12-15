@@ -49,6 +49,7 @@ local function request_float_preview(method, empty_message, get_text)
 	local encoding = client.offset_encoding or "utf-8"
 	local params = vim.lsp.util.make_position_params(0, encoding)
 
+	---@diagnostic disable-next-line param-type-mismatch
 	client:request(method, params, function(err, result, context, _)
 		if vim.api.nvim_get_current_buf() ~= context.bufnr then
 			return
@@ -77,6 +78,7 @@ local function broadcast_request(method, success_message)
 	})
 
 	for _, client in ipairs(clients) do
+		---@diagnostic disable-next-line param-type-mismatch
 		client:request(method, nil, function(err, _, _, _)
 			if err then
 				notify_server_error(err)
@@ -188,7 +190,8 @@ function M.open_cargo_toml()
 		textDocument = vim.lsp.util.make_text_document_params(0),
 	}
 
-	client:request(method, params, function(err, result, context, _)
+	---@diagnostic disable-next-line param-type-mismatch
+	client:request(method, params, function(err, result, _, _)
 		if err then
 			notify_server_error(err)
 			return
@@ -198,9 +201,6 @@ function M.open_cargo_toml()
 			vim.notify("No Cargo.toml found")
 			return
 		end
-
-		local client_id = context.client_id
-		local client = assert(vim.lsp.get_client_by_id(client_id))
 
 		vim.lsp.util.show_document(
 			result,
@@ -220,7 +220,8 @@ function M.parent_module()
 	local params = vim.lsp.util.make_position_params(0, encoding)
 	local method = "experimental/parentModule"
 
-	client:request(method, params, function(err, result, context, _)
+	---@diagnostic disable-next-line param-type-mismatch
+	client:request(method, params, function(err, result, _, _)
 		if err then
 			notify_server_error(err)
 			return
@@ -234,8 +235,6 @@ function M.parent_module()
 		assert(vim.islist(result))
 		local location = assert(result[1])
 		assert(location.uri or location.targetUri)
-		local client_id = context.client_id
-		local client = assert(vim.lsp.get_client_by_id(client_id))
 
 		vim.lsp.util.show_document(
 			location,
@@ -255,6 +254,7 @@ function M.external_docs()
 	local params = vim.lsp.util.make_position_params(0, encoding)
 	local method = "experimental/externalDocs"
 
+	---@diagnostic disable-next-line param-type-mismatch
 	client:request(method, params, function(err, result, _, _)
 		if err then
 			notify_server_error(err)
