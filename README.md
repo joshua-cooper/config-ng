@@ -27,6 +27,7 @@
 - [x] Check if we can use `vim.tbl_get` anywhere
 - [x] Check if @as type defs are correct or not
 - [x] Fix rust analyzer util type warnings for emmylua + lua-ls
+- [ ] Remove bad diagnostic disables
 - [ ] Theme
 
 #### Later
@@ -59,8 +60,6 @@
 
 #### Blocked
 
-- [ ] emmylua-ls doesn't pick up some stuff (e.g. `vim.lsp.buf.format`) until
-      you go to definition on part of it. (should be fixed in next release)
 - [ ] Refresh codelens scoped per client (not currently supported in
       `vim.lsp.codelens.refresh`)
 - [ ] Fix c-n, c-p with 1 (or any?) match when using `fuzzy` completeopt.
