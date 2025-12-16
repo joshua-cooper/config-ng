@@ -27,7 +27,7 @@
 - [x] Check if we can use `vim.tbl_get` anywhere
 - [x] Check if @as type defs are correct or not
 - [x] Fix rust analyzer util type warnings for emmylua + lua-ls
-- [ ] Remove bad diagnostic disables
+- [x] Remove bad diagnostic disables
 - [ ] Theme
 
 #### Later

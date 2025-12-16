@@ -75,7 +75,6 @@ end
 ---@param config vim.lsp.ClientConfig
 local function before_init(params, config)
 	if config.settings and config.settings["rust-analyzer"] then
-		---@diagnostic disable-next-line: assign-type-mismatch
 		params.initializationOptions = config.settings["rust-analyzer"]
 	end
 end
@@ -153,7 +152,7 @@ local function reuse_client(client, config)
 	)
 
 	if should_add_to_workspace then
-		local workspace_folder = {
+		local folder = {
 			uri = vim.uri_from_fname(config.root_dir),
 			name = config.root_dir,
 		}
@@ -161,13 +160,13 @@ local function reuse_client(client, config)
 		client:notify("workspace/didChangeWorkspaceFolders", {
 			event = {
 				added = {
-					workspace_folder,
+					folder,
 				},
 				removed = {},
 			},
 		})
 
-		table.insert(client.workspace_folders, workspace_folder)
+		client.workspace_folders[#client.workspace_folders + 1] = folder
 	end
 
 	return true

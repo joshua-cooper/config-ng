@@ -92,28 +92,25 @@ end
 
 ---@param command lsp.Command
 function M.run_single(command)
-	---@diagnostic disable-next-line: param-type-mismatch
-	local arguments = assert(command.arguments)
-	---@diagnostic disable-next-line: param-type-mismatch
-	local first = assert(arguments[1])
-	---@diagnostic disable-next-line: unnecessary-assert
-	local args = assert(first.args)
+	local args = vim.tbl_get(command, "arguments", 1, "args")
+	assert(type(args) == "table")
 	assert(type(args.workspaceRoot) == "string")
 
+	---@type string[]
 	local cargo_args = { "cargo" }
 
 	for _, arg in ipairs(args.cargoArgs or {}) do
-		table.insert(cargo_args, arg)
+		cargo_args[#cargo_args + 1] = arg
 	end
 
 	for _, arg in ipairs(args.cargoExtraArgs or {}) do
-		table.insert(cargo_args, arg)
+		cargo_args[#cargo_args + 1] = arg
 	end
 
-	table.insert(cargo_args, "--")
+	cargo_args[#cargo_args + 1] = "--"
 
 	for _, arg in ipairs(args.executableArgs or {}) do
-		table.insert(cargo_args, arg)
+		cargo_args[#cargo_args + 1] = arg
 	end
 
 	local bufnr = vim.api.nvim_create_buf(true, false)
