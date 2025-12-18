@@ -9,7 +9,7 @@ vim.g.colors_name = "zen-alpha"
 local dark = {
 	-- Base
 
-	bg = "#181616",
+	bg = "#1c1917",
 	bg_light = "#282727",
 	bg_lighter = "#393836",
 	fg = "#c5c9c5",
@@ -54,7 +54,7 @@ local dark = {
 local light = {
 	-- Base
 
-	bg = "#ffffff",
+	bg = "#f0edec",
 	bg_light = "#f5f5f5",
 	bg_lighter = "#ebebeb",
 	fg = "#545464",
