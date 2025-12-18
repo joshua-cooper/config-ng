@@ -5,4 +5,4 @@ font-feature = -calt, -liga, -dlig
 window-padding-x = 4
 window-padding-y = 4
 window-padding-balance = true
-keybind = ctrl+enter=ignore
+keybind = ctrl+enter=unbind
