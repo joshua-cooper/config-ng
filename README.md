@@ -8,10 +8,17 @@
 
 - [ ] custom prompt
 - [ ] theme using terminal colors
+- [ ] Decide on fish formatting (use spaces for indent?)
 
 ### tmux
 
 - [ ] custom theme
+- [ ] make shift+v behave like vim in copy mode when already selected (e.g. it
+      should keep the currently selected lines selected, but expand the
+      selection to the entire lines)
+- [ ] bind y to copy without exiting copy mode
+- [ ] bind v to start selection?
+- [ ] add a `prompt-command-cursor-style` option
 
 ### nvim
 
@@ -38,7 +45,6 @@
        only foldcolumn, it's too cramped. We want the same as default, but with
        a space between the buffer content and foldcolumn if only it is enabled)
 - [x] Double click statuscolumn handler
-- [ ] Decide on fish formatting (use spaces for indent?)
 - [ ] LSP codelens
 - [ ] Custom codelens virtual text
 - [ ] Use LSP omnifunc and foldexpr in lua files when lsp is active (all files?
