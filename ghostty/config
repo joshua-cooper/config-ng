@@ -1,4 +1,4 @@
-theme = light:Zenbones Light,dark:Zenbones Dark
+theme = light:zen-light,dark:zen-dark
 app-notifications = no-config-reload,no-clipboard-copy
 resize-overlay = never
 font-feature = -calt, -liga, -dlig
