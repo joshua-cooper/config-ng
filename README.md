@@ -6,7 +6,7 @@
 
 ### fish
 
-- [ ] custom prompt
+- [x] custom prompt
 - [ ] theme using terminal colors
 - [ ] Decide on fish formatting (use spaces for indent?)
 

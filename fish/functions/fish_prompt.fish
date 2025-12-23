@@ -1,20 +1,53 @@
 function fish_prompt
-        #Save the return status of the previous command
-        set -l last_pipestatus $pipestatus
-        set -lx __fish_last_status $status # Export for __fish_print_pipestatus.
+	set -l last_status $status
+	set -l last_pipestatus $pipestatus
+	set -l color_normal (set_color normal)
 
-        if functions -q fish_is_root_user; and fish_is_root_user
-                printf '%s@%s %s%s%s# ' $USER (prompt_hostname) (set -q fish_color_cwd_root
-                                                                     and set_color $fish_color_cwd_root
-                                                                     or set_color $fish_color_cwd) \
-                        (prompt_pwd) (set_color normal)
-        else
-                set -l status_color (set_color $fish_color_status)
-                set -l statusb_color (set_color --bold $fish_color_status)
-                set -l pipestatus_string (__fish_print_pipestatus "[" "]" "|" "$status_color" "$statusb_color" $last_pipestatus)
+	set -l pwd_string (prompt_pwd)$color_normal
 
-                printf '[%s] %s%s@%s %s%s %s%s%s \n> ' (date "+%H:%M:%S") (set_color brblue) \
-                        $USER (prompt_hostname) (set_color $fish_color_cwd) $PWD $pipestatus_string \
-                        (set_color normal)
-        end
+	if fish_is_root_user
+		set pwd_string " "(set_color $fish_color_cwd_root)$pwd_string
+	else
+		set pwd_string " "(set_color $fish_color_cwd)$pwd_string
+	end
+
+	set -l status_string ""
+
+	if not contains $last_status 0 141
+		set -l color_status (set_color $fish_color_status)
+		set -l separator $color_normal"|"$color_status
+		set -l pipestatus_string (
+			fish_status_to_signal $last_pipestatus \
+				| string join $separator
+		)
+
+		set status_string (
+			string join "" \
+				" " \
+				$color_status \
+				$pipestatus_string \
+				$color_normal
+		)
+
+		if test "$last_status" -ne "$last_pipestatus[-1]"
+			set status_string (
+				string join "" \
+					$status_string \
+					" -> " \
+					$color_status \
+					$last_status \
+					$color_normal
+			)
+		end
+	end
+
+	set -l info_string (
+		string join "" -- \
+			(prompt_login) \
+			$pwd_string \
+			(fish_vcs_prompt) \
+			$status_string
+	)
+
+	printf "%s\n> " $info_string
 end
