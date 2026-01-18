@@ -4,6 +4,10 @@
 
 - [ ] Custom Light + dark theme
 
+#### Later
+
+- [ ] Remove close window confirmation when running tmux
+
 ### fish
 
 - [x] custom prompt
@@ -12,6 +16,8 @@
 
 ### tmux
 
+- [ ] fix bug when status is disabled and tab completing with the menu popup
+      (the status pushes down the window conent as if the status were enabled)
 - [ ] custom theme
 - [ ] make shift+v behave like vim in copy mode when already selected (e.g. it
       should keep the currently selected lines selected, but expand the
@@ -19,6 +25,9 @@
 - [ ] bind y to copy without exiting copy mode
 - [ ] bind v to start selection?
 - [ ] add a `prompt-command-cursor-style` option
+- [ ] update-environment
+- [ ] main-pane-{height,width}
+- [ ] window-status-*
 
 ### nvim
 
