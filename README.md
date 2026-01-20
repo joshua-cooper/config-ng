@@ -22,6 +22,9 @@
 - [x] main-pane-{height,width}
 - [x] window-status-*
 - [x] update-environment
+
+#### Later
+
 - [ ] fix theme reloading bug for window{-active}-style and copy mode
       selection/popup and popup-style and menu style
 - [ ] fix bug when status is disabled and tab completing with the menu popup
