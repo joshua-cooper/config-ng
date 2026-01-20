@@ -21,6 +21,7 @@
 - [ ] fix bug when status is disabled and tab completing with the menu popup
       (the status pushes down the window conent as if the status were enabled)
 - [ ] custom theme
+- [ ] set `cursor-colour` (doesn't support variables atm)
 - [ ] make shift+v behave like vim in copy mode when already selected (e.g. it
       should keep the currently selected lines selected, but expand the
       selection to the entire lines)
