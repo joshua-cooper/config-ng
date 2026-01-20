@@ -20,9 +20,9 @@ local dark = {
 
 	border = "#625e5a",
 	cursor_line = "#282727",
-	visual = "#394b70",
-	pmenu = "#1d1c19",
-	float = "#0d0c0c",
+	visual = "#223249",
+	pmenu = "#464442",
+	float = "#464442",
 
 	-- Diagnostics
 
@@ -54,20 +54,20 @@ local dark = {
 local light = {
 	-- Base
 
-	bg = "#f0edec",
-	bg_light = "#f5f5f5",
-	bg_lighter = "#ebebeb",
+	bg = "#faf9f8",
+	bg_light = "#f0edec",
+	bg_lighter = "#e8e5e3",
 	fg = "#545464",
 	fg_dark = "#43436c",
 	fg_darker = "#8a8980",
 
 	-- UI
 
-	border = "#c0c0c0",
-	cursor_line = "#f8f8f8",
-	visual = "#c7d7e0",
-	pmenu = "#f0f0f0",
-	float = "#fafafa",
+	border = "#d0d0d0",
+	cursor_line = "#f5f5f5",
+	visual = "#c9cbd1",
+	pmenu = "#e5e2e0",
+	float = "#e5e2e0",
 
 	-- Diagnostics
 
