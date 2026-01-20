@@ -21,13 +21,13 @@
 - [x] bind v to start selection
 - [x] main-pane-{height,width}
 - [x] window-status-*
+- [x] update-environment
 - [ ] fix theme reloading bug for window{-active}-style and copy mode
       selection/popup and popup-style and menu style
 - [ ] fix bug when status is disabled and tab completing with the menu popup
-      (the status pushes down the window conent as if the status were enabled)
+      (the status pushes down the window content as if the status were enabled)
 - [ ] set `cursor-colour` (doesn't support variables atm)
 - [ ] add a `prompt-command-cursor-style` option
-- [ ] update-environment
 
 ### nvim
 
