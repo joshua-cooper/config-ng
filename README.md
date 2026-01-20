@@ -16,21 +16,18 @@
 
 ### tmux
 
+- [x] custom theme
+- [x] bind y to copy without exiting copy mode
+- [x] bind v to start selection
+- [x] main-pane-{height,width}
+- [x] window-status-*
 - [ ] fix theme reloading bug for window{-active}-style and copy mode
       selection/popup and popup-style and menu style
 - [ ] fix bug when status is disabled and tab completing with the menu popup
       (the status pushes down the window conent as if the status were enabled)
-- [x] custom theme
 - [ ] set `cursor-colour` (doesn't support variables atm)
-- [ ] make shift+v behave like vim in copy mode when already selected (e.g. it
-      should keep the currently selected lines selected, but expand the
-      selection to the entire lines)
-- [x] bind y to copy without exiting copy mode
-- [x] bind v to start selection
 - [ ] add a `prompt-command-cursor-style` option
 - [ ] update-environment
-- [x] main-pane-{height,width}
-- [x] window-status-*
 
 ### nvim
 
