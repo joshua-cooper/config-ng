@@ -17,7 +17,7 @@
 ### tmux
 
 - [ ] fix theme reloading bug for window{-active}-style and copy mode
-      selection/popup and popup-style
+      selection/popup and popup-style and menu style
 - [ ] fix bug when status is disabled and tab completing with the menu popup
       (the status pushes down the window conent as if the status were enabled)
 - [ ] custom theme
