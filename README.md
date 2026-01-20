@@ -28,6 +28,8 @@
       (the status pushes down the window content as if the status were enabled)
 - [ ] set `cursor-colour` (doesn't support variables atm)
 - [ ] add a `prompt-command-cursor-style` option
+- [ ] manually setting theme doesn't update fg color everywhere (e.g. fg of text
+      under cursor in nvim)
 
 ### nvim
 
