@@ -1,4 +1,4 @@
-vim.cmd.colorscheme("zen-alpha")
+vim.cmd.colorscheme("zen")
 
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
