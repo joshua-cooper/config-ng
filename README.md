@@ -4,10 +4,6 @@
 
 - [ ] Custom Light + dark theme
 
-#### Later
-
-- [ ] Remove close window confirmation when running tmux
-
 ### fish
 
 - [x] custom prompt
@@ -25,14 +21,12 @@
 
 #### Later
 
-- [ ] fix theme reloading bug for window{-active}-style and copy mode
+- [x] set `cursor-colour` (doesn't support variables atm)
+- [x] fix theme reloading bug for window{-active}-style and copy mode
       selection/popup and popup-style and menu style
+- [x] add a `prompt-command-cursor-style` option
 - [ ] fix bug when status is disabled and tab completing with the menu popup
       (the status pushes down the window content as if the status were enabled)
-- [ ] set `cursor-colour` (doesn't support variables atm)
-- [ ] add a `prompt-command-cursor-style` option
-- [ ] manually setting theme doesn't update fg color everywhere (e.g. fg of text
-      under cursor in nvim)
 
 ### nvim
 
@@ -61,8 +55,6 @@
 - [x] Double click statuscolumn handler
 - [ ] LSP codelens
 - [ ] Custom codelens virtual text
-- [ ] Use LSP omnifunc and foldexpr in lua files when lsp is active (all files?
-      need to check how default ftplugins interact here)
 - [ ] Recalculate folds on LSP attach (`:help zx`)
 - [ ] Termux handling
   - [ ] Path display (this might apply to non nixos distros too, like
@@ -70,27 +62,24 @@
   - [ ] Jumping to rust std item complains about std being nightly
 - [ ] rust-analyzer debuggables
 - [ ] rust-analyzer user commands
-- [ ] Manual truncation of statusline when too long (avoids default `>`)
-- [ ] `set formatoptions` (add `n` and `/`)
 - [ ] Highlight indentation using the wrong whitespace (e.g. tabs when
       `expandtab = true`)
 - [ ] Variable to prevent lsp auto start
 - [ ] Variable to prevent lsp auto format
 - [ ] Make vim global LSP work in .nvim.lua files
+- [ ] `set formatoptions` (add `n` and `/`)
+- [ ] Use LSP omnifunc and foldexpr in lua files when lsp is active (all files?
+      need to check how default ftplugins interact here)
 
 #### Blocked
 
-- [ ] Refresh codelens scoped per client (not currently supported in
+- [x] Refresh codelens scoped per client (not currently supported in
       `vim.lsp.codelens.refresh`)
-- [ ] Fix c-n, c-p with 1 (or any?) match when using `fuzzy` completeopt.
+- [x] Fix c-n, c-p with 1 (or any?) match when using `fuzzy` completeopt.
       Currently the first is skipped.
-- [ ] BiDi support <https://github.com/neovim/neovim/issues/553>
-  - [ ] Isolate statusline components (filename, each flag, etc.)
-  - [ ] Independent statusline alignment for vertical splits
 
 #### Upstream types
 
-- [ ] `vim.diagnostic.count(bufnr)` to be `table<integer, integer>`
-- [ ] `LspClient:supports_method` to return `boolean`
-- [ ] `vim.api.nvim_win_call` to return generic return type of callback
-- [ ] remove `---@diagnostic disable-next-line: *` (emmylua bug)
+- [x] `vim.diagnostic.count(bufnr)` to be `table<integer, integer>`
+- [x] `LspClient:supports_method` to return `boolean`
+- [ ] remove `---@diagnostic disable-next-line: *`
