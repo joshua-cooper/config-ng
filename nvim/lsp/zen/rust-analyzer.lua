@@ -102,6 +102,11 @@ local function root_dir(bufnr, on_dir)
 	local opts = {
 		text = true,
 		cwd = crate_dir,
+		env = {
+			-- Allow cargo to parse manifests with unstable
+			-- features.
+			RUSTC_BOOTSTRAP = "1",
+		},
 	}
 
 	vim.system(CARGO_METADATA_COMMAND, opts, function(result)

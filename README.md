@@ -54,12 +54,12 @@
        a space between the buffer content and foldcolumn if only it is enabled)
 - [x] Double click statuscolumn handler
 - [x] Recalculate folds on LSP attach (`:help zx`)
+- [x] Jumping to rust std item complains about std being nightly
 - [ ] LSP codelens
 - [ ] Custom codelens virtual text
 - [ ] Termux handling
   - [ ] Path display (this might apply to non nixos distros too, like
         arch/debian)
-  - [ ] Jumping to rust std item complains about std being nightly
 - [ ] rust-analyzer debuggables
 - [ ] rust-analyzer user commands
 - [ ] Highlight indentation using the wrong whitespace (e.g. tabs when
