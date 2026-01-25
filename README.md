@@ -53,9 +53,9 @@
        only foldcolumn, it's too cramped. We want the same as default, but with
        a space between the buffer content and foldcolumn if only it is enabled)
 - [x] Double click statuscolumn handler
+- [x] Recalculate folds on LSP attach (`:help zx`)
 - [ ] LSP codelens
 - [ ] Custom codelens virtual text
-- [ ] Recalculate folds on LSP attach (`:help zx`)
 - [ ] Termux handling
   - [ ] Path display (this might apply to non nixos distros too, like
         arch/debian)

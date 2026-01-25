@@ -38,6 +38,10 @@ function M.on_attach(client, bufnr)
 			autotrigger = true,
 		})
 	end
+
+	if supports_method("textDocument/foldingRange") then
+		vim.cmd.normal({ "zx", bang = true })
+	end
 end
 
 ---@param client vim.lsp.Client
