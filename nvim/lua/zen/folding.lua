@@ -23,7 +23,11 @@ function M.foldexpr(line)
 		method = "textDocument/foldingRange",
 	})
 
-	if #clients > 0 then
+	local has_folding_client = vim.iter(clients):any(function(c)
+		return not c:is_stopped()
+	end)
+
+	if has_folding_client then
 		return vim.lsp.foldexpr(line)
 	end
 

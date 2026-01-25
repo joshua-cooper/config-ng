@@ -40,7 +40,10 @@ function M.on_attach(client, bufnr)
 	end
 
 	if supports_method("textDocument/foldingRange") then
-		vim.cmd.normal({ "zx", bang = true })
+		vim.cmd.normal({
+			"zx",
+			bang = true,
+		})
 	end
 end
 
@@ -59,6 +62,13 @@ function M.on_detach(client, bufnr)
 
 	if supports_method("textDocument/completion") then
 		vim.lsp.completion.enable(false, client.id, bufnr)
+	end
+
+	if supports_method("textDocument/foldingRange") then
+		vim.cmd.normal({
+			"zx",
+			bang = true,
+		})
 	end
 end
 
