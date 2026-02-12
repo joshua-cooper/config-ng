@@ -4,9 +4,6 @@ local ROOT_MARKERS = {
 }
 
 local GLOBAL_EMMYLUA_SETTINGS = {
-	codeLens = {
-		enable = false,
-	},
 	format = {
 		externalTool = {
 			program = "stylua",

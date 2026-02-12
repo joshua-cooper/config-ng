@@ -55,8 +55,8 @@
 - [x] Double click statuscolumn handler
 - [x] Recalculate folds on LSP attach (`:help zx`)
 - [x] Jumping to rust std item complains about std being nightly
-- [ ] LSP codelens
-- [ ] Custom codelens virtual text
+- [x] LSP codelens
+- [x] Custom codelens virtual text
 - [ ] Termux handling
   - [ ] Path display (this might apply to non nixos distros too, like
         arch/debian)
