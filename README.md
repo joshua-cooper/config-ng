@@ -82,4 +82,5 @@
 
 - [x] `vim.diagnostic.count(bufnr)` to be `table<integer, integer>`
 - [x] `LspClient:supports_method` to return `boolean`
-- [ ] remove `---@diagnostic disable-next-line: *`
+- [ ] remove `---@diagnostic disable-next-line: *`. This is caused by lsp method
+      type declarations being too strict, not allowing custom methods.
