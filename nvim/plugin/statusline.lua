@@ -1,15 +1,5 @@
 local group = vim.api.nvim_create_augroup("zen.statusline", {})
 
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "qf",
-	group = group,
-	desc = "Set custom statusline for quickfix windows",
-	callback = function(_)
-		vim.wo[0][0].statusline =
-			"%!v:lua.require'zen.statusline'.statusline()"
-	end,
-})
-
 vim.api.nvim_create_autocmd("DiagnosticChanged", {
 	group = group,
 	desc = "Redraw statusline when diagnostics change",
