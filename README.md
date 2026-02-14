@@ -57,9 +57,6 @@
 - [x] Jumping to rust std item complains about std being nightly
 - [x] LSP codelens
 - [x] Custom codelens virtual text
-- [ ] Termux handling
-  - [ ] Path display (this might apply to non nixos distros too, like
-        arch/debian)
 - [ ] rust-analyzer debuggables
 - [ ] rust-analyzer user commands
 - [ ] Highlight indentation using the wrong whitespace (e.g. tabs when
@@ -70,6 +67,8 @@
 - [ ] `set formatoptions` (add `n` and `/`)
 - [ ] Use LSP omnifunc and foldexpr in lua files when lsp is active (all files?
       need to check how default ftplugins interact here)
+- [ ] Termux path display (this might apply to non nixos distros too, like
+      arch/debian)
 
 #### Blocked
 
