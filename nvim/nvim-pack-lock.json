@@ -1,5 +1,10 @@
 {
   "plugins": {
+    "conform.nvim": {
+      "rev": "3543d000dafbc41cc7761d860cfdb24e82154f75",
+      "src": "https://github.com/stevearc/conform.nvim",
+      "version": "9.1.0 - 9.2.0"
+    },
     "mini.surround": {
       "rev": "5aab42fcdcf31fa010f012771eda5631c077840a",
       "src": "https://github.com/nvim-mini/mini.surround",

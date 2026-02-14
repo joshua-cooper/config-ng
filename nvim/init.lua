@@ -140,6 +140,10 @@ vim.pack.add({
 		version = vim.version.range("2.15"),
 	},
 	{
+		src = "https://github.com/stevearc/conform.nvim",
+		version = vim.version.range("9.1"),
+	},
+	{
 		src = "https://github.com/nvim-mini/mini.surround",
 		version = vim.version.range("0.16"),
 	},
@@ -171,6 +175,18 @@ require("oil").setup({
 	skip_confirm_for_simple_edits = true,
 	view_options = {
 		show_hidden = true,
+	},
+})
+
+require("conform").setup({
+	notify_no_formatters = false,
+	format_on_save = {
+		timeout_ms = 1000,
+	},
+	formatters_by_ft = {
+		lua = { "stylua" },
+		nix = { "nixfmt" },
+		rust = { "rustfmt" },
 	},
 })
 

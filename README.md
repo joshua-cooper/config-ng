@@ -57,14 +57,15 @@
 - [x] Jumping to rust std item complains about std being nightly
 - [x] LSP codelens
 - [x] Custom codelens virtual text
-- [ ] rust-analyzer debuggables
 - [ ] rust-analyzer user commands
-- [ ] Highlight indentation using the wrong whitespace (e.g. tabs when
-      `expandtab = true`)
+- [ ] rust-analyzer debuggables
+- [ ] Variable to prevent auto format
 - [ ] Variable to prevent lsp auto start
-- [ ] Variable to prevent lsp auto format
+- [ ] Structure plugin setup (remove from init.lua?)
 - [ ] Make vim global LSP work in .nvim.lua files
 - [ ] `set formatoptions` (add `n` and `/`)
+- [ ] Highlight indentation using the wrong whitespace (e.g. tabs when
+      `expandtab = true`)
 - [ ] Use LSP omnifunc and foldexpr in lua files when lsp is active (all files?
       need to check how default ftplugins interact here)
 - [ ] Termux path display (this might apply to non nixos distros too, like
