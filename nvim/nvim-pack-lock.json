@@ -6,14 +6,14 @@
       "version": "9.1.0 - 9.2.0"
     },
     "mini.surround": {
-      "rev": "5aab42fcdcf31fa010f012771eda5631c077840a",
+      "rev": "88c52297ed3e69ecf9f8652837888ecc727a28ee",
       "src": "https://github.com/nvim-mini/mini.surround",
-      "version": "0.16.0 - 0.17.0"
+      "version": "0.17.0 - 0.18.0"
     },
     "mini.trailspace": {
-      "rev": "39a0460c025a605519fdd6bea1ce870642429996",
+      "rev": "f8083ca969e1b2098480c10f3c3c4d2ce3586680",
       "src": "https://github.com/nvim-mini/mini.trailspace",
-      "version": "0.16.0 - 0.17.0"
+      "version": "0.17.0 - 0.18.0"
     },
     "nvim-treesitter": {
       "rev": "42fc28ba918343ebfd5565147a42a26580579482",
