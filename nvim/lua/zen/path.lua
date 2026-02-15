@@ -22,7 +22,7 @@ local function format_cargo_registry(registry, crate)
 end
 
 ---@param cargo_home string
----@return [string, function]
+---@return [string, fun(registry: string, crate: string): string]
 local function cargo_registry_pattern(cargo_home)
 	return {
 		string.format(
@@ -86,7 +86,7 @@ function M.format(path, known_paths)
 		return path
 	end
 
-	---@type [string, string|function][]
+	---@type [string, string|fun(...: string): string][]
 	local patterns = {
 		NIX_STORE_PATTERN,
 		cargo_registry_pattern(known_paths.cargo_home),

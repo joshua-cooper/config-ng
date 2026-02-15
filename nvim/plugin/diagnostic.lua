@@ -1,5 +1,5 @@
 ---@param method string
----@return function
+---@return fun()
 local function lazy(method)
 	return function()
 		local f = assert(
