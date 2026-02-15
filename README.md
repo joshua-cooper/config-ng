@@ -85,3 +85,10 @@
 - [x] `LspClient:supports_method` to return `boolean`
 - [ ] remove `---@diagnostic disable-next-line: *`. This is caused by lsp method
       type declarations being too strict, not allowing custom methods.
+
+#### Bugs
+
+- [ ] Diagnostics don't seem to update properly. e.g. add/remove unused
+      variables in rust file and they become out of date
+- [ ] Expand macro doesn't work on stuff like `Debug`
+- [ ] OpenCargoToml/ParentModule don't work in 3rd party code
