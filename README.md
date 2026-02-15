@@ -57,11 +57,12 @@
 - [x] Jumping to rust std item complains about std being nightly
 - [x] LSP codelens
 - [x] Custom codelens virtual text
-- [ ] rust-analyzer user commands
+- [x] rust-analyzer user commands
 - [ ] rust-analyzer debuggables
 - [ ] Variable to prevent auto format
 - [ ] Variable to prevent lsp auto start
 - [ ] Structure plugin setup (remove from init.lua?)
+- [ ] Check `function` vs `fun` type annotations
 - [ ] Make vim global LSP work in .nvim.lua files
 - [ ] `set formatoptions` (add `n` and `/`)
 - [ ] Highlight indentation using the wrong whitespace (e.g. tabs when

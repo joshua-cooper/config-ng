@@ -165,7 +165,7 @@ function M.view_hir()
 end
 
 function M.reload_workspace()
-	broadcast_request("rust-analyzer/reloadWorkspace", "Workspace reloaded")
+	broadcast_request("rust-analyzer/reloadWorkspace", "Reloaded workspace")
 end
 
 function M.rebuild_proc_macros()

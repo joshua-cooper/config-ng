@@ -1,3 +1,32 @@
+---@param method string
+---@return fun()
+local function lazy(method)
+	return function()
+		local message = string.format(
+			"zen.lsp.rust-analyzer method '%s' should exist",
+			method
+		)
+
+		local f = assert(
+			require("zen.lsp.rust-analyzer")[method],
+			message
+		)
+
+		f()
+	end
+end
+
+local USER_COMMANDS = {
+	LspRustAnalyzerExpandMacro = lazy("expand_macro"),
+	LspRustAnalyzerViewMir = lazy("view_mir"),
+	LspRustAnalyzerViewHir = lazy("view_hir"),
+	LspRustAnalyzerReloadWorkspace = lazy("reload_workspace"),
+	LspRustAnalyzerRebuildProcMacros = lazy("rebuild_proc_macros"),
+	LspRustAnalyzerOpenCargoToml = lazy("open_cargo_toml"),
+	LspRustAnalyzerParentModule = lazy("parent_module"),
+	LspRustAnalyzerExternalDocs = lazy("external_docs"),
+}
+
 local CARGO_METADATA_COMMAND = {
 	"cargo",
 	"metadata",
@@ -177,6 +206,40 @@ local function reuse_client(client, config)
 	return true
 end
 
+---@param client vim.lsp.Client
+---@param bufnr integer
+local function on_attach(client, bufnr)
+	for name, command in pairs(USER_COMMANDS) do
+		vim.api.nvim_buf_create_user_command(bufnr, name, command, {})
+	end
+
+	local group = vim.api.nvim_create_augroup(
+		string.format("zen.lsp.%s:%d", client.name, bufnr),
+		{}
+	)
+
+	vim.api.nvim_create_autocmd("LspDetach", {
+		group = group,
+		buffer = bufnr,
+		desc = string.format("Clean up %s LSP clients", client.name),
+		callback = function(args)
+			if args.data.client_id ~= client.id then
+				return
+			end
+
+			for name, _ in pairs(USER_COMMANDS) do
+				pcall(
+					vim.api.nvim_buf_del_user_command,
+					bufnr,
+					name
+				)
+			end
+
+			return true
+		end,
+	})
+end
+
 ---@type vim.lsp.Config
 return {
 	cmd = {
@@ -214,4 +277,5 @@ return {
 	root_dir = root_dir,
 	reuse_client = reuse_client,
 	before_init = before_init,
+	on_attach = on_attach,
 }
