@@ -182,14 +182,29 @@ require("oil").setup({
 
 require("conform").setup({
 	notify_no_formatters = false,
-	format_on_save = {
-		timeout_ms = 1000,
-	},
 	formatters_by_ft = {
 		lua = { "stylua" },
 		nix = { "nixfmt" },
 		rust = { "rustfmt" },
 	},
+})
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+	group = vim.api.nvim_create_augroup("zen.conform", {}),
+	callback = function(args)
+		local is_enabled = vim.F.if_nil(
+			vim.b[args.buf].format_on_save,
+			vim.g.format_on_save,
+			true
+		)
+
+		if is_enabled then
+			require("conform").format({
+				buf = args.buf,
+				timeout_ms = 1000,
+			})
+		end
+	end,
 })
 
 require("mini.surround").setup()

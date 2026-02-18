@@ -59,8 +59,8 @@
 - [x] Custom codelens virtual text
 - [x] rust-analyzer user commands
 - [x] Check `function` vs `fun` type annotations
+- [x] Variable to prevent auto format
 - [ ] rust-analyzer debuggables
-- [ ] Variable to prevent auto format
 - [ ] Variable to prevent lsp auto start
 - [ ] Structure plugin setup (remove from init.lua?)
 - [ ] Make vim global LSP work in .nvim.lua files
