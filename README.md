@@ -60,8 +60,8 @@
 - [x] rust-analyzer user commands
 - [x] Check `function` vs `fun` type annotations
 - [x] Variable to prevent auto format
+- [x] Variable to prevent lsp auto start
 - [ ] rust-analyzer debuggables
-- [ ] Variable to prevent lsp auto start
 - [ ] Structure plugin setup (remove from init.lua?)
 - [ ] Make vim global LSP work in .nvim.lua files
 - [ ] `set formatoptions` (add `n` and `/`)
