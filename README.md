@@ -7,8 +7,9 @@
 ### fish
 
 - [x] custom prompt
+- [x] Decide on fish formatting (use spaces for indent?)
 - [ ] theme using terminal colors
-- [ ] Decide on fish formatting (use spaces for indent?)
+- [ ] wt function (git worktree cd)
 
 ### tmux
 
@@ -18,6 +19,7 @@
 - [x] main-pane-{height,width}
 - [x] window-status-*
 - [x] update-environment
+- [ ] "setup" mode
 
 #### Later
 
