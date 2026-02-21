@@ -20,6 +20,7 @@
 - [x] window-status-*
 - [x] update-environment
 - [ ] "setup" mode
+- [ ] rename session bind that pre-fills current dir
 
 #### Later
 
