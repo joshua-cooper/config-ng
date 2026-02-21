@@ -8,8 +8,8 @@
 
 - [x] custom prompt
 - [x] Decide on fish formatting (use spaces for indent?)
+- [x] wt function (git worktree cd)
 - [ ] theme using terminal colors
-- [ ] wt function (git worktree cd)
 
 ### tmux
 
