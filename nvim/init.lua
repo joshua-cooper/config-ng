@@ -60,6 +60,10 @@ vim.o.foldmethod = "expr"
 vim.o.foldlevelstart = 99
 vim.o.foldexpr = "v:lua.require'zen.fold'.foldexpr()"
 
+-- Formatting
+
+vim.o.formatexpr = "v:lua.require'zen.format'.formatexpr()"
+
 -- Persistence
 
 vim.o.undofile = true
