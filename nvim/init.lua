@@ -58,7 +58,7 @@ vim.o.sidescrolloff = 3
 vim.o.foldtext = ""
 vim.o.foldmethod = "expr"
 vim.o.foldlevelstart = 99
-vim.o.foldexpr = "v:lua.require'zen.folding'.foldexpr()"
+vim.o.foldexpr = "v:lua.require'zen.fold'.foldexpr()"
 
 -- Persistence
 

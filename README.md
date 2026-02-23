@@ -65,7 +65,7 @@
 - [x] Variable to prevent auto format
 - [x] Variable to prevent lsp auto start
 - [x] Structure plugin setup (remove from init.lua?)
-- [ ] rename folding to fold
+- [x] rename folding to fold
 - [ ] rust-analyzer debuggables
 - [ ] Make vim global LSP work in .nvim.lua files
 - [ ] `set formatoptions` (add `n` and `/`)
