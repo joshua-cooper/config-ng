@@ -64,8 +64,9 @@
 - [x] Check `function` vs `fun` type annotations
 - [x] Variable to prevent auto format
 - [x] Variable to prevent lsp auto start
+- [x] Structure plugin setup (remove from init.lua?)
+- [ ] rename folding to fold
 - [ ] rust-analyzer debuggables
-- [ ] Structure plugin setup (remove from init.lua?)
 - [ ] Make vim global LSP work in .nvim.lua files
 - [ ] `set formatoptions` (add `n` and `/`)
 - [ ] Highlight indentation using the wrong whitespace (e.g. tabs when

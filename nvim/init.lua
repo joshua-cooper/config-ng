@@ -71,7 +71,6 @@ vim.keymap.set("n", "<leader>f", ":find ")
 vim.keymap.set("n", "<leader>w", "<cmd>write<cr>")
 vim.keymap.set("n", "<leader>k", "<cmd>confirm bdelete<cr>")
 vim.keymap.set("n", "<leader>q", "<cmd>confirm quitall<cr>")
-vim.keymap.set("n", "-", "<cmd>Oil<cr>")
 
 -- Diagnostics
 
@@ -154,59 +153,3 @@ vim.pack.add({
 		version = vim.version.range("0.17"),
 	},
 })
-
-require("nvim-treesitter.configs").setup({
-	modules = {},
-	auto_install = false,
-	sync_install = true,
-	ignore_install = {},
-	ensure_installed = {
-		"css",
-		"fish",
-		"html",
-		"javascript",
-		"json",
-		"nix",
-		"rust",
-		"toml",
-		"yaml",
-	},
-})
-
-require("oil").setup({
-	skip_confirm_for_simple_edits = true,
-	view_options = {
-		show_hidden = true,
-	},
-})
-
-require("conform").setup({
-	notify_no_formatters = false,
-	formatters_by_ft = {
-		fish = { "fish_indent" },
-		lua = { "stylua" },
-		nix = { "nixfmt" },
-		rust = { "rustfmt" },
-	},
-})
-
-vim.api.nvim_create_autocmd("BufWritePre", {
-	group = vim.api.nvim_create_augroup("zen.conform", {}),
-	callback = function(args)
-		local is_enabled = vim.F.if_nil(
-			vim.b[args.buf].format_on_save,
-			vim.g.format_on_save,
-			true
-		)
-
-		if is_enabled then
-			require("conform").format({
-				buf = args.buf,
-				timeout_ms = 1000,
-			})
-		end
-	end,
-})
-
-require("mini.surround").setup()
-require("mini.trailspace").setup()
