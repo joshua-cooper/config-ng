@@ -19,8 +19,8 @@
 - [x] main-pane-{height,width}
 - [x] window-status-*
 - [x] update-environment
-- [ ] "setup" mode
-- [ ] rename session bind that pre-fills current dir
+- [x] "setup" mode
+- [x] rename session bind that pre-fills current dir
 
 #### Later
 
