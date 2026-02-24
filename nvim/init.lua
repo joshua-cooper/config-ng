@@ -101,6 +101,7 @@ vim.diagnostic.config({
 					diagnostic.col,
 				},
 				severity = diagnostic.severity,
+				focus = false,
 			})
 		end,
 		wrap = true,
