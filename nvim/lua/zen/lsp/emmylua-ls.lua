@@ -65,38 +65,37 @@ function M.reuse_client(client, config)
 		or (client.root_dir == config.root_dir)
 end
 
----@param _params lsp.InitializeParams
----@param config vim.lsp.ClientConfig
-function M.before_init(_params, config)
-	if not config.root_dir then
+---@param client vim.lsp.Client
+---@param _init_result lsp.InitializeResult
+function M.on_init(client, _init_result)
+	if not client.root_dir then
 		return
 	end
 
-	if not is_in_runtime_path(config.root_dir) then
+	if not is_in_runtime_path(client.root_dir) then
 		return
 	end
 
-	local nvim_emmylua_settings = {
-		runtime = {
-			version = "LuaJIT",
+	client.settings = vim.tbl_deep_extend("force", client.settings, {
+		emmylua = {
+			runtime = {
+				version = "LuaJIT",
+			},
+			workspace = {
+				library = list_runtime_paths(),
+			},
+			strict = {
+				requirePath = false,
+				typeCall = true,
+				arrayIndex = true,
+				metaOverrideFileDefine = true,
+			},
 		},
-		workspace = {
-			library = list_runtime_paths(),
-		},
-		strict = {
-			requirePath = false,
-			typeCall = true,
-			arrayIndex = true,
-			metaOverrideFileDefine = true,
-		},
-	}
+	})
 
-	config.settings = config.settings or {}
-	config.settings.emmylua = vim.tbl_deep_extend(
-		"force",
-		config.settings.emmylua or {},
-		nvim_emmylua_settings
-	)
+	client:notify("workspace/didChangeConfiguration", {
+		settings = client.settings,
+	})
 end
 
 return M

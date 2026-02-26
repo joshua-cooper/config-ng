@@ -6,9 +6,6 @@ return {
 	filetypes = {
 		"lua",
 	},
-	settings = {
-		emmylua = {},
-	},
 	workspace_required = false,
 	root_dir = function(bufnr, on_dir)
 		return require("zen.lsp.emmylua-ls").root_dir(bufnr, on_dir)
@@ -19,7 +16,10 @@ return {
 			config
 		)
 	end,
-	before_init = function(params, config)
-		return require("zen.lsp.emmylua-ls").before_init(params, config)
+	on_init = function(client, init_result)
+		return require("zen.lsp.emmylua-ls").on_init(
+			client,
+			init_result
+		)
 	end,
 }
