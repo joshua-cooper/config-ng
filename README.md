@@ -30,6 +30,7 @@
 - [x] add a `prompt-command-cursor-style` option
 - [ ] fix bug when status is disabled and tab completing with the menu popup
       (the status pushes down the window content as if the status were enabled)
+- [ ] Fix menu-border none (it currently pads things)
 
 ### nvim
 
