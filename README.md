@@ -31,6 +31,10 @@
 - [ ] fix bug when status is disabled and tab completing with the menu popup
       (the status pushes down the window content as if the status were enabled)
 - [ ] Fix menu-border none (it currently pads things)
+- [ ] Borders around stuff in choose tree needs bg set. (if terminal has its own
+      bg, you can see it through borders)
+- [ ] Can we customize format of term dimensions indicator on prefix + q (e.g.
+      add padding)
 
 ### nvim
 
