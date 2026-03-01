@@ -73,14 +73,11 @@
 - [x] rename folding to fold
 - [x] conform based formatexpr
 - [ ] Make vim global LSP work in .nvim.lua files
-- [ ] `set formatoptions` (add `n` and `/`)
 - [ ] Highlight indentation using the wrong whitespace (e.g. tabs when
       `expandtab = true`)
 - [ ] Use LSP omnifunc and foldexpr in lua files when lsp is active (all files?
       need to check how default ftplugins interact here)
 - [ ] rust-analyzer debuggables
-- [ ] Termux path display (this might apply to non nixos distros too, like
-      arch/debian)
 
 #### Blocked
 
