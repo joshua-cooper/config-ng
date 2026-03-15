@@ -93,6 +93,15 @@
 - [ ] remove `---@diagnostic disable-next-line: *`. This is caused by lsp method
       type declarations being too strict, not allowing custom methods.
 
+#### Audit
+
+- [ ] Guard `vim.bo[bufnr].busy` in `on_progress` with `nvim_buf_is_valid`
+      (race between progress events and buffer deletion)
+- [ ] Use `vim.pesc(cargo_home)` in `cargo_registry_pattern` and
+      `cargo_git_pattern` (same as `cwd` and `home` patterns)
+- [ ] Export `statusline_winid` from `zen.statusline` and require it in
+      `zen.statuscolumn` (duplicated function)
+
 #### Bugs
 
 - [ ] Diagnostics don't seem to update properly. e.g. add/remove unused
