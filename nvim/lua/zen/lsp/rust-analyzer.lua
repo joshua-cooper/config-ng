@@ -169,8 +169,10 @@ function M.run_single(command)
 	assert(type(args) == "table")
 	assert(type(args.workspaceRoot) == "string")
 
+	local command_name = "cargo"
+
 	---@type string[]
-	local cargo_args = { "cargo" }
+	local cargo_args = { command_name }
 
 	for _, arg in ipairs(args.cargoArgs or {}) do
 		cargo_args[#cargo_args + 1] = arg
@@ -186,9 +188,9 @@ function M.run_single(command)
 		cargo_args[#cargo_args + 1] = arg
 	end
 
-	if vim.fn.executable(cargo_args[1]) == 0 then
+	if vim.fn.executable(command_name) == 0 then
 		vim.notify(
-			string.format("%s is not executable", cargo_args[1]),
+			string.format("%s is not executable", command_name),
 			vim.log.levels.ERROR
 		)
 		return
