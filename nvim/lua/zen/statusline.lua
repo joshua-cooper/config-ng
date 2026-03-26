@@ -83,7 +83,7 @@ end
 local function buffer_flags(bufnr)
 	local fileencoding = vim.bo[bufnr].fileencoding
 	local fileformat = vim.bo[bufnr].fileformat
-	local has_diagnostics = #vim.diagnostic.get(bufnr) > 0
+	local has_diagnostics = next(vim.diagnostic.count(bufnr)) ~= nil
 	local is_modified = vim.bo[bufnr].modified
 
 	---@type string[]

@@ -186,6 +186,14 @@ function M.run_single(command)
 		cargo_args[#cargo_args + 1] = arg
 	end
 
+	if vim.fn.executable(cargo_args[1]) == 0 then
+		vim.notify(
+			string.format("%s is not executable", cargo_args[1]),
+			vim.log.levels.ERROR
+		)
+		return
+	end
+
 	local bufnr = vim.api.nvim_create_buf(true, false)
 	local winnr = vim.api.nvim_open_win(bufnr, true, {
 		win = -1,

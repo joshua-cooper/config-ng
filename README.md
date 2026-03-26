@@ -95,20 +95,15 @@
 
 #### Audit
 
-- [ ] Guard `vim.bo[bufnr].busy` in `on_progress` with `nvim_buf_is_valid`
-      (race between progress events and buffer deletion)
-- [ ] Use `vim.pesc(cargo_home)` in `cargo_registry_pattern` and
+- [x] Use `vim.pesc(cargo_home)` in `cargo_registry_pattern` and
       `cargo_git_pattern` (same as `cwd` and `home` patterns)
-- [ ] Export `statusline_winid` from `zen.statusline` and require it in
-      `zen.statuscolumn` (duplicated function)
-- [ ] Filter nils from `vim.tbl_map(vim.uv.fs_realpath, paths)` in
+- [x] Filter nils from `vim.tbl_map(vim.uv.fs_realpath, paths)` in
       `list_runtime_paths` (sparse array breaks `ipairs` in
       `runtime_path_dir` and sends holes to emmylua-ls `workspace.library`)
-- [ ] Use `vim.diagnostic.count` instead of `#vim.diagnostic.get(bufnr) > 0`
+- [x] Use `vim.diagnostic.count` instead of `#vim.diagnostic.get(bufnr) > 0`
       in `buffer_flags` (allocates full diagnostic list on every statusline
       redraw)
-- [ ] Remove no-op `math.ceil` around `math.huge` in `jump_first`/`jump_last`
-- [ ] Check `jobstart` return value in `run_single` and clean up
+- [x] Check `jobstart` return value in `run_single` and clean up
       buffer/window on failure (currently leaves an empty terminal split)
 
 #### Bugs

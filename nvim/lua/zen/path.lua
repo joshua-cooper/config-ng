@@ -28,7 +28,7 @@ local function cargo_registry_pattern(cargo_home)
 	return {
 		string.format(
 			"^%s/registry/src/([^/]+)-[0-9a-f]+/([^/]+)/",
-			cargo_home
+			vim.pesc(cargo_home)
 		),
 		format_cargo_registry,
 	}
@@ -40,7 +40,7 @@ local function cargo_git_pattern(cargo_home)
 	return {
 		string.format(
 			"^%s/git/checkouts/([^/]+)-[0-9a-f]+/[0-9a-f]+/",
-			cargo_home
+			vim.pesc(cargo_home)
 		),
 		"[cargo-git:%1] ",
 	}

@@ -14,7 +14,7 @@ local function list_runtime_paths()
 		paths[#paths + 1] = vim.fs.dirname(vim.uv.fs_realpath(vimrc))
 	end
 
-	return vim.tbl_map(vim.uv.fs_realpath, paths)
+	return vim.iter(paths):map(vim.uv.fs_realpath):totable()
 end
 
 ---@param path string
