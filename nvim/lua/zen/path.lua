@@ -4,6 +4,7 @@ local M = {}
 ---@field cwd string
 ---@field home string
 ---@field cargo_home string
+---@field rustup_home string
 
 local NIX_STORE_PATTERN = {
 	"^/nix/store/[0-9a-z]+%-([^/]+)/",
@@ -45,6 +46,18 @@ local function cargo_git_pattern(cargo_home)
 	}
 end
 
+---@param rustup_home string
+---@return [string, string]
+local function rustup_toolchain_pattern(rustup_home)
+	return {
+		string.format(
+			"^%s/toolchains/[^/]+/lib/rustlib/src/rust/library/",
+			vim.pesc(rustup_home)
+		),
+		"[rust] ",
+	}
+end
+
 ---@param cwd string
 ---@return [string, string]
 local function cwd_pattern(cwd)
@@ -75,6 +88,8 @@ function M.known_paths(winnr)
 		home = home,
 		cargo_home = vim.env.CARGO_HOME
 			or vim.fs.joinpath(home, ".cargo"),
+		rustup_home = vim.env.RUSTUP_HOME
+			or vim.fs.joinpath(home, ".rustup"),
 	}
 end
 
@@ -91,6 +106,7 @@ function M.format(path, known_paths)
 		NIX_STORE_PATTERN,
 		cargo_registry_pattern(known_paths.cargo_home),
 		cargo_git_pattern(known_paths.cargo_home),
+		rustup_toolchain_pattern(known_paths.rustup_home),
 		cwd_pattern(known_paths.cwd),
 		home_pattern(known_paths.home),
 	}
