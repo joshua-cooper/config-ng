@@ -108,7 +108,7 @@
 
 #### Bugs
 
-- [ ] Diagnostics don't seem to update properly. e.g. add/remove unused
+- [x] Diagnostics don't seem to update properly. e.g. add/remove unused
       variables in rust file and they become out of date
 - [ ] Expand macro doesn't work on stuff like `Debug`
 - [ ] OpenCargoToml/ParentModule don't work in 3rd party code
