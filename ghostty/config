@@ -5,4 +5,5 @@ font-feature = -calt, -liga, -dlig
 window-padding-x = 4
 window-padding-y = 4
 window-padding-balance = true
+gtk-titlebar-hide-when-maximized = true
 keybind = ctrl+enter=unbind
