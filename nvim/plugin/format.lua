@@ -13,7 +13,8 @@ require("conform").setup({
 	formatters_by_ft = {
 		fish = { "fish_indent" },
 		lua = { "stylua" },
-		nix = { "nixfmt" },
+		nix = { "treefmt", "nixfmt", stop_after_first = true },
 		rust = { "rustfmt" },
+		toml = { "taplo" },
 	},
 })
