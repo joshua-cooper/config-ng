@@ -39,6 +39,30 @@ local function is_exrc(path)
 	return vim.fs.basename(path) == ".nvim.lua"
 end
 
+---@param client vim.lsp.Client
+local function apply_nvim_runtime_settings(client)
+	client.settings = vim.tbl_deep_extend("force", client.settings, {
+		emmylua = {
+			runtime = {
+				version = "LuaJIT",
+			},
+			workspace = {
+				library = list_runtime_paths(),
+			},
+			strict = {
+				requirePath = false,
+				typeCall = true,
+				arrayIndex = true,
+				metaOverrideFileDefine = true,
+			},
+		},
+	})
+
+	client:notify("workspace/didChangeConfiguration", {
+		settings = client.settings,
+	})
+end
+
 ---@param bufnr integer
 ---@param on_dir fun(root_dir: string?)
 function M.root_dir(bufnr, on_dir)
@@ -72,30 +96,6 @@ function M.reuse_client(client, config)
 
 	return (is_nvim_client and is_nvim_config)
 		or (client.root_dir == config.root_dir)
-end
-
----@param client vim.lsp.Client
-local function apply_nvim_runtime_settings(client)
-	client.settings = vim.tbl_deep_extend("force", client.settings, {
-		emmylua = {
-			runtime = {
-				version = "LuaJIT",
-			},
-			workspace = {
-				library = list_runtime_paths(),
-			},
-			strict = {
-				requirePath = false,
-				typeCall = true,
-				arrayIndex = true,
-				metaOverrideFileDefine = true,
-			},
-		},
-	})
-
-	client:notify("workspace/didChangeConfiguration", {
-		settings = client.settings,
-	})
 end
 
 ---@param client vim.lsp.Client
