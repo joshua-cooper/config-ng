@@ -116,8 +116,8 @@ vim.diagnostic.config({
 -- LSP
 
 vim.lsp.enable({
-	"zen/emmylua-ls",
-	"zen/rust-analyzer",
+	"emmylua-ls",
+	"rust-analyzer",
 })
 
 -- Plugins

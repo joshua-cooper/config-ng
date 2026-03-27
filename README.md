@@ -24,8 +24,8 @@
 
 ### nvim
 
+- [x] Remove zen prefix from the lsp configs
 - [ ] Theme from scratch
-- [ ] Remove zen prefix from the lsp configs
 - [ ] Make vim global LSP work in .nvim.lua files
 
 #### Nice to have
