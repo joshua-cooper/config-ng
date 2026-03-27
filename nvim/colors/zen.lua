@@ -377,9 +377,9 @@ hl("gitcommitDiscardedFile", { fg = p.red, bold = true })
 hl("gitcommitSelectedFile", { fg = p.green, bold = true })
 hl("gitcommitUnmergedFile", { fg = p.yellow, bold = true })
 
--- Plugins
+-- Whitespace
 
-hl("MiniTrailspace", { link = "DiffDelete" })
+hl("ZenTrailingWhitespace", { bg = p.bg_light })
 
 -- Terminal colors
 

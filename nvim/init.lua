@@ -152,8 +152,4 @@ vim.pack.add({
 		src = "https://github.com/nvim-mini/mini.surround",
 		version = vim.version.range("0.17"),
 	},
-	{
-		src = "https://github.com/nvim-mini/mini.trailspace",
-		version = vim.version.range("0.17"),
-	},
 })
