@@ -27,8 +27,6 @@
 - [ ] Theme from scratch
 - [ ] Remove zen prefix from the lsp configs
 - [ ] Make vim global LSP work in .nvim.lua files
-- [ ] Use LSP omnifunc and foldexpr in lua files when lsp is active (all files?
-      need to check how default ftplugins interact here)
 
 #### Nice to have
 
@@ -38,6 +36,9 @@
 
 - [ ] remove `---@diagnostic disable-next-line: *`. This is caused by lsp method
       type declarations being too strict, not allowing custom methods.
+- [ ] Use LSP omnifunc and foldexpr in lua files when lsp is active. This
+      applies to other filetypes too, but lua is the most used one. Upstream should
+      probably conditionally set these options
 
 #### Bugs
 
