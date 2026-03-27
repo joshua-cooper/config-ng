@@ -1,5 +1,7 @@
 ## TODO
 
+- [ ] Revisit .editorconfig styles
+
 ### ghostty
 
 - [ ] Custom Light + dark theme
@@ -23,6 +25,7 @@
 ### nvim
 
 - [ ] Theme from scratch
+- [ ] Remove zen prefix from the lsp configs
 - [ ] Make vim global LSP work in .nvim.lua files
 - [ ] Use LSP omnifunc and foldexpr in lua files when lsp is active (all files?
       need to check how default ftplugins interact here)
