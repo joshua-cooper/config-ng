@@ -1,7 +1,5 @@
 ## TODO
 
-- [ ] Revisit .editorconfig styles
-
 ### ghostty
 
 - [ ] Custom Light + dark theme

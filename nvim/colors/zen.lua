@@ -1,105 +1,105 @@
 vim.cmd.highlight("clear")
 
 if vim.fn.exists("syntax_on") == 1 then
-	vim.cmd("syntax reset")
+    vim.cmd("syntax reset")
 end
 
 vim.g.colors_name = "zen"
 
 local dark = {
-	-- Base
+    -- Base
 
-	bg = "#1c1917",
-	bg_light = "#282727",
-	bg_lighter = "#393836",
-	fg = "#c5c9c5",
-	fg_dark = "#a6a69c",
-	fg_darker = "#737c73",
+    bg = "#1c1917",
+    bg_light = "#282727",
+    bg_lighter = "#393836",
+    fg = "#c5c9c5",
+    fg_dark = "#a6a69c",
+    fg_darker = "#737c73",
 
-	-- UI
+    -- UI
 
-	border = "#625e5a",
-	cursor_line = "#282727",
-	visual = "#223249",
-	pmenu = "#464442",
-	float = "#464442",
+    border = "#625e5a",
+    cursor_line = "#282727",
+    visual = "#223249",
+    pmenu = "#464442",
+    float = "#464442",
 
-	-- Diagnostics
+    -- Diagnostics
 
-	error = "#c4746e",
-	warning = "#c4b28a",
-	info = "#8ea4a2",
-	hint = "#949fb5",
+    error = "#c4746e",
+    warning = "#c4b28a",
+    info = "#8ea4a2",
+    hint = "#949fb5",
 
-	-- Diff
+    -- Diff
 
-	diff_add = "#87a987",
-	diff_delete = "#c4746e",
-	diff_change = "#b6927b",
-	diff_text = "#12120f",
+    diff_add = "#87a987",
+    diff_delete = "#c4746e",
+    diff_change = "#b6927b",
+    diff_text = "#12120f",
 
-	-- Colors
+    -- Colors
 
-	red = "#c4746e",
-	orange = "#b6927b",
-	yellow = "#c4b28a",
-	green = "#87a987",
-	aqua = "#8ea4a2",
-	blue = "#8ba4b0",
-	cyan = "#949fb5",
-	purple = "#8992a7",
-	magenta = "#a292a3",
+    red = "#c4746e",
+    orange = "#b6927b",
+    yellow = "#c4b28a",
+    green = "#87a987",
+    aqua = "#8ea4a2",
+    blue = "#8ba4b0",
+    cyan = "#949fb5",
+    purple = "#8992a7",
+    magenta = "#a292a3",
 }
 
 local light = {
-	-- Base
+    -- Base
 
-	bg = "#faf9f8",
-	bg_light = "#f0edec",
-	bg_lighter = "#e8e5e3",
-	fg = "#545464",
-	fg_dark = "#43436c",
-	fg_darker = "#8a8980",
+    bg = "#faf9f8",
+    bg_light = "#f0edec",
+    bg_lighter = "#e8e5e3",
+    fg = "#545464",
+    fg_dark = "#43436c",
+    fg_darker = "#8a8980",
 
-	-- UI
+    -- UI
 
-	border = "#d0d0d0",
-	cursor_line = "#f5f5f5",
-	visual = "#c9cbd1",
-	pmenu = "#e5e2e0",
-	float = "#e5e2e0",
+    border = "#d0d0d0",
+    cursor_line = "#f5f5f5",
+    visual = "#c9cbd1",
+    pmenu = "#e5e2e0",
+    float = "#e5e2e0",
 
-	-- Diagnostics
+    -- Diagnostics
 
-	error = "#e82424",
-	warning = "#e98a00",
-	info = "#597b75",
-	hint = "#5a7785",
+    error = "#e82424",
+    warning = "#e98a00",
+    info = "#597b75",
+    hint = "#5a7785",
 
-	-- Diff
+    -- Diff
 
-	diff_add = "#6f894e",
-	diff_delete = "#c84053",
-	diff_change = "#836f4a",
-	diff_text = "#d7e3d8",
+    diff_add = "#6f894e",
+    diff_delete = "#c84053",
+    diff_change = "#836f4a",
+    diff_text = "#d7e3d8",
 
-	-- Colors
+    -- Colors
 
-	red = "#c84053",
-	orange = "#cc6d00",
-	yellow = "#836f4a",
-	green = "#6f894e",
-	aqua = "#597b75",
-	blue = "#4d699b",
-	cyan = "#5e857a",
-	purple = "#624c83",
-	magenta = "#b35b79",
+    red = "#c84053",
+    orange = "#cc6d00",
+    yellow = "#836f4a",
+    green = "#6f894e",
+    aqua = "#597b75",
+    blue = "#4d699b",
+    cyan = "#5e857a",
+    purple = "#624c83",
+    magenta = "#b35b79",
 }
 
 local p = vim.o.background == "dark" and dark or light
 
 local function hl(group, opts)
-	vim.api.nvim_set_hl(0, group, opts)
+    vim.api.nvim_set_hl(0, group, opts)
 end
 
 -- Base

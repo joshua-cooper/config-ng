@@ -3,19 +3,28 @@ root = true
 [*]
 charset = utf-8
 end_of_line = lf
-indent_style = tab
-indent_size = 8
 insert_final_newline = true
 trim_trailing_whitespace = true
-max_line_length = 80
-
-[*.json]
-indent_style = space
-indent_size = 2
-
-[*.fish]
-indent_style = space
-indent_size = 4
 
 [COMMIT_EDITMSG]
 max_line_length = 72
+
+[LICENSE]
+max_line_length = 80
+
+[*.{json,toml}]
+indent_size = 2
+indent_style = space
+
+[git/{config,config.base}]
+indent_style = tab
+
+[*.{fish,lua}]
+indent_size = 4
+indent_style = space
+max_line_length = 80
+
+[tmux/tmux.conf]
+indent_size = 4
+indent_style = space
+max_line_length = 80

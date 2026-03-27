@@ -21,7 +21,7 @@ vim.o.winborder = "solid"
 vim.o.list = true
 vim.o.listchars = "tab:  ,nbsp:⍽"
 vim.o.fillchars = "eob: ,trunc:›,truncrl:‹"
-	.. ",fold: ,foldsep: ,foldinner: ,foldopen:▼,foldclose:▶"
+    .. ",fold: ,foldsep: ,foldinner: ,foldopen:▼,foldclose:▶"
 vim.o.quickfixtextfunc = "v:lua.require'zen.quickfix'.quickfixtextfunc"
 vim.o.statuscolumn = "%!v:lua.require'zen.statuscolumn'.statuscolumn()"
 vim.o.statusline = "%!v:lua.require'zen.statusline'.statusline()"
@@ -78,79 +78,79 @@ vim.keymap.set("n", "<leader>q", "<cmd>confirm quitall<cr>")
 -- Diagnostics
 
 vim.diagnostic.config({
-	float = {
-		header = "",
-		prefix = function(_, i, total)
-			if total == 1 then
-				return "", ""
-			end
+    float = {
+        header = "",
+        prefix = function(_, i, total)
+            if total == 1 then
+                return "", ""
+            end
 
-			return string.format("%d. ", i), ""
-		end,
-	},
-	jump = {
-		on_jump = function(diagnostic, _)
-			assert(diagnostic)
+            return string.format("%d. ", i), ""
+        end,
+    },
+    jump = {
+        on_jump = function(diagnostic, _)
+            assert(diagnostic)
 
-			vim.diagnostic.open_float({
-				bufnr = diagnostic.bufnr,
-				namespace = diagnostic.namespace,
-				pos = {
-					diagnostic.lnum,
-					diagnostic.col,
-				},
-				severity = diagnostic.severity,
-				focus = false,
-			})
-		end,
-		wrap = true,
-	},
-	severity_sort = true,
-	signs = false,
-	underline = false,
-	update_in_insert = false,
-	virtual_lines = false,
-	virtual_text = false,
+            vim.diagnostic.open_float({
+                bufnr = diagnostic.bufnr,
+                namespace = diagnostic.namespace,
+                pos = {
+                    diagnostic.lnum,
+                    diagnostic.col,
+                },
+                severity = diagnostic.severity,
+                focus = false,
+            })
+        end,
+        wrap = true,
+    },
+    severity_sort = true,
+    signs = false,
+    underline = false,
+    update_in_insert = false,
+    virtual_lines = false,
+    virtual_text = false,
 })
 
 -- LSP
 
 vim.lsp.enable({
-	"emmylua-ls",
-	"emmylua-ls-exrc",
-	"rust-analyzer",
+    "emmylua-ls",
+    "emmylua-ls-exrc",
+    "rust-analyzer",
 })
 
 -- Plugins
 
 vim.api.nvim_create_autocmd("PackChanged", {
-	group = vim.api.nvim_create_augroup("zen.pack", {}),
-	desc = "Execute pack callbacks",
-	callback = function(args)
-		require("zen.pack").on_changed(args.data.kind, args.data.spec)
-	end,
+    group = vim.api.nvim_create_augroup("zen.pack", {}),
+    desc = "Execute pack callbacks",
+    callback = function(args)
+        require("zen.pack").on_changed(args.data.kind, args.data.spec)
+    end,
 })
 
 vim.pack.add({
-	{
-		src = "https://github.com/nvim-treesitter/nvim-treesitter",
-		version = vim.version.range("0.10"),
-		data = {
-			on_update = function(_)
-				require("zen.tree-sitter").on_update()
-			end,
-		},
-	},
-	{
-		src = "https://github.com/stevearc/oil.nvim",
-		version = vim.version.range("2.15"),
-	},
-	{
-		src = "https://github.com/stevearc/conform.nvim",
-		version = vim.version.range("9.1"),
-	},
-	{
-		src = "https://github.com/nvim-mini/mini.surround",
-		version = vim.version.range("0.17"),
-	},
+    {
+        src = "https://github.com/nvim-treesitter/nvim-treesitter",
+        version = vim.version.range("0.10"),
+        data = {
+            on_update = function(_)
+                require("zen.tree-sitter").on_update()
+            end,
+        },
+    },
+    {
+        src = "https://github.com/stevearc/oil.nvim",
+        version = vim.version.range("2.15"),
+    },
+    {
+        src = "https://github.com/stevearc/conform.nvim",
+        version = vim.version.range("9.1"),
+    },
+    {
+        src = "https://github.com/nvim-mini/mini.surround",
+        version = vim.version.range("0.17"),
+    },
 })
