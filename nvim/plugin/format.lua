@@ -10,6 +10,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
 require("conform").setup({
 	notify_no_formatters = false,
+	notify_on_error = false,
 	formatters_by_ft = {
 		fish = { "fish_indent" },
 		lua = { "stylua" },
