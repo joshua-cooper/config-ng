@@ -72,9 +72,9 @@
 - [x] Structure plugin setup (remove from init.lua?)
 - [x] rename folding to fold
 - [x] conform based formatexpr
-- [ ] Make vim global LSP work in .nvim.lua files
-- [ ] Highlight indentation using the wrong whitespace (e.g. tabs when
+- [x] Highlight indentation using the wrong whitespace (e.g. tabs when
       `expandtab = true`)
+- [ ] Make vim global LSP work in .nvim.lua files
 - [ ] Use LSP omnifunc and foldexpr in lua files when lsp is active (all files?
       need to check how default ftplugins interact here)
 - [ ] rust-analyzer debuggables
