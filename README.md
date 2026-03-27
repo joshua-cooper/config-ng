@@ -13,7 +13,7 @@
 ### nvim
 
 - [x] Remove zen prefix from the lsp configs
-- [ ] Make vim global LSP work in .nvim.lua files
+- [x] Make vim global LSP work in .nvim.lua files
 - [ ] Theme from scratch
 
 #### Nice to have

@@ -117,6 +117,7 @@ vim.diagnostic.config({
 
 vim.lsp.enable({
 	"emmylua-ls",
+	"emmylua-ls-exrc",
 	"rust-analyzer",
 })
 

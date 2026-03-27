@@ -33,13 +33,22 @@ local function is_in_runtime_path(path)
 	return runtime_path_dir(path) ~= nil
 end
 
+---@param path string
+---@return boolean
+local function is_exrc(path)
+	return vim.fs.basename(path) == ".nvim.lua"
+end
+
 ---@param bufnr integer
 ---@param on_dir fun(root_dir: string?)
 function M.root_dir(bufnr, on_dir)
-	on_dir(
-		runtime_path_dir(vim.api.nvim_buf_get_name(bufnr))
-			or vim.fs.root(bufnr, ROOT_MARKERS)
-	)
+	local bufname = vim.api.nvim_buf_get_name(bufnr)
+
+	if is_exrc(bufname) then
+		return
+	end
+
+	on_dir(runtime_path_dir(bufname) or vim.fs.root(bufnr, ROOT_MARKERS))
 end
 
 ---@param client vim.lsp.Client
@@ -66,16 +75,7 @@ function M.reuse_client(client, config)
 end
 
 ---@param client vim.lsp.Client
----@param _init_result lsp.InitializeResult
-function M.on_init(client, _init_result)
-	if not client.root_dir then
-		return
-	end
-
-	if not is_in_runtime_path(client.root_dir) then
-		return
-	end
-
+local function apply_nvim_runtime_settings(client)
 	client.settings = vim.tbl_deep_extend("force", client.settings, {
 		emmylua = {
 			runtime = {
@@ -96,6 +96,45 @@ function M.on_init(client, _init_result)
 	client:notify("workspace/didChangeConfiguration", {
 		settings = client.settings,
 	})
+end
+
+---@param client vim.lsp.Client
+---@param _init_result lsp.InitializeResult
+function M.on_init(client, _init_result)
+	if not client.root_dir then
+		return
+	end
+
+	if not is_in_runtime_path(client.root_dir) then
+		return
+	end
+
+	apply_nvim_runtime_settings(client)
+end
+
+---@param bufnr integer
+---@param on_dir fun(root_dir: string?)
+function M.exrc_root_dir(bufnr, on_dir)
+	local bufname = vim.api.nvim_buf_get_name(bufnr)
+
+	if not is_exrc(bufname) then
+		return
+	end
+
+	on_dir(vim.fs.dirname(bufname))
+end
+
+---@param client vim.lsp.Client
+---@param config vim.lsp.ClientConfig
+---@return boolean
+function M.exrc_reuse_client(client, config)
+	return client.name == config.name and client.root_dir == config.root_dir
+end
+
+---@param client vim.lsp.Client
+---@param _init_result lsp.InitializeResult
+function M.exrc_on_init(client, _init_result)
+	apply_nvim_runtime_settings(client)
 end
 
 return M
