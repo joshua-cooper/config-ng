@@ -134,7 +134,7 @@ vim.api.nvim_create_autocmd("PackChanged", {
 vim.pack.add({
     {
         src = "https://github.com/nvim-treesitter/nvim-treesitter",
-        version = vim.version.range("0.10"),
+        version = "main",
         data = {
             on_update = function(_)
                 require("zen.tree-sitter").on_update()

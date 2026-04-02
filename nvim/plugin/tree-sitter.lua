@@ -1,10 +1,7 @@
-require("nvim-treesitter.configs").setup({
-    modules = {},
-    auto_install = false,
-    sync_install = true,
-    ignore_install = {},
-    ensure_installed = {
+require("nvim-treesitter")
+    .install({
         "css",
+        "editorconfig",
         "fish",
         "html",
         "javascript",
@@ -13,5 +10,5 @@ require("nvim-treesitter.configs").setup({
         "rust",
         "toml",
         "yaml",
-    },
-})
+    })
+    :wait()
